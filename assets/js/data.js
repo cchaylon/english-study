@@ -7,31 +7,31 @@ const LEVELS = [
   {
     code: "A1",
     name: "务实基础",
-    color: "#5f8a70",
+    color: "#10b981",
     desc: "发音、词汇与语法地基，完成从零到入门的跨越。"
   },
   {
     code: "A2",
     name: "超能飞越",
-    color: "#2f7a68",
+    color: "#0891b2",
     desc: "听说读写专项推进，把知识转化为实际运用。"
   },
   {
     code: "B1",
     name: "炉火纯青",
-    color: "#3c6785",
+    color: "#2563eb",
     desc: "真实语料与正式场景，建立稳定输出能力。"
   },
   {
     code: "B2",
     name: "融会贯通",
-    color: "#b2782f",
+    color: "#7c3aed",
     desc: "外刊、学术写作与主题表达，走向独立使用。"
   },
   {
     code: "C1",
     name: "王者英语",
-    color: "#7a4a62",
+    color: "#e11d48",
     desc: "高难度学术阅读与演讲，完成接近母语的进阶。"
   }
 ];
