@@ -1,6 +1,6 @@
 /* ============================================================
    LINGUA · 站点交互
-   目录筛选 / 课程页渲染 / 章节页目录 / 学习进度 / 自测题
+   目录筛选 / 课程页渲染 / 章节页目录 / 学习进度 / 自测题 / 深色与浅色主题
    ============================================================ */
 
 (function () {
@@ -17,6 +17,31 @@
     check: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m3 8.4 3.2 3.2L13 4.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     search: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="7" cy="7" r="4.6"/><path d="m10.6 10.6 3 3" stroke-linecap="round"/></svg>'
   };
+
+  /* ---------- 深色 / 浅色主题 ---------- */
+  function initTheme() {
+    const root = document.documentElement;
+    const btn = $(".theme-toggle");
+
+    const apply = (theme) => {
+      root.setAttribute("data-theme", theme);
+      if (btn) btn.setAttribute("aria-pressed", String(theme === "dark"));
+    };
+
+    const stored = (() => {
+      try { return localStorage.getItem("lingua.theme"); } catch (e) { return null; }
+    })();
+    const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    apply(stored || (prefersDark ? "dark" : "light"));
+
+    if (btn) {
+      btn.addEventListener("click", () => {
+        const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        apply(next);
+        try { localStorage.setItem("lingua.theme", next); } catch (e) { /* 忽略隐私模式限制 */ }
+      });
+    }
+  }
 
   /* ---------- 移动端导航 ---------- */
   function initMobileNav() {
@@ -349,6 +374,7 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
+    initTheme();
     initMobileNav();
     initCatalog();
     initCoursePage();
