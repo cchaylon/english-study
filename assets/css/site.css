@@ -816,7 +816,7 @@ a.lesson-row:hover { background: var(--primary-soft); padding-left: 15px; }
 }
 .objectives h2 { margin: 0 0 10px; font-size: 11.5px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--primary); font-weight: 800; }
 .objectives ol { margin: 0; padding-left: 0; list-style: none; counter-reset: obj; display: grid; gap: 6px; }
-.objectives li { counter-increment: obj; display: flex; gap: 11px; font-size: 14.5px; color: var(--ink-2); line-height: 1.6; }
+.objectives li { counter-increment: obj; position: relative; padding-left: 33px; font-size: 14.5px; color: var(--ink-2); line-height: 1.6; }
 .objectives li::before {
   content: counter(obj, decimal-leading-zero);
   font-family: var(--mono);
@@ -826,8 +826,9 @@ a.lesson-row:hover { background: var(--primary-soft); padding-left: 15px; }
   border-radius: 50%;
   width: 22px; height: 22px;
   display: grid; place-items: center;
-  flex-shrink: 0;
-  margin-top: 2px;
+  position: absolute;
+  left: 0;
+  top: 2px;
   background: var(--surface);
 }
 
@@ -947,8 +948,8 @@ td .en { font-size: 15.5px; }
 }
 .summary-block h2 { margin: 0 0 12px; font-size: 25px; font-weight: 750; }
 .summary-block ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 7px; }
-.summary-block li { display: flex; gap: 9px; font-size: 14.5px; line-height: 1.65; color: rgba(255, 255, 255, 0.86); }
-.summary-block li::before { content: "—"; color: #67e8f9; }
+.summary-block li { position: relative; padding-left: 23px; font-size: 14.5px; line-height: 1.65; color: rgba(255, 255, 255, 0.86); }
+.summary-block li::before { content: "—"; color: #67e8f9; position: absolute; left: 0; }
 .summary-block .en { color: #fff; }
 
 .quiz { margin-top: 30px; }
