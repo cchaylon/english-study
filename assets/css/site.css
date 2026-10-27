@@ -888,6 +888,37 @@ td .en { font-size: 15.5px; }
 .summary-block li::before { content: "—"; color: #67e8f9; }
 .summary-block .en { color: #fff; }
 
+.quiz { margin-top: 30px; }
+.quiz-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 4px; }
+.quiz-head h2 { margin: 0; font-size: 26px; font-weight: 750; }
+.quiz-head span { font-size: 12px; color: var(--muted); }
+.quiz-intro { font-size: 13.5px; color: var(--muted); margin: 0 0 14px; }
+.quiz-item { padding: 18px 20px; border: 1px solid var(--line); border-radius: 13px; background: #fff; margin-bottom: 10px; box-shadow: 0 8px 20px -22px rgba(15, 23, 42, 0.4); }
+.quiz-q { font-size: 15.5px; line-height: 1.65; margin: 0 0 11px; font-weight: 500; }
+.quiz-q b { color: var(--primary); margin-right: 6px; }
+.quiz-options { display: grid; gap: 7px; }
+.quiz-opt {
+  text-align: left;
+  padding: 9px 13px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f8faff;
+  color: var(--ink-2);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.16s;
+  font-family: inherit;
+  line-height: 1.55;
+}
+.quiz-opt:hover { border-color: rgba(79, 70, 229, 0.4); background: var(--primary-soft); }
+.quiz-opt.is-correct { border-color: var(--emerald); background: rgba(16, 185, 129, 0.08); color: #047857; font-weight: 600; }
+.quiz-opt.is-wrong { border-color: var(--rose); background: rgba(244, 63, 94, 0.07); color: #be123c; }
+.quiz-opt:disabled { cursor: default; }
+.quiz-explain { margin-top: 9px; padding-top: 9px; border-top: 1px dashed var(--line); font-size: 13.5px; color: var(--muted); line-height: 1.7; display: none; }
+.quiz-explain.show { display: block; }
+.quiz-score { margin-top: 12px; padding: 14px 18px; border-radius: 11px; background: var(--primary-soft); font-size: 14px; color: var(--primary-deep); display: none; }
+.quiz-score.show { display: block; }
+
 .lesson-pager { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 36px; }
 .pager-link { display: flex; flex-direction: column; gap: 3px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 11px; transition: all 0.18s; background: #fff; }
 .pager-link:hover { border-color: rgba(79, 70, 229, 0.35); transform: translateY(-2px); box-shadow: var(--shadow-soft); }

@@ -1,6 +1,6 @@
 /* ============================================================
    LINGUA · 站点交互
-   目录筛选 / 课程页渲染 / 章节页目录 / 学习进度
+   目录筛选 / 课程页渲染 / 章节页目录 / 学习进度 / 自测题
    ============================================================ */
 
 (function () {
@@ -211,7 +211,7 @@
             </div>
             ${hasDetail ? `<div class="side-card">
               <h3>推荐入口</h3>
-              <p>从第 1 讲开始，按顺序完成 8 个章节；每讲附有知识地图与例句。</p>
+              <p>从第 1 讲开始，按顺序完成 8 个章节；每讲附有知识地图、例句与自测题。</p>
               <p style="margin-top:14px"><a class="btn btn-primary" style="width:100%" href="${course.lessons[0].href}">进入第 1 讲 ${ICONS.arrow}</a></p>
             </div>` : ""}
           </aside>
@@ -300,6 +300,38 @@
       }, { rootMargin: "-90px 0px -70% 0px", threshold: 0 });
       headings.forEach((h) => observer.observe(h));
     }
+
+    /* 自测题 */
+    const quizItems = $$(".quiz-item");
+    let answered = 0;
+    let correct = 0;
+
+    quizItems.forEach((item) => {
+      const answer = item.dataset.answer;
+      const explain = $(".quiz-explain", item);
+      $$(".quiz-opt", item).forEach((opt) => {
+        opt.addEventListener("click", () => {
+          if (item.dataset.done) return;
+          item.dataset.done = "1";
+          answered += 1;
+          const picked = opt.dataset.opt;
+          const right = picked === answer;
+          if (right) correct += 1;
+          $$(".quiz-opt", item).forEach((o) => {
+            o.disabled = true;
+            if (o.dataset.opt === answer) o.classList.add("is-correct");
+            else if (o === opt) o.classList.add("is-wrong");
+          });
+          if (explain) explain.classList.add("show");
+
+          const score = $(".quiz-score");
+          if (score && answered === quizItems.length) {
+            score.classList.add("show");
+            score.textContent = `本讲自测完成：答对 ${correct} / ${quizItems.length} 题。${correct === quizItems.length ? "全部正确，可以进入下一讲。" : "建议回看错题对应的知识点，再进入下一讲。"}`;
+          }
+        });
+      });
+    });
 
     /* 顶部学习进度：已访问即记录 */
     if (!done.includes(lessonNo)) {
