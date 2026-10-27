@@ -78,7 +78,7 @@
 :root[data-theme="dark"] .stat:nth-child(4) b { color: #fb7185; }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; touch-action: manipulation; }
 
 body {
   margin: 0;
@@ -89,6 +89,7 @@ body {
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  touch-action: manipulation;
 }
 
 body::before {
