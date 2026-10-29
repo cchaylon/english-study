@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>我来教你 · 句子分析 | LINGUA 英语进阶学堂</title>
-  <meta name="description" content="我来教你：AI 句子分析。拆解英文句子成分、识别五大基本句型与从句结构，分色高亮呈现主干骨架，面向托业 800 分以下学习者。">
+  <meta name="description" content="我来教你：AI 句子分析。判断句子属于五大基本句型中的哪一种，拆解成分与从句，分色高亮主干骨架，面向托业 800 分以下学习者。">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%231e5a4a'/%3E%3Ctext x='20' y='27' font-family='Georgia' font-size='20' fill='%23f3e7cd' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="assets/css/site.css">
   <link rel="stylesheet" href="assets/css/teach.css">
@@ -37,71 +37,33 @@
   </header>
 
   <main>
-    <!-- 顶部视觉区 -->
-    <section class="teach-hero">
+    <!-- 功能模块容器：紧凑选择条，可扩展；新增卡片只需在注册表中追加 -->
+    <section class="modules" id="modules" aria-label="我来教你功能模块">
       <div class="container">
-        <div class="teach-hero-inner">
-          <div class="teach-hero-copy">
-            <span class="eyebrow">TEACH ME · AI 语法实验室</span>
-            <h1 class="teach-title">把句子拆开，<br><em>线条一清二楚</em></h1>
-            <p class="teach-lede">输入一句英文，AI 帮你标出主语、谓语、宾语与各类修饰成分，识别五大基本句型与从句结构，把主干骨架单独拎出来看。</p>
-            <div class="teach-hero-actions">
-              <button class="btn btn-primary" type="button" data-jump-analyzer>立即拆句
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8h9M8.4 4.2 12.2 8l-3.8 3.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
-              <button class="btn btn-ghost" type="button" data-random-sentence>随机来一句</button>
-            </div>
-            <div class="teach-hero-note"><span class="dot-live"></span>首期上线「句子分析」· 例句取自《老友记》等影视原声</div>
-          </div>
-
-          <div class="teach-art" aria-hidden="true">
-            <div class="art-board">
-              <span class="art-kicker">Sentence Anatomy</span>
-              <p class="art-sentence">
-                <span class="art-w art-s">The guy<span class="art-l">主语</span></span>
-                <span class="art-w art-at">who lives upstairs<span class="art-l">定语从句</span></span>
-                <span class="art-w art-v">keeps<span class="art-l">谓语</span></span>
-                <span class="art-w art-o">playing music<span class="art-l">宾语</span></span>
-              </p>
-              <div class="art-skeleton">
-                <span class="art-s-tag">主干</span>
-                <span class="art-s-text">The guy · keeps · playing music</span>
-              </div>
-            </div>
-            <div class="art-chip art-chip-1">S + V + O</div>
-            <div class="art-chip art-chip-2">定语从句 × 1</div>
-            <div class="art-chip art-chip-3">托业 &lt; 800</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 功能模块容器：可扩展，新增卡片只需在注册表中追加一条 -->
-    <section class="modules" id="modules" aria-labelledby="modulesTitle">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">Feature Modules</span>
-            <h2 id="modulesTitle">我来教你 · 功能模块</h2>
-            <p>一个可扩展的功能容器。每张卡片是一个独立教学工具，后续会持续加入新的练习卡片。</p>
-          </div>
-          <span class="modules-count" id="modulesCount"></span>
-        </div>
-        <div class="module-grid" id="moduleGrid"></div>
+        <div class="module-bar" id="moduleGrid"></div>
       </div>
     </section>
 
     <!-- 句子分析工作区 -->
     <section class="analyzer" id="analyze" aria-labelledby="analyzerTitle">
       <div class="container">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">Sentence Analyzer</span>
-            <h2 id="analyzerTitle">句子分析</h2>
-            <p>拆解句子成分、识别句型与从句，用颜色区分语法角色，主干骨架单独呈现。</p>
+        <header class="analyzer-head">
+          <div class="analyzer-copy">
+            <span class="eyebrow">TEACH ME · Sentence Analyzer</span>
+            <h1 id="analyzerTitle">句子分析</h1>
+            <p>拆解句子成分、识别五大基本句型与从句，用颜色区分语法角色，主干骨架单独呈现。</p>
           </div>
-          <span class="analyzer-hint">支持长难句 · 自动识别从句</span>
-        </div>
+          <div class="pattern-ref">
+            <span class="pattern-ref-label">五大基本句型</span>
+            <div class="pattern-ref-list">
+              <span>主谓 <em>SV</em></span>
+              <span>主谓宾 <em>SVO</em></span>
+              <span>主谓双宾 <em>SVOO</em></span>
+              <span>主谓宾宾补 <em>SVOC</em></span>
+              <span>主系表 <em>SVP</em></span>
+            </div>
+          </div>
+        </header>
 
         <div class="analyzer-grid">
           <aside class="input-card">
@@ -132,7 +94,7 @@
           <div class="output-card" id="analyzerOutput" aria-live="polite">
             <div class="state-empty">
               <div class="empty-art">Aa</div>
-              <h3>输入一句英文，<br>看看它的骨架</h3>
+              <h2 class="empty-title">输入一句英文，看看它的骨架</h2>
               <p>直接粘贴你想拆的长难句，或点左侧「随机例句」。</p>
               <p class="empty-note">解析完成后，句子会按成分分色高亮，主谓宾骨架单独拎出来。</p>
             </div>
@@ -160,7 +122,7 @@
             <b>工具</b>
             <a href="teach.html#analyze">句子分析</a>
             <a href="teach.html#modules">功能模块</a>
-            <a href="index.html?level=B1#catalog">B1 阶段课程</a>
+            <a href="lesson-05.html">五种基本句型</a>
           </div>
           <div class="footer-col">
             <b>更多</b>
