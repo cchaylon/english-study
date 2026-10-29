@@ -1,0 +1,646 @@
+/* ============================================================
+   LINGUA · 我来教你（TEACH ME）
+   模块注册表 + 句子分析（DeepSeek 结构化解析 → 前端渲染）
+   ============================================================ */
+
+(function () {
+  "use strict";
+
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+  /* ---------------- DeepSeek 配置 -------------------------------
+     静态站点直连 DeepSeek 开放接口；密钥置于前端仅用于演示，
+     正式上线请改为服务端代理，避免密钥暴露。
+  ------------------------------------------------------------- */
+  const DEEPSEEK = {
+    endpoint: "https://api.deepseek.com/chat/completions",
+    model: "deepseek-chat",
+    apiKey: "sk-0a4accfdb77846099f8fc504493bf6e7",
+    timeout: 55000
+  };
+
+  const SYSTEM_PROMPT = `你是资深英语语法教学专家，面向托业 800 分以下的中国学习者。
+任务：拆解用户给出的英文句子，只输出严格 JSON（不要 markdown、不要解释文字）。
+
+规则：
+1. chunks：把句子切成连续的片段，按原顺序完整覆盖全句。每个 text 必须是原句中连续的字符片段（保留原有标点），不要改动拼写，不要添加原句没有的词。
+2. 每个片段标注 role，取值只能是：subject(主语) / verb(谓语动词) / object(宾语) / complement(宾语补足语) / predicative(表语) / attributive(定语) / adverbial(状语) / conjunction(连词或从句引导词) / other(其他)。label 用对应中文。
+3. pattern 取五大基本句型之一：SV / SVO / SVP / SVOO / SVOC；含从句时在主干基础上追加从句类型，如 SVO+宾语从句、SVO+定语从句。patternName 用中文，如“主谓宾”“主系表”“主谓宾+定语从句”。
+4. skeleton 用尽量少的词呈现句子主干（保留原句词形）。
+5. clauses 列出主句与各从句，type 取 主句/宾语从句/定语从句/状语从句/表语从句/同位语从句/并列句。
+6. keyPoints 给 2-3 条中文学习要点，点明易错处，每条不超过 40 字。
+7. translation 给出自然、准确的中文翻译。
+
+输出 JSON 结构：
+{"translation":"中文翻译","pattern":"SVO","patternName":"主谓宾","chunks":[{"text":"I","role":"subject","label":"主语","note":"一句话成分说明"}],"skeleton":"I ...","clauses":[{"type":"主句","text":"...","note":"..."}],"keyPoints":["..."]}`;
+
+  /* ---------------- 语法角色 ------------- */
+  const ROLES = {
+    subject: { label: "主语", color: "#2563eb" },
+    verb: { label: "谓语", color: "#e11d48" },
+    object: { label: "宾语", color: "#ea580c" },
+    complement: { label: "宾补", color: "#d946ef" },
+    predicative: { label: "表语", color: "#0891b2" },
+    attributive: { label: "定语", color: "#7c3aed" },
+    adverbial: { label: "状语", color: "#16a34a" },
+    conjunction: { label: "连词", color: "#64748b" },
+    other: { label: "其他", color: "#94a3b8" }
+  };
+
+  // 兼容模型可能返回的英文枚举 / 中文名 / 带括号的写法
+  const ROLE_ALIASES = {
+    "subject": "subject", "主语": "subject", "主语从句": "subject", "subjectclause": "subject",
+    "verb": "verb", "谓语": "verb", "谓语动词": "verb", "predicate": "verb", "动词": "verb",
+    "object": "object", "宾语": "object", "宾语从句": "object", "objectclause": "object",
+    "直接宾语": "object", "间接宾语": "object", "双宾语": "object",
+    "complement": "complement", "宾补": "complement", "补语": "complement",
+    "宾语补足语": "complement", "宾语补语": "complement",
+    "objectcomplement": "complement", "oc": "complement",
+    "predicative": "predicative", "表语": "predicative", "表语从句": "predicative",
+    "主语补足语": "predicative", "subjectcomplement": "predicative",
+    "attributive": "attributive", "定语": "attributive", "定语从句": "attributive",
+    "attributiveclause": "attributive", "modifier": "attributive", "relative": "attributive",
+    "前置定语": "attributive", "后置定语": "attributive",
+    "adverbial": "adverbial", "状语": "adverbial", "状语从句": "adverbial",
+    "adverbialclause": "adverbial",
+    "conjunction": "conjunction", "连词": "conjunction", "引导词": "conjunction",
+    "从句引导词": "conjunction", "connector": "conjunction",
+    "other": "other", "其他": "other", "插入语": "other", "同位语": "other",
+    "appositive": "other", "感叹词": "other", "interjection": "other",
+    "标点": "other", "punctuation": "other"
+  };
+
+  const CORE_ROLES = new Set(["subject", "verb", "object", "complement", "predicative"]);
+
+  /* ---------------- 例句库（优先影视原声，难度对标托业 800 以下） ------------- */
+  const SAMPLES = [
+    { text: "I'm not going to let you eat my sandwich.", source: "《老友记》" },
+    { text: "Joey doesn't share food!", source: "《老友记》" },
+    { text: "We were on a break!", source: "《老友记》" },
+    { text: "Could you tell me where the nearest subway station is?", source: "托业 · 出行场景" },
+    { text: "My boss asked me to finish the report by Friday.", source: "托业 · 办公场景" },
+    { text: "The guy who lives upstairs keeps playing music that drives me crazy every night.", source: "《老友记》 · 长难句" },
+    { text: "If you leave now, you will catch the last train.", source: "《老友记》 · 条件句" },
+    { text: "She said she would call me back after the meeting.", source: "托业 · 会议场景" },
+    { text: "Do you have any idea how much this costs?", source: "《老友记》" },
+    { text: "That's the last thing I want to hear right now.", source: "《老友记》" },
+    { text: "The coffee shop where we first met is closing down.", source: "《老友记》 · 定语从句" },
+    { text: "I don't think this is a good idea.", source: "《老友记》 · 宾语从句" },
+    { text: "You can't just expect me to drop everything.", source: "《老友记》" },
+    { text: "Could you keep it down? I'm trying to study.", source: "《老友记》" },
+    { text: "The meeting has been moved to three o'clock.", source: "托业 · 会议场景" },
+    { text: "It's not that I don't like him; it's that he never listens.", source: "《老友记》 · 进阶" }
+  ];
+
+  /* ---------------- 模块注册表（扩展入口） -------------
+     新增功能卡片：向 MODULES 追加一条记录即可。
+     status: "live" 可点击；"soon" 为占位预告。
+  ------------------------------------------------------- */
+  const MODULES = [
+    {
+      id: "sentence",
+      title: "句子分析",
+      desc: "拆解句子成分，识别五大句型与从句结构，分色高亮主干骨架。",
+      status: "live",
+      href: "#analyze",
+      accent: "#4f46e5",
+      icon: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 5h14M3 10h9M3 15h11" stroke-linecap="round"/><circle cx="16" cy="10" r="1.6" fill="currentColor" stroke="none"/></svg>'
+    },
+    {
+      id: "vocab",
+      title: "词汇拆解",
+      desc: "按词根词缀拆词，串联同义替换，一节课记住一组高频词。",
+      status: "soon",
+      accent: "#0891b2",
+      icon: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="3"/><path d="M7 7h6M7 10h6M7 13h4" stroke-linecap="round"/></svg>'
+    },
+    {
+      id: "speak",
+      title: "发音跟读",
+      desc: "逐词标注连读、弱读与语调，跟读一句得分一句。",
+      status: "soon",
+      accent: "#f43f5e",
+      icon: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 8v4M8 5v10M12 7v6M16 9v2" stroke-linecap="round"/></svg>'
+    },
+    {
+      id: "writing",
+      title: "写作批改",
+      desc: "提交一段英文，逐句纠错并给出更地道的改写版本。",
+      status: "soon",
+      accent: "#16a34a",
+      icon: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m4 15 1.6-4.4L14 2.2l3.8 3.8-8.4 8.4L5 15H4Z" stroke-linejoin="round"/><path d="m12.4 4 3.6 3.6" stroke-linecap="round"/></svg>'
+    }
+  ];
+
+  /* ---------------- 状态 ---------------- */
+  const CACHE_KEY = "lingua.teach.sentence.cache.v1";
+  const CACHE_LIMIT = 30;
+
+  let busy = false;
+  let currentSource = "";
+  let lastSentence = "";
+
+  const output = $("#analyzerOutput");
+
+  /* ---------------- 工具函数 ---------------- */
+  const esc = (value) => String(value == null ? "" : value).replace(/[&<>"']/g, (ch) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  }[ch]));
+
+  function normalizeRole(role) {
+    const raw = String(role || "").trim();
+    const key = raw.toLowerCase().replace(/[\s_\-()]/g, "");
+    if (ROLE_ALIASES[key]) return ROLE_ALIASES[key];
+    if (ROLES[raw]) return raw;
+    return "other";
+  }
+
+  function roleMeta(role) {
+    return ROLES[role] || ROLES.other;
+  }
+
+  function displayText(chunks) {
+    let out = "";
+    chunks.forEach((chunk, index) => {
+      if (index === 0) { out = chunk.text; return; }
+      const prev = chunks[index - 1].text;
+      const noSpaceBefore = /^[,.;:!?%)\]）”"'’]/.test(chunk.text) || /^['’]/.test(chunk.text);
+      const noSpaceAfter = /[(（“‘"]$/.test(prev) || /[\/-]$/.test(prev);
+      out += noSpaceBefore || noSpaceAfter ? chunk.text : " " + chunk.text;
+    });
+    return out;
+  }
+
+  function readCache() {
+    try {
+      const raw = JSON.parse(localStorage.getItem(CACHE_KEY) || "{}");
+      return raw && typeof raw === "object" ? raw : {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function writeCache(sentence, data) {
+    try {
+      const cache = readCache();
+      cache[sentence.toLowerCase()] = data;
+      const keys = Object.keys(cache);
+      while (keys.length > CACHE_LIMIT) {
+        const oldest = keys.shift();
+        delete cache[oldest];
+      }
+      localStorage.setItem(CACHE_KEY, JSON.stringify(cache));
+    } catch (e) { /* 隐私模式下忽略 */ }
+  }
+
+  function normalizeResult(raw) {
+    const chunks = (Array.isArray(raw.chunks) ? raw.chunks : []).map((chunk) => ({
+      text: String(chunk.text || "").trim(),
+      role: normalizeRole(chunk.role),
+      note: String(chunk.note || "").trim()
+    })).filter((chunk) => chunk.text);
+
+    if (!chunks.length) throw new Error("解析结果为空");
+
+    const clauses = (Array.isArray(raw.clauses) ? raw.clauses : []).map((clause) => ({
+      type: String(clause.type || "从句"),
+      text: String(clause.text || ""),
+      note: String(clause.note || "")
+    }));
+
+    return {
+      translation: String(raw.translation || "（暂无翻译）"),
+      pattern: String(raw.pattern || ""),
+      patternName: String(raw.patternName || ""),
+      chunks,
+      skeleton: String(raw.skeleton || "").trim() || displayText(chunks.filter((c) => CORE_ROLES.has(c.role))),
+      clauses,
+      keyPoints: (Array.isArray(raw.keyPoints) ? raw.keyPoints : []).map((point) => String(point)).filter(Boolean)
+    };
+  }
+
+  function parseResponse(content) {
+    let text = String(content || "").trim();
+    text = text.replace(/^```(?:json)?/i, "").replace(/```$/, "").trim();
+    const start = text.indexOf("{");
+    const end = text.lastIndexOf("}");
+    if (start !== -1 && end !== -1) text = text.slice(start, end + 1);
+    try {
+      return JSON.parse(text);
+    } catch (e) {
+      throw new Error("AI 返回的 JSON 无法解析");
+    }
+  }
+
+  /* ---------------- 请求 DeepSeek ---------------- */
+  async function requestAnalysis(sentence) {
+    const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+    const timer = controller ? setTimeout(() => controller.abort(), DEEPSEEK.timeout) : null;
+
+    try {
+      const response = await fetch(DEEPSEEK.endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + DEEPSEEK.apiKey
+        },
+        body: JSON.stringify({
+          model: DEEPSEEK.model,
+          messages: [
+            { role: "system", content: SYSTEM_PROMPT },
+            { role: "user", content: sentence }
+          ],
+          response_format: { type: "json_object" },
+          temperature: 0.2,
+          max_tokens: 1400,
+          stream: false
+        }),
+        signal: controller ? controller.signal : undefined
+      });
+
+      if (!response.ok) throw new Error("HTTP " + response.status);
+
+      const payload = await response.json();
+      const choice = payload && payload.choices && payload.choices[0];
+      const content = choice && choice.message && choice.message.content;
+      if (!content) throw new Error("AI 未返回内容");
+
+      return normalizeResult(parseResponse(content));
+    } finally {
+      if (timer) clearTimeout(timer);
+    }
+  }
+
+  function describeError(err) {
+    const message = String((err && err.message) || err || "");
+    if (/abort|timeout/i.test(message)) return "请求超时了，请稍后重试。";
+    if (message.includes("401")) return "API 密钥无效或已失效（401），请检查密钥配置。";
+    if (message.includes("402")) return "DeepSeek 账户余额不足（402）。";
+    if (message.includes("429")) return "请求过于频繁（429），稍等片刻再试。";
+    if (/failed to fetch|networkerror|load failed/i.test(message)) return "无法连接 DeepSeek 服务，请检查网络后重试。";
+    if (/JSON|解析结果为空/i.test(message)) return "AI 返回的结构不符合预期，换一句或重试一次。";
+    return "解析失败：" + message;
+  }
+
+  /* ---------------- 渲染：模块容器 ---------------- */
+  function renderModules() {
+    const grid = $("#moduleGrid");
+    if (!grid) return;
+
+    grid.innerHTML = MODULES.map((mod, index) => {
+      const live = mod.status === "live";
+      const body = `
+        <div class="mc-top">
+          <span class="mc-no">${String(index + 1).padStart(2, "0")} / MODULE</span>
+          <span class="mc-badge">${live ? "已上线" : "即将上线"}</span>
+        </div>
+        <div class="mc-icon">${mod.icon}</div>
+        <h3>${esc(mod.title)}</h3>
+        <p>${esc(mod.desc)}</p>
+        <div class="mc-foot"><span>${live ? "开始使用" : "敬请期待"}</span><span class="arrow">${live ? "→" : "·"}</span></div>`;
+
+      return live
+        ? `<a class="module-card is-live" href="${mod.href}" style="--ac:${mod.accent}">${body}</a>`
+        : `<div class="module-card is-soon" style="--ac:${mod.accent}">${body}</div>`;
+    }).join("");
+
+    const count = $("#modulesCount");
+    if (count) {
+      const liveCount = MODULES.filter((m) => m.status === "live").length;
+      count.textContent = `共 ${MODULES.length} 个模块 · ${liveCount} 个已上线`;
+    }
+  }
+
+  /* ---------------- 渲染：状态 ---------------- */
+  function renderEmpty() {
+    output.innerHTML = `
+      <div class="state-empty">
+        <div class="empty-art">Aa</div>
+        <h3>输入一句英文，<br>看看它的骨架</h3>
+        <p>直接粘贴你想拆的长难句，或点左侧「随机例句」。</p>
+        <p class="empty-note">解析完成后，句子会按成分分色高亮，主谓宾骨架单独拎出来。</p>
+      </div>`;
+  }
+
+  function renderLoading(sentence) {
+    output.innerHTML = `
+      <div class="state-loading">
+        <div class="loading-head"><span class="spinner"></span>正在拆解句子骨架…</div>
+        <p style="margin:12px 0 0;font-size:13px;color:var(--muted);font-family:var(--serif);line-height:1.7">${esc(sentence)}</p>
+        <div class="shimmer tall"></div>
+        <div class="shimmer s1"></div>
+        <div class="shimmer s2"></div>
+        <div class="shimmer s3"></div>
+        <div class="shimmer s4"></div>
+      </div>`;
+  }
+
+  function renderError(message, options) {
+    const opts = options || {};
+    const showRetry = opts.retry !== false && lastSentence;
+    output.innerHTML = `
+      <div class="state-error">
+        <span class="err-badge">解析失败</span>
+        <h3>这次没能拆出来</h3>
+        <p>${esc(message)}</p>
+        ${showRetry ? '<button class="btn btn-primary" type="button" id="retryBtn">重新解析</button>' : ""}
+      </div>`;
+  }
+
+  /* ---------------- 渲染：分析结果 ---------------- */
+  function chunkMarkup(chunks) {
+    let html = "";
+    chunks.forEach((chunk, index) => {
+      if (index > 0) {
+        const prev = chunks[index - 1].text;
+        const noSpaceBefore = /^[,.;:!?%)\]）”"'’]/.test(chunk.text) || /^['’]/.test(chunk.text);
+        const noSpaceAfter = /[(（“‘"]$/.test(prev) || /[\/-]$/.test(prev);
+        if (!noSpaceBefore && !noSpaceAfter) html += " ";
+      }
+      const meta = roleMeta(chunk.role);
+      const core = CORE_ROLES.has(chunk.role) ? 1 : 0;
+      html += `<span class="tchunk" data-core="${core}" style="--c:${meta.color}" title="${esc(meta.label)}：${esc(chunk.note || chunk.text)}">${esc(chunk.text)}<span class="tchunk-label">${meta.label}</span></span>`;
+    });
+    return html;
+  }
+
+  function renderResult(data) {
+    const usedRoles = [];
+    data.chunks.forEach((chunk) => {
+      if (!usedRoles.includes(chunk.role)) usedRoles.push(chunk.role);
+    });
+
+    const mainSequence = [];
+    data.chunks.forEach((chunk) => {
+      if (!CORE_ROLES.has(chunk.role)) return;
+      const label = roleMeta(chunk.role).label;
+      if (!mainSequence.includes(label)) mainSequence.push(label);
+    });
+
+    const legend = usedRoles.map((role) => {
+      const meta = roleMeta(role);
+      return `<span class="legend-chip" style="--c:${meta.color}"><span class="legend-dot"></span>${meta.label}</span>`;
+    }).join("");
+
+    const rows = data.chunks.map((chunk) => {
+      const meta = roleMeta(chunk.role);
+      return `<div class="comp-row">
+        <span class="comp-role" style="--c:${meta.color}">${meta.label}</span>
+        <div class="comp-body">
+          <b>${esc(chunk.text)}</b>
+          ${chunk.note ? `<span>${esc(chunk.note)}</span>` : ""}
+        </div>
+      </div>`;
+    }).join("");
+
+    const clauses = data.clauses.length
+      ? `<h3 class="sub">从句结构</h3>
+         <div class="clause-list">
+           ${data.clauses.map((clause) => `
+             <div class="clause-item">
+               <span class="clause-type">${esc(clause.type)}</span>
+               <span class="clause-text">${esc(clause.text)}</span>
+               ${clause.note ? `<span class="clause-note">${esc(clause.note)}</span>` : ""}
+             </div>`).join("")}
+         </div>`
+      : "";
+
+    const keyPoints = data.keyPoints.length
+      ? `<h3 class="sub">学习要点</h3>
+         <ol class="keypoints">${data.keyPoints.map((point) => `<li>${esc(point)}</li>`).join("")}</ol>`
+      : "";
+
+    const source = currentSource
+      ? `例句来源 <b>${esc(currentSource)}</b>`
+      : `AI 解析 · DeepSeek`;
+
+    output.innerHTML = `
+      <div class="result">
+        <div class="result-bar">
+          <span class="pattern-badge">
+            <code>${esc(data.pattern || "SENTENCE")}</code>
+            <b>${esc(data.patternName || "句子结构")}</b>
+          </span>
+          <div class="result-tools">
+            <span class="result-source">${source}</span>
+            <button class="tool-btn" type="button" id="focusBtn" aria-pressed="false">只看主干</button>
+            <button class="tool-btn" type="button" id="reanalyzeBtn">重新解析</button>
+          </div>
+        </div>
+
+        <div class="gram-card">
+          <span class="card-label">原句 · Sentence</span>
+          <div class="gram-sentence" id="gramSentence">${chunkMarkup(data.chunks)}</div>
+          <div class="gram-legend">${legend}</div>
+        </div>
+
+        <div class="skeleton-card">
+          <span class="skeleton-label">主干骨架</span>
+          <p class="skeleton-text">${esc(data.skeleton)}</p>
+          <div class="skeleton-formula">${mainSequence.map((label) => `<span>${esc(label)}</span>`).join("")}</div>
+        </div>
+
+        <div class="gram-translation"><b>译</b><span>${esc(data.translation)}</span></div>
+
+        <div class="result-grid">
+          <div class="result-panel">
+            <h3>句子成分</h3>
+            ${rows}
+          </div>
+          <div class="result-panel">
+            ${clauses || `<h3>从句结构</h3><p style="margin:0;font-size:12.5px;color:var(--muted)">本句为简单句，没有从句。</p>`}
+            ${keyPoints}
+          </div>
+        </div>
+      </div>`;
+
+    const sentenceBox = $("#gramSentence");
+    const focusBtn = $("#focusBtn");
+    if (focusBtn && sentenceBox) {
+      focusBtn.addEventListener("click", () => {
+        const active = sentenceBox.classList.toggle("is-focus");
+        focusBtn.setAttribute("aria-pressed", String(active));
+        focusBtn.textContent = active ? "显示全部" : "只看主干";
+      });
+    }
+  }
+
+  /* ---------------- 主流程 ---------------- */
+  function setBusy(value) {
+    busy = value;
+    ["#analyzeBtn", "#randomBtn"].forEach((selector) => {
+      const button = $(selector);
+      if (button) button.disabled = value;
+    });
+  }
+
+  function syncSource(sentence) {
+    const sample = SAMPLES.find((item) => item.text === sentence);
+    currentSource = sample ? sample.source : "";
+  }
+
+  async function runAnalysis(rawSentence, options) {
+    if (busy) return;
+    const opts = options || {};
+    const sentence = String(rawSentence || "").replace(/\s+/g, " ").trim();
+
+    if (!sentence) {
+      renderError("请先输入一句英文，再开始拆解。", { retry: false });
+      return;
+    }
+    if (!/[A-Za-z]/.test(sentence)) {
+      renderError("这句里没有英文单词，请检查输入内容。", { retry: false });
+      return;
+    }
+    if (sentence.length > 240) {
+      renderError("句子太长了，请控制在 240 个字符以内。", { retry: false });
+      return;
+    }
+
+    lastSentence = sentence;
+    syncSource(sentence);
+    const input = $("#sentenceInput");
+    if (input && input.value.trim() !== sentence) input.value = sentence;
+
+    if (opts.source) currentSource = opts.source;
+
+    const cacheKey = sentence.toLowerCase();
+    if (!opts.force) {
+      const cached = readCache()[cacheKey];
+      if (cached) {
+        try {
+          renderResult(normalizeResult(cached));
+          if (window.innerWidth < 980 && opts.scroll) $("#analyze").scrollIntoView({ behavior: "smooth", block: "start" });
+          return;
+        } catch (e) { /* 缓存损坏则重新请求 */ }
+      }
+    }
+
+    setBusy(true);
+    renderLoading(sentence);
+
+    try {
+      const result = await requestAnalysis(sentence);
+      writeCache(sentence, result);
+      renderResult(result);
+    } catch (err) {
+      renderError(describeError(err));
+    } finally {
+      setBusy(false);
+      if (window.innerWidth < 980) output.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+
+  function pickSample() {
+    const current = ($("#sentenceInput") ? $("#sentenceInput").value.trim() : "");
+    const pool = SAMPLES.filter((item) => item.text.toLowerCase() !== current.toLowerCase());
+    const list = pool.length ? pool : SAMPLES;
+    return list[Math.floor(Math.random() * list.length)];
+  }
+
+  function fillSample(sample) {
+    if (busy) return;
+    const input = $("#sentenceInput");
+    if (input) {
+      input.value = sample.text;
+      updateCount();
+    }
+    currentSource = sample.source;
+    runAnalysis(sample.text, { source: sample.source, scroll: true });
+  }
+
+  function updateCount() {
+    const input = $("#sentenceInput");
+    const counter = $("#charCount");
+    if (input && counter) counter.textContent = `${input.value.length} / 240`;
+  }
+
+  /* ---------------- 事件绑定 ---------------- */
+  function bindEvents() {
+    const input = $("#sentenceInput");
+    if (input) {
+      input.addEventListener("input", updateCount);
+      input.addEventListener("keydown", (event) => {
+        if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+          event.preventDefault();
+          runAnalysis(input.value, { scroll: true });
+        }
+      });
+    }
+
+    const analyzeBtn = $("#analyzeBtn");
+    if (analyzeBtn && input) {
+      analyzeBtn.addEventListener("click", () => runAnalysis(input.value, { scroll: true }));
+    }
+
+    const randomBtn = $("#randomBtn");
+    if (randomBtn) {
+      randomBtn.addEventListener("click", () => {
+        const sample = pickSample();
+        fillSample(sample);
+      });
+    }
+
+    $$("[data-random-sentence]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const sample = pickSample();
+        fillSample(sample);
+      });
+    });
+
+    $$(".sentence-chip").forEach((chip) => {
+      chip.addEventListener("click", () => {
+        const sentence = chip.dataset.sentence || "";
+        fillSample({ text: sentence, source: "" });
+      });
+    });
+
+    $$("[data-jump-analyzer]").forEach((button) => {
+      button.addEventListener("click", () => {
+        $("#analyze").scrollIntoView({ behavior: "smooth", block: "start" });
+        setTimeout(() => { if (input) input.focus({ preventScroll: true }); }, 420);
+      });
+    });
+
+    if (output) {
+      output.addEventListener("click", (event) => {
+        const target = event.target.closest("button");
+        if (!target) return;
+        if (target.id === "retryBtn" || target.id === "reanalyzeBtn") {
+          if (lastSentence) runAnalysis(lastSentence, { force: true });
+        }
+      });
+    }
+  }
+
+  /* ---------------- 初始化 ---------------- */
+  function init() {
+    if (!output) return;
+    renderModules();
+    bindEvents();
+    updateCount();
+    renderEmpty();
+
+    const params = new URLSearchParams(location.search);
+    const preset = params.get("s");
+    if (preset) {
+      const sample = SAMPLES.find((item) => item.text.toLowerCase() === preset.trim().toLowerCase());
+      fillSample(sample || { text: preset, source: "" });
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+
+  /* 扩展接口：后续模块可复用解析能力 */
+  window.LinguaTeach = {
+    modules: MODULES,
+    samples: SAMPLES,
+    analyze: runAnalysis,
+    render: (raw) => renderResult(normalizeResult(raw))
+  };
+})();

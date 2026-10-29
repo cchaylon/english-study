@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>我来教你 · 句子分析 | LINGUA 英语进阶学堂</title>
+  <meta name="description" content="我来教你：AI 句子分析。拆解英文句子成分、识别五大基本句型与从句结构，分色高亮呈现主干骨架，面向托业 800 分以下学习者。">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%231e5a4a'/%3E%3Ctext x='20' y='27' font-family='Georgia' font-size='20' fill='%23f3e7cd' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="stylesheet" href="assets/css/teach.css">
+</head>
+<body data-page="teach">
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="index.html" aria-label="LINGUA 首页">
+        <span class="logo-mark">L</span>
+        <span class="logo-text"><b>LINGUA</b><span>英语进阶学堂</span></span>
+      </a>
+      <nav class="main-nav" aria-label="主导航">
+        <a href="index.html#catalog">课程目录</a>
+        <a href="index.html#roadmap">学习路径</a>
+        <a href="lesson-01.html">核心语法</a>
+        <a href="teach.html" class="is-active">我来教你</a>
+        <a href="index.html#about">关于本站</a>
+      </nav>
+      <div class="header-actions">
+        <a class="search-jump" href="index.html#catalog">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="7" cy="7" r="4.6"/><path d="m10.6 10.6 3 3" stroke-linecap="round"/></svg>
+          <span>搜索课程</span><kbd>/</kbd>
+        </a>
+        <button class="nav-toggle" aria-label="打开菜单" aria-expanded="false">
+          <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h14M3 10h14M3 14h14" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 顶部视觉区 -->
+    <section class="teach-hero">
+      <div class="container">
+        <div class="teach-hero-inner">
+          <div class="teach-hero-copy">
+            <span class="eyebrow">TEACH ME · AI 语法实验室</span>
+            <h1 class="teach-title">把句子拆开，<br><em>线条一清二楚</em></h1>
+            <p class="teach-lede">输入一句英文，AI 帮你标出主语、谓语、宾语与各类修饰成分，识别五大基本句型与从句结构，把主干骨架单独拎出来看。</p>
+            <div class="teach-hero-actions">
+              <button class="btn btn-primary" type="button" data-jump-analyzer>立即拆句
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8h9M8.4 4.2 12.2 8l-3.8 3.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button class="btn btn-ghost" type="button" data-random-sentence>随机来一句</button>
+            </div>
+            <div class="teach-hero-note"><span class="dot-live"></span>首期上线「句子分析」· 例句取自《老友记》等影视原声</div>
+          </div>
+
+          <div class="teach-art" aria-hidden="true">
+            <div class="art-board">
+              <span class="art-kicker">Sentence Anatomy</span>
+              <p class="art-sentence">
+                <span class="art-w art-s">The guy<span class="art-l">主语</span></span>
+                <span class="art-w art-at">who lives upstairs<span class="art-l">定语从句</span></span>
+                <span class="art-w art-v">keeps<span class="art-l">谓语</span></span>
+                <span class="art-w art-o">playing music<span class="art-l">宾语</span></span>
+              </p>
+              <div class="art-skeleton">
+                <span class="art-s-tag">主干</span>
+                <span class="art-s-text">The guy · keeps · playing music</span>
+              </div>
+            </div>
+            <div class="art-chip art-chip-1">S + V + O</div>
+            <div class="art-chip art-chip-2">定语从句 × 1</div>
+            <div class="art-chip art-chip-3">托业 &lt; 800</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 功能模块容器：可扩展，新增卡片只需在注册表中追加一条 -->
+    <section class="modules" id="modules" aria-labelledby="modulesTitle">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Feature Modules</span>
+            <h2 id="modulesTitle">我来教你 · 功能模块</h2>
+            <p>一个可扩展的功能容器。每张卡片是一个独立教学工具，后续会持续加入新的练习卡片。</p>
+          </div>
+          <span class="modules-count" id="modulesCount"></span>
+        </div>
+        <div class="module-grid" id="moduleGrid"></div>
+      </div>
+    </section>
+
+    <!-- 句子分析工作区 -->
+    <section class="analyzer" id="analyze" aria-labelledby="analyzerTitle">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Sentence Analyzer</span>
+            <h2 id="analyzerTitle">句子分析</h2>
+            <p>拆解句子成分、识别句型与从句，用颜色区分语法角色，主干骨架单独呈现。</p>
+          </div>
+          <span class="analyzer-hint">支持长难句 · 自动识别从句</span>
+        </div>
+
+        <div class="analyzer-grid">
+          <aside class="input-card">
+            <div class="input-head">
+              <span class="input-tag">输入</span>
+              <h3>写下要拆解的英文句子</h3>
+            </div>
+            <textarea id="sentenceInput" class="sentence-input" maxlength="240" rows="5"
+              placeholder="例如：The guy who lives upstairs keeps playing music that drives me crazy."
+              aria-label="待分析的英文句子"></textarea>
+            <div class="input-meta">
+              <span id="charCount">0 / 240</span>
+              <span>建议 1 句，最多 240 个字符</span>
+            </div>
+            <div class="input-actions">
+              <button class="btn btn-primary" id="analyzeBtn" type="button">拆解句子</button>
+              <button class="btn btn-ghost" id="randomBtn" type="button">随机例句</button>
+            </div>
+            <div class="input-samples">
+              <span class="samples-label">试一试</span>
+              <button class="sentence-chip" type="button" data-sentence="I'm not going to let you eat my sandwich.">I'm not going to let you eat my sandwich.</button>
+              <button class="sentence-chip" type="button" data-sentence="Could you tell me where the nearest subway station is?">Could you tell me where the nearest subway station is?</button>
+              <button class="sentence-chip" type="button" data-sentence="My boss asked me to finish the report by Friday.">My boss asked me to finish the report by Friday.</button>
+            </div>
+            <p class="input-tip">例句优先取自《老友记》等影视短句，难度对标托业 800 分以下。解析结果由 DeepSeek 生成，仅作学习参考。</p>
+          </aside>
+
+          <div class="output-card" id="analyzerOutput" aria-live="polite">
+            <div class="state-empty">
+              <div class="empty-art">Aa</div>
+              <h3>输入一句英文，<br>看看它的骨架</h3>
+              <p>直接粘贴你想拆的长难句，或点左侧「随机例句」。</p>
+              <p class="empty-note">解析完成后，句子会按成分分色高亮，主谓宾骨架单独拎出来。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="about">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <b>LINGUA · 英语进阶学堂</b>
+          <p>一个按等级组织的英语学习资料站。课程目录与课时信息来自现有教学资料，核心语法体系提供在线图文精讲，「我来教你」提供 AI 语法工具。</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <b>学习</b>
+            <a href="index.html#catalog">课程总目录</a>
+            <a href="index.html#roadmap">学习路径</a>
+            <a href="lesson-01.html">核心语法体系</a>
+          </div>
+          <div class="footer-col">
+            <b>工具</b>
+            <a href="teach.html#analyze">句子分析</a>
+            <a href="teach.html#modules">功能模块</a>
+            <a href="index.html?level=B1#catalog">B1 阶段课程</a>
+          </div>
+          <div class="footer-col">
+            <b>更多</b>
+            <a href="index.html?level=B2#catalog">B2 融会贯通</a>
+            <a href="index.html?level=C1#catalog">C1 王者英语</a>
+            <a href="course.html?id=21">核心语法课程页</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 LINGUA · 学习资料整理与展示</span>
+        <span>按顺序学习，比盲目收藏更重要</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/site.js"></script>
+  <script src="assets/js/teach.js"></script>
+</body>
+</html>
