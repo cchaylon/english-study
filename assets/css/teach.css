@@ -360,6 +360,13 @@
   transition: background 0.2s, opacity 0.24s, filter 0.24s;
 }
 .tchunk:hover { background: color-mix(in srgb, var(--c) 18%, var(--chunk-base)); }
+.tchunk-text { display: inline; }
+.tchunk.is-clause .tchunk-text {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  text-decoration-color: color-mix(in srgb, var(--c) 80%, var(--chunk-ink));
+}
 .tchunk-label { font-family: var(--sans); font-size: 9.5px; letter-spacing: 0.7px; font-weight: 700; vertical-align: super; margin-left: 3px; color: color-mix(in srgb, var(--c) 68%, var(--chunk-ink)); }
 .gram-sentence.is-focus .tchunk[data-core="0"] { opacity: 0.34; filter: saturate(0.5); }
 .gram-sentence.is-focus .tchunk[data-core="1"] { background: color-mix(in srgb, var(--c) 16%, var(--chunk-base)); box-shadow: inset 0 -3px 0 var(--c); font-weight: 600; }
@@ -367,6 +374,8 @@
 .gram-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--line); }
 .legend-chip { --c: var(--role-other); display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; color: var(--ink-2); }
 .legend-dot { width: 10px; height: 10px; border-radius: 3px; background: color-mix(in srgb, var(--c) 78%, var(--chunk-ink)); }
+.legend-note { display: inline-flex; align-items: center; gap: 7px; font-size: 11.5px; color: var(--muted); }
+.legend-underline { width: 16px; height: 2px; border-radius: 1px; background: var(--primary); }
 
 /* ---------- 结果：主干骨架 ---------- */
 .skeleton-card {

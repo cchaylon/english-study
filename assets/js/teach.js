@@ -28,14 +28,15 @@
 2. basicFormula：与 basicPattern 一一对应，只能取：S+V、S+V+O、S+V+O+O、S+V+O+C、S+V+P。
 3. chunks：把句子切成连续的片段，按原顺序完整覆盖全句。每个 text 必须是原句中连续的字符片段（保留原有标点），不要改动拼写，不要添加原句没有的词。
 4. 每个片段标注 role，取值只能是：subject(主语) / verb(谓语动词) / object(宾语) / complement(宾语补足语) / predicative(表语) / attributive(定语) / adverbial(状语) / conjunction(连词或从句引导词) / other(其他)。label 用对应中文。
-5. pattern：主句句型代码，只能取 SV / SVO / SVOO / SVOC / SVP；若句子含从句，在主句代码后追加从句类型，如 SVO+宾语从句、SVO+定语从句。patternName 用中文，如「主谓宾」「主谓宾+定语从句」。
-6. skeleton 用尽量少的词呈现句子主干（保留原句词形）。
-7. clauses 列出主句与各从句，type 取 主句/宾语从句/定语从句/状语从句/表语从句/同位语从句/并列句。
-8. keyPoints 给 2-3 条中文学习要点，点明易错处，每条不超过 40 字。
-9. translation 给出自然、准确的中文翻译。
+5. clause：该片段若属于从句，填写对应从句类型（与 clauses.type 一致，如「定语从句」）；属于主句或不在从句中时填空字符串 ""。
+6. pattern：主句句型代码，只能取 SV / SVO / SVOO / SVOC / SVP；若句子含从句，在主句代码后追加从句类型，如 SVO+宾语从句、SVO+定语从句。patternName 用中文，如「主谓宾」「主谓宾+定语从句」。
+7. skeleton 用尽量少的词呈现句子主干（保留原句词形）。
+8. clauses 列出主句与各从句，type 取 主句/宾语从句/定语从句/状语从句/表语从句/同位语从句/并列句。
+9. keyPoints 给 2-3 条中文学习要点，点明易错处，每条不超过 40 字。
+10. translation 给出自然、准确的中文翻译。
 
 输出 JSON 结构：
-{"translation":"中文翻译","basicPattern":"主谓宾","basicFormula":"S+V+O","pattern":"SVO","patternName":"主谓宾","chunks":[{"text":"I","role":"subject","label":"主语","note":"一句话成分说明"}],"skeleton":"I ...","clauses":[{"type":"主句","text":"...","note":"..."}],"keyPoints":["..."]}`;
+{"translation":"中文翻译","basicPattern":"主谓宾","basicFormula":"S+V+O","pattern":"SVO","patternName":"主谓宾","chunks":[{"text":"I","role":"subject","label":"主语","note":"一句话成分说明","clause":""}],"skeleton":"I ...","clauses":[{"type":"主句","text":"...","note":"..."}],"keyPoints":["..."]}`;
 
   /* ---------------- 语法角色 ------------- */
   const ROLES = {
@@ -209,7 +210,8 @@
     const chunks = (Array.isArray(raw.chunks) ? raw.chunks : []).map((chunk) => ({
       text: String(chunk.text || "").trim(),
       role: normalizeRole(chunk.role),
-      note: String(chunk.note || "").trim()
+      note: String(chunk.note || "").trim(),
+      clause: String(chunk.clause || "").trim()
     })).filter((chunk) => chunk.text);
 
     if (!chunks.length) throw new Error("解析结果为空");
@@ -365,7 +367,48 @@
   }
 
   /* ---------------- 渲染：分析结果 ---------------- */
-  function chunkMarkup(chunks) {
+  function normalizeClauseText(value) {
+    return String(value || "")
+      .toLowerCase()
+      .replace(/[^a-z0-9'’\s]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  // 模型未给 chunk.clause 时，用 clauses 文本与片段序列比对，回推从句范围（兼容旧缓存）
+  function resolveClauseMarks(chunks, clauses) {
+    const marks = new Array(chunks.length).fill("");
+    const norms = chunks.map((chunk) => normalizeClauseText(chunk.text));
+    const targets = clauses
+      .filter((clause) => String(clause.type || "").trim() !== "主句" && normalizeClauseText(clause.text))
+      .map((clause) => ({ type: String(clause.type).trim(), text: normalizeClauseText(clause.text) }));
+
+    targets.forEach((target) => {
+      let matched = false;
+      for (let start = 0; start < chunks.length && !matched; start += 1) {
+        let joined = "";
+        for (let end = start; end < chunks.length && end - start < 9; end += 1) {
+          joined = joined ? `${joined} ${norms[end]}` : norms[end];
+          if (!joined) continue;
+          if (joined === target.text) {
+            for (let k = start; k <= end; k += 1) if (!marks[k]) marks[k] = target.type;
+            matched = true;
+            break;
+          }
+          if (joined.length >= target.text.length) break;
+        }
+      }
+      if (!matched) {
+        const index = norms.findIndex((norm, i) => !marks[i] && norm && ` ${norm} `.includes(` ${target.text} `));
+        if (index !== -1) marks[index] = target.type;
+      }
+    });
+
+    return marks;
+  }
+
+  function chunkMarkup(chunks, clauses) {
+    const clauseMarks = resolveClauseMarks(chunks, clauses || []);
     let html = "";
     chunks.forEach((chunk, index) => {
       if (index > 0) {
@@ -376,7 +419,9 @@
       }
       const meta = roleMeta(chunk.role);
       const core = CORE_ROLES.has(chunk.role) ? 1 : 0;
-      html += `<span class="tchunk" data-core="${core}" style="--c:${meta.color}" title="${esc(meta.label)}：${esc(chunk.note || chunk.text)}">${esc(chunk.text)}<span class="tchunk-label">${meta.label}</span></span>`;
+      const clauseType = String(chunk.clause || "").trim() || clauseMarks[index] || "";
+      const title = `${meta.label}${clauseType ? `（${clauseType}）` : ""}：${chunk.note || chunk.text}`;
+      html += `<span class="tchunk${clauseType ? " is-clause" : ""}" data-core="${core}" data-clause="${esc(clauseType)}" style="--c:${meta.color}" title="${esc(title)}"><span class="tchunk-text">${esc(chunk.text)}</span><span class="tchunk-label">${meta.label}</span></span>`;
     });
     return html;
   }
@@ -398,6 +443,12 @@
       const meta = roleMeta(role);
       return `<span class="legend-chip" style="--c:${meta.color}"><span class="legend-dot"></span>${meta.label}</span>`;
     }).join("");
+
+    const hasClauses = data.clauses.some((clause) => String(clause.type).trim() !== "主句")
+      || data.chunks.some((chunk) => String(chunk.clause || "").trim());
+    const legendNote = hasClauses
+      ? `<span class="legend-note"><span class="legend-underline"></span>下划线为从句</span>`
+      : "";
 
     const rows = data.chunks.map((chunk) => {
       const meta = roleMeta(chunk.role);
@@ -452,8 +503,8 @@
 
         <div class="gram-card">
           <span class="card-label">原句 · Sentence</span>
-          <div class="gram-sentence" id="gramSentence">${chunkMarkup(data.chunks)}</div>
-          <div class="gram-legend">${legend}</div>
+          <div class="gram-sentence" id="gramSentence">${chunkMarkup(data.chunks, data.clauses)}</div>
+          <div class="gram-legend">${legend}${legendNote}</div>
         </div>
 
         <div class="skeleton-card">
