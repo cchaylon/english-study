@@ -167,7 +167,7 @@
 .art-chip-3 { bottom: 24px; right: -14px; transform: rotate(3deg); color: #fde68a; }
 
 /* ---------- 功能模块容器 ---------- */
-.modules { padding: 58px 0 10px; }
+.modules { padding: 58px 0 10px; scroll-margin-top: calc(var(--header-h) + 16px); }
 .modules-count { font-size: 12.5px; color: var(--muted); white-space: nowrap; }
 
 .module-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
@@ -237,7 +237,7 @@
 .is-soon .mc-foot { color: #94a3b8; font-weight: 500; border-top-color: #eef2f7; }
 
 /* ---------- 句子分析 ---------- */
-.analyzer { padding: 46px 0 80px; }
+.analyzer { padding: 46px 0 80px; scroll-margin-top: calc(var(--header-h) + 16px); }
 .analyzer-hint { font-size: 12.5px; color: var(--muted); white-space: nowrap; }
 
 .analyzer-grid { display: grid; grid-template-columns: 352px minmax(0, 1fr); gap: 20px; align-items: start; }
@@ -407,7 +407,7 @@
 .pattern-badge code { font-family: var(--mono); font-size: 13px; letter-spacing: 0.5px; opacity: 0.85; }
 .pattern-badge b { font-size: 16px; font-weight: 750; letter-spacing: 0.2px; }
 
-.result-tools { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.result-tools { margin-left: auto; display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
 .result-source { font-size: 11.5px; color: var(--muted); }
 .result-source b { color: var(--ink-2); font-weight: 650; }
 .tool-btn {
@@ -438,6 +438,7 @@
   line-height: 2.05;
   color: var(--ink);
   word-break: break-word;
+  overflow-wrap: anywhere;
 }
 .tchunk {
   --c: var(--role-other);
@@ -576,7 +577,7 @@
 
 @media (max-width: 980px) {
   .teach-hero-inner { grid-template-columns: 1fr; padding: 40px 32px 36px; gap: 30px; }
-  .teach-art { min-height: 280px; max-width: 480px; }
+  .teach-art { min-height: 280px; max-width: 480px; width: 100%; margin: 0 auto; }
   .analyzer-grid { grid-template-columns: 1fr; }
   .input-card { position: static; }
   .result-grid { grid-template-columns: 1fr; }

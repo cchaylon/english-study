@@ -48,16 +48,27 @@
     other: { label: "其他", color: "#94a3b8" }
   };
 
+  // 兼容模型可能返回的英文枚举 / 中文名 / 带括号的写法
   const ROLE_ALIASES = {
-    "主": "subject", "主语": "subject", "subject": "subject",
-    "谓": "verb", "谓语": "verb", "verb": "verb", "predicate": "verb",
-    "宾语": "object", "object": "object",
-    "宾补": "complement", "补语": "complement", "complement": "complement",
+    "subject": "subject", "主语": "subject", "主语从句": "subject", "subjectclause": "subject",
+    "verb": "verb", "谓语": "verb", "谓语动词": "verb", "predicate": "verb", "动词": "verb",
+    "object": "object", "宾语": "object", "宾语从句": "object", "objectclause": "object",
+    "直接宾语": "object", "间接宾语": "object", "双宾语": "object",
+    "complement": "complement", "宾补": "complement", "补语": "complement",
+    "宾语补足语": "complement", "宾语补语": "complement",
     "objectcomplement": "complement", "oc": "complement",
-    "表语": "predicative", "predicative": "predicative", "subjectcomplement": "predicative",
-    "定语": "attributive", "attributive": "attributive", "modifier": "attributive",
-    "状语": "adverbial", "adverbial": "adverbial",
-    "连词": "conjunction", "引导词": "conjunction", "conjunction": "conjunction"
+    "predicative": "predicative", "表语": "predicative", "表语从句": "predicative",
+    "主语补足语": "predicative", "subjectcomplement": "predicative",
+    "attributive": "attributive", "定语": "attributive", "定语从句": "attributive",
+    "attributiveclause": "attributive", "modifier": "attributive", "relative": "attributive",
+    "前置定语": "attributive", "后置定语": "attributive",
+    "adverbial": "adverbial", "状语": "adverbial", "状语从句": "adverbial",
+    "adverbialclause": "adverbial",
+    "conjunction": "conjunction", "连词": "conjunction", "引导词": "conjunction",
+    "从句引导词": "conjunction", "connector": "conjunction",
+    "other": "other", "其他": "other", "插入语": "other", "同位语": "other",
+    "appositive": "other", "感叹词": "other", "interjection": "other",
+    "标点": "other", "punctuation": "other"
   };
 
   const CORE_ROLES = new Set(["subject", "verb", "object", "complement", "predicative"]);
@@ -325,13 +336,15 @@
       </div>`;
   }
 
-  function renderError(message) {
+  function renderError(message, options) {
+    const opts = options || {};
+    const showRetry = opts.retry !== false && lastSentence;
     output.innerHTML = `
       <div class="state-error">
         <span class="err-badge">解析失败</span>
         <h3>这次没能拆出来</h3>
         <p>${esc(message)}</p>
-        <button class="btn btn-primary" type="button" id="retryBtn">重新解析</button>
+        ${showRetry ? '<button class="btn btn-primary" type="button" id="retryBtn">重新解析</button>' : ""}
       </div>`;
   }
 
@@ -473,11 +486,15 @@
     const sentence = String(rawSentence || "").replace(/\s+/g, " ").trim();
 
     if (!sentence) {
-      renderError("请先输入一句英文，再开始拆解。");
+      renderError("请先输入一句英文，再开始拆解。", { retry: false });
       return;
     }
     if (!/[A-Za-z]/.test(sentence)) {
-      renderError("这句里没有英文单词，请检查输入内容。");
+      renderError("这句里没有英文单词，请检查输入内容。", { retry: false });
+      return;
+    }
+    if (sentence.length > 240) {
+      renderError("句子太长了，请控制在 240 个字符以内。", { retry: false });
       return;
     }
 
@@ -523,6 +540,7 @@
   }
 
   function fillSample(sample) {
+    if (busy) return;
     const input = $("#sentenceInput");
     if (input) {
       input.value = sample.text;
