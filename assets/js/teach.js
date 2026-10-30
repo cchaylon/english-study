@@ -24,16 +24,19 @@
 任务：拆解用户给出的英文句子，只输出严格 JSON（不要 markdown、不要解释文字）。
 
 规则：
-1. chunks：把句子切成连续的片段，按原顺序完整覆盖全句。每个 text 必须是原句中连续的字符片段（保留原有标点），不要改动拼写，不要添加原句没有的词。
-2. 每个片段标注 role，取值只能是：subject(主语) / verb(谓语动词) / object(宾语) / complement(宾语补足语) / predicative(表语) / attributive(定语) / adverbial(状语) / conjunction(连词或从句引导词) / other(其他)。label 用对应中文。
-3. pattern 取五大基本句型之一：SV / SVO / SVP / SVOO / SVOC；含从句时在主干基础上追加从句类型，如 SVO+宾语从句、SVO+定语从句。patternName 用中文，如“主谓宾”“主系表”“主谓宾+定语从句”。
-4. skeleton 用尽量少的词呈现句子主干（保留原句词形）。
-5. clauses 列出主句与各从句，type 取 主句/宾语从句/定语从句/状语从句/表语从句/同位语从句/并列句。
-6. keyPoints 给 2-3 条中文学习要点，点明易错处，每条不超过 40 字。
-7. translation 给出自然、准确的中文翻译。
+1. basicPattern：判断主句属于五大基本句型中的哪一种，只能取以下五个值之一：主谓、主谓宾、主谓双宾、主谓宾宾补、主系表。句子含从句时，仍按主句判断。
+2. basicFormula：与 basicPattern 一一对应，只能取：S+V、S+V+O、S+V+O+O、S+V+O+C、S+V+P。
+3. chunks：把句子切成连续的片段，按原顺序完整覆盖全句。每个 text 必须是原句中连续的字符片段（保留原有标点），不要改动拼写，不要添加原句没有的词。
+4. 每个片段标注 role，取值只能是：subject(主语) / verb(谓语动词) / object(宾语) / complement(宾语补足语) / predicative(表语) / attributive(定语) / adverbial(状语) / conjunction(连词或从句引导词) / other(其他)。label 用对应中文。
+5. clause：该片段若属于从句，填写对应从句类型（与 clauses.type 一致，如「定语从句」）；属于主句或不在从句中时填空字符串 ""。
+6. pattern：主句句型代码，只能取 SV / SVO / SVOO / SVOC / SVP；若句子含从句，在主句代码后追加从句类型，如 SVO+宾语从句、SVO+定语从句。patternName 用中文，如「主谓宾」「主谓宾+定语从句」。
+7. skeleton 用尽量少的词呈现句子主干（保留原句词形）。
+8. clauses 列出主句与各从句，type 取 主句/宾语从句/定语从句/状语从句/表语从句/同位语从句/并列句。
+9. keyPoints 给 2-3 条中文学习要点，点明易错处，每条不超过 40 字。
+10. translation 给出自然、准确的中文翻译。
 
 输出 JSON 结构：
-{"translation":"中文翻译","pattern":"SVO","patternName":"主谓宾","chunks":[{"text":"I","role":"subject","label":"主语","note":"一句话成分说明"}],"skeleton":"I ...","clauses":[{"type":"主句","text":"...","note":"..."}],"keyPoints":["..."]}`;
+{"translation":"中文翻译","basicPattern":"主谓宾","basicFormula":"S+V+O","pattern":"SVO","patternName":"主谓宾","chunks":[{"text":"I","role":"subject","label":"主语","note":"一句话成分说明","clause":""}],"skeleton":"I ...","clauses":[{"type":"主句","text":"...","note":"..."}],"keyPoints":["..."]}`;
 
   /* ---------------- 语法角色 ------------- */
   const ROLES = {
@@ -72,6 +75,15 @@
   };
 
   const CORE_ROLES = new Set(["subject", "verb", "object", "complement", "predicative"]);
+
+  // 五大基本句型（与 lesson-05 的表述一致）
+  const BASIC_PATTERNS = {
+    SV: { name: "主谓", formula: "S + V" },
+    SVO: { name: "主谓宾", formula: "S + V + O" },
+    SVOO: { name: "主谓双宾", formula: "S + V + O + O" },
+    SVOC: { name: "主谓宾宾补", formula: "S + V + O + C" },
+    SVP: { name: "主系表", formula: "S + V + P" }
+  };
 
   /* ---------------- 例句库（优先影视原声，难度对标托业 800 以下） ------------- */
   const SAMPLES = [
@@ -198,7 +210,8 @@
     const chunks = (Array.isArray(raw.chunks) ? raw.chunks : []).map((chunk) => ({
       text: String(chunk.text || "").trim(),
       role: normalizeRole(chunk.role),
-      note: String(chunk.note || "").trim()
+      note: String(chunk.note || "").trim(),
+      clause: String(chunk.clause || "").trim()
     })).filter((chunk) => chunk.text);
 
     if (!chunks.length) throw new Error("解析结果为空");
@@ -209,10 +222,24 @@
       note: String(clause.note || "")
     }));
 
+    // 五大基本句型：优先取模型字段，缺失时由 pattern 代码回推
+    const code = String(raw.pattern || "").split("+")[0].trim().toUpperCase();
+    const byCode = BASIC_PATTERNS[code];
+    const declared = String(raw.basicPattern || "").trim();
+    const declaredHit = Object.keys(BASIC_PATTERNS).find((key) => BASIC_PATTERNS[key].name === declared);
+    const basicCode = declaredHit || (byCode ? code : "");
+    const basicPattern = declaredHit
+      ? declared
+      : (byCode ? byCode.name : (declared || "—"));
+    const basicFormula = String(raw.basicFormula || "").trim() || (byCode ? byCode.formula : "");
+
     return {
       translation: String(raw.translation || "（暂无翻译）"),
       pattern: String(raw.pattern || ""),
       patternName: String(raw.patternName || ""),
+      basicPattern,
+      basicFormula,
+      basicCode,
       chunks,
       skeleton: String(raw.skeleton || "").trim() || displayText(chunks.filter((c) => CORE_ROLES.has(c.role))),
       clauses,
@@ -283,33 +310,24 @@
     return "解析失败：" + message;
   }
 
-  /* ---------------- 渲染：模块容器 ---------------- */
+  /* ---------------- 渲染：模块选择条 ---------------- */
   function renderModules() {
-    const grid = $("#moduleGrid");
-    if (!grid) return;
+    const bar = $("#moduleGrid");
+    if (!bar) return;
 
-    grid.innerHTML = MODULES.map((mod, index) => {
+    bar.innerHTML = `<span class="module-bar-label">我来教你</span>` + MODULES.map((mod) => {
       const live = mod.status === "live";
-      const body = `
-        <div class="mc-top">
-          <span class="mc-no">${String(index + 1).padStart(2, "0")} / MODULE</span>
-          <span class="mc-badge">${live ? "已上线" : "即将上线"}</span>
-        </div>
-        <div class="mc-icon">${mod.icon}</div>
-        <h3>${esc(mod.title)}</h3>
-        <p>${esc(mod.desc)}</p>
-        <div class="mc-foot"><span>${live ? "开始使用" : "敬请期待"}</span><span class="arrow">${live ? "→" : "·"}</span></div>`;
-
       return live
-        ? `<a class="module-card is-live" href="${mod.href}" style="--ac:${mod.accent}">${body}</a>`
-        : `<div class="module-card is-soon" style="--ac:${mod.accent}">${body}</div>`;
+        ? `<button class="module-pill is-live is-active" type="button" data-target="${mod.href}" title="${esc(mod.desc)}">${mod.icon}<span>${esc(mod.title)}</span></button>`
+        : `<span class="module-pill is-soon" title="${esc(mod.desc)}">${mod.icon}<span>${esc(mod.title)}</span><em>即将上线</em></span>`;
     }).join("");
 
-    const count = $("#modulesCount");
-    if (count) {
-      const liveCount = MODULES.filter((m) => m.status === "live").length;
-      count.textContent = `共 ${MODULES.length} 个模块 · ${liveCount} 个已上线`;
-    }
+    $$(".module-pill.is-live", bar).forEach((pill) => {
+      pill.addEventListener("click", () => {
+        const target = document.querySelector(pill.dataset.target || "");
+        if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
   }
 
   /* ---------------- 渲染：状态 ---------------- */
@@ -317,7 +335,7 @@
     output.innerHTML = `
       <div class="state-empty">
         <div class="empty-art">Aa</div>
-        <h3>输入一句英文，<br>看看它的骨架</h3>
+        <h2 class="empty-title">输入一句英文，看看它的骨架</h2>
         <p>直接粘贴你想拆的长难句，或点左侧「随机例句」。</p>
         <p class="empty-note">解析完成后，句子会按成分分色高亮，主谓宾骨架单独拎出来。</p>
       </div>`;
@@ -349,7 +367,48 @@
   }
 
   /* ---------------- 渲染：分析结果 ---------------- */
-  function chunkMarkup(chunks) {
+  function normalizeClauseText(value) {
+    return String(value || "")
+      .toLowerCase()
+      .replace(/[^a-z0-9'’\s]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  // 模型未给 chunk.clause 时，用 clauses 文本与片段序列比对，回推从句范围（兼容旧缓存）
+  function resolveClauseMarks(chunks, clauses) {
+    const marks = new Array(chunks.length).fill("");
+    const norms = chunks.map((chunk) => normalizeClauseText(chunk.text));
+    const targets = clauses
+      .filter((clause) => String(clause.type || "").trim() !== "主句" && normalizeClauseText(clause.text))
+      .map((clause) => ({ type: String(clause.type).trim(), text: normalizeClauseText(clause.text) }));
+
+    targets.forEach((target) => {
+      let matched = false;
+      for (let start = 0; start < chunks.length && !matched; start += 1) {
+        let joined = "";
+        for (let end = start; end < chunks.length && end - start < 9; end += 1) {
+          joined = joined ? `${joined} ${norms[end]}` : norms[end];
+          if (!joined) continue;
+          if (joined === target.text) {
+            for (let k = start; k <= end; k += 1) if (!marks[k]) marks[k] = target.type;
+            matched = true;
+            break;
+          }
+          if (joined.length >= target.text.length) break;
+        }
+      }
+      if (!matched) {
+        const index = norms.findIndex((norm, i) => !marks[i] && norm && ` ${norm} `.includes(` ${target.text} `));
+        if (index !== -1) marks[index] = target.type;
+      }
+    });
+
+    return marks;
+  }
+
+  function chunkMarkup(chunks, clauses) {
+    const clauseMarks = resolveClauseMarks(chunks, clauses || []);
     let html = "";
     chunks.forEach((chunk, index) => {
       if (index > 0) {
@@ -360,7 +419,9 @@
       }
       const meta = roleMeta(chunk.role);
       const core = CORE_ROLES.has(chunk.role) ? 1 : 0;
-      html += `<span class="tchunk" data-core="${core}" style="--c:${meta.color}" title="${esc(meta.label)}：${esc(chunk.note || chunk.text)}">${esc(chunk.text)}<span class="tchunk-label">${meta.label}</span></span>`;
+      const clauseType = String(chunk.clause || "").trim() || clauseMarks[index] || "";
+      const title = `${meta.label}${clauseType ? `（${clauseType}）` : ""}：${chunk.note || chunk.text}`;
+      html += `<span class="tchunk${clauseType ? " is-clause" : ""}" data-core="${core}" data-clause="${esc(clauseType)}" style="--c:${meta.color}" title="${esc(title)}"><span class="tchunk-text">${esc(chunk.text)}</span><span class="tchunk-label">${meta.label}</span></span>`;
     });
     return html;
   }
@@ -382,6 +443,12 @@
       const meta = roleMeta(role);
       return `<span class="legend-chip" style="--c:${meta.color}"><span class="legend-dot"></span>${meta.label}</span>`;
     }).join("");
+
+    const hasClauses = data.clauses.some((clause) => String(clause.type).trim() !== "主句")
+      || data.chunks.some((chunk) => String(chunk.clause || "").trim());
+    const legendNote = hasClauses
+      ? `<span class="legend-note"><span class="legend-underline"></span>下划线为从句</span>`
+      : "";
 
     const rows = data.chunks.map((chunk) => {
       const meta = roleMeta(chunk.role);
@@ -411,6 +478,8 @@
          <ol class="keypoints">${data.keyPoints.map((point) => `<li>${esc(point)}</li>`).join("")}</ol>`
       : "";
 
+    const clauseCount = data.clauses.filter((clause) => String(clause.type).trim() !== "主句").length;
+
     const source = currentSource
       ? `例句来源 <b>${esc(currentSource)}</b>`
       : `AI 解析 · DeepSeek`;
@@ -419,9 +488,12 @@
       <div class="result">
         <div class="result-bar">
           <span class="pattern-badge">
-            <code>${esc(data.pattern || "SENTENCE")}</code>
-            <b>${esc(data.patternName || "句子结构")}</b>
+            <span class="pb-kind">五大基本句型</span>
+            <b>${esc(data.basicPattern || "—")}</b>
+            <code>${esc(data.basicCode || data.pattern || "SENTENCE")}</code>
           </span>
+          ${data.patternName && data.patternName !== data.basicPattern ? `<span class="pattern-full">${esc(data.patternName)}</span>` : ""}
+          ${clauseCount ? `<span class="clause-count">含 ${clauseCount} 个从句</span>` : ""}
           <div class="result-tools">
             <span class="result-source">${source}</span>
             <button class="tool-btn" type="button" id="focusBtn" aria-pressed="false">只看主干</button>
@@ -431,8 +503,8 @@
 
         <div class="gram-card">
           <span class="card-label">原句 · Sentence</span>
-          <div class="gram-sentence" id="gramSentence">${chunkMarkup(data.chunks)}</div>
-          <div class="gram-legend">${legend}</div>
+          <div class="gram-sentence" id="gramSentence">${chunkMarkup(data.chunks, data.clauses)}</div>
+          <div class="gram-legend">${legend}${legendNote}</div>
         </div>
 
         <div class="skeleton-card">
@@ -582,24 +654,10 @@
       });
     }
 
-    $$("[data-random-sentence]").forEach((button) => {
-      button.addEventListener("click", () => {
-        const sample = pickSample();
-        fillSample(sample);
-      });
-    });
-
     $$(".sentence-chip").forEach((chip) => {
       chip.addEventListener("click", () => {
         const sentence = chip.dataset.sentence || "";
         fillSample({ text: sentence, source: "" });
-      });
-    });
-
-    $$("[data-jump-analyzer]").forEach((button) => {
-      button.addEventListener("click", () => {
-        $("#analyze").scrollIntoView({ behavior: "smooth", block: "start" });
-        setTimeout(() => { if (input) input.focus({ preventScroll: true }); }, 420);
       });
     });
 
