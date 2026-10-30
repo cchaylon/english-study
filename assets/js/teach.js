@@ -116,7 +116,7 @@
       title: "句子分析",
       desc: "拆解句子成分，识别五大句型与从句结构，分色高亮主干骨架。",
       status: "live",
-      href: "#analyze",
+      href: "teach.html",
       accent: "#4f46e5",
       icon: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 5h14M3 10h9M3 15h11" stroke-linecap="round"/><circle cx="16" cy="10" r="1.6" fill="currentColor" stroke="none"/></svg>'
     },
@@ -125,7 +125,7 @@
       title: "单词扩展",
       desc: "音标拼读、释义、搭配、分层例句、词族、构词、语义、主题与习语，一次展开并归档词根。",
       status: "live",
-      href: "#word",
+      href: "teach-vocab.html",
       accent: "#0891b2",
       icon: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="3"/><path d="M7 7h6M7 10h6M7 13h4" stroke-linecap="round"/></svg>'
     },
@@ -362,27 +362,21 @@
     return "解析失败：" + message;
   }
 
-  /* ---------------- 渲染：模块选择条 ---------------- */
+  /* ---------------- 渲染：模块选择条 ----------------
+     句子分析与单词扩展是各自独立的页面，模块条只负责页面间跳转。
+  ------------------------------------------------------- */
   function renderModules() {
     const bar = $("#moduleGrid");
     if (!bar) return;
+    const current = document.body.dataset.teach || "";
 
-    bar.innerHTML = `<span class="module-bar-label">我来教你</span>` + MODULES.map((mod, index) => {
-      const live = mod.status === "live";
-      const active = live && index === MODULES.findIndex((item) => item.status === "live");
-      return live
-        ? `<button class="module-pill is-live${active ? " is-active" : ""}" type="button" data-target="${mod.href}" title="${esc(mod.desc)}">${mod.icon}<span>${esc(mod.title)}</span></button>`
-        : `<span class="module-pill is-soon" title="${esc(mod.desc)}">${mod.icon}<span>${esc(mod.title)}</span><em>即将上线</em></span>`;
+    bar.innerHTML = `<span class="module-bar-label">我来教你</span>` + MODULES.map((mod) => {
+      if (mod.status !== "live") {
+        return `<span class="module-pill is-soon" title="${esc(mod.desc)}">${mod.icon}<span>${esc(mod.title)}</span><em>即将上线</em></span>`;
+      }
+      const active = mod.id === current ? " is-active" : "";
+      return `<a class="module-pill is-live${active}" href="${mod.href}" title="${esc(mod.desc)}">${mod.icon}<span>${esc(mod.title)}</span></a>`;
     }).join("");
-
-    $$(".module-pill.is-live", bar).forEach((pill) => {
-      pill.addEventListener("click", () => {
-        $$(".module-pill.is-live", bar).forEach((item) => item.classList.remove("is-active"));
-        pill.classList.add("is-active");
-        const target = document.querySelector(pill.dataset.target || "");
-        if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-    });
   }
 
   /* ---------------- 渲染：状态 ---------------- */
