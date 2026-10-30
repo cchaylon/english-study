@@ -600,6 +600,8 @@
 
         <div class="gram-translation"><b>译</b><span>${esc(data.translation)}</span></div>
 
+        ${patternAnalysisBlock}
+
         <div class="result-grid">
           <div class="result-panel">
             <h3>句子成分</h3>
@@ -610,7 +612,6 @@
             ${keyPoints}
           </div>
         </div>
-        ${patternAnalysisBlock}
       </div>`;
 
     const sentenceBox = $("#gramSentence");
