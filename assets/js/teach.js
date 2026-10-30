@@ -456,19 +456,36 @@
   function chunkMarkup(chunks, clauses) {
     const clauseMarks = resolveClauseMarks(chunks, clauses || []);
     let html = "";
+    let openClause = "";
+
     chunks.forEach((chunk, index) => {
+      const clauseType = String(chunk.clause || "").trim() || clauseMarks[index] || "";
+
+      // 从句类型变化时先闭合上一段，让同一声明式从句只画一条连续下划线
+      if (openClause && clauseType !== openClause) {
+        html += "</span>";
+        openClause = "";
+      }
+
       if (index > 0) {
         const prev = chunks[index - 1].text;
         const noSpaceBefore = /^[,.;:!?%)\]）”"'’]/.test(chunk.text) || /^['’]/.test(chunk.text);
         const noSpaceAfter = /[(（“‘"]$/.test(prev) || /[\/-]$/.test(prev);
         if (!noSpaceBefore && !noSpaceAfter) html += " ";
       }
+
+      if (clauseType && !openClause) {
+        html += `<span class="clause-group" data-clause="${esc(clauseType)}">`;
+        openClause = clauseType;
+      }
+
       const meta = roleMeta(chunk.role);
       const core = CORE_ROLES.has(chunk.role) ? 1 : 0;
-      const clauseType = String(chunk.clause || "").trim() || clauseMarks[index] || "";
       const title = `${meta.label}${clauseType ? `（${clauseType}）` : ""}：${chunk.note || chunk.text}`;
       html += `<span class="tchunk${clauseType ? " is-clause" : ""}" data-core="${core}" data-clause="${esc(clauseType)}" style="--c:${meta.color}" title="${esc(title)}"><span class="tchunk-text">${esc(chunk.text)}</span><span class="tchunk-label">${meta.label}</span></span>`;
     });
+
+    if (openClause) html += "</span>";
     return html;
   }
 

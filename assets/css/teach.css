@@ -413,12 +413,15 @@
 }
 .tchunk:hover { background: color-mix(in srgb, var(--c) 18%, var(--chunk-base)); }
 .tchunk-text { display: inline; }
-.tchunk.is-clause .tchunk-text {
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
-  text-decoration-color: color-mix(in srgb, var(--c) 80%, var(--chunk-ink));
+/* 从句整体画一条连续下划线：把相邻从句片段包在同一个内联容器里 */
+.clause-group {
+  border-bottom: 2px solid color-mix(in srgb, var(--primary) 72%, transparent);
+  padding-bottom: 2px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
+/* 从句片段只保留整段下划线，避免每块单词各自出现一条短线 */
+.tchunk.is-clause { box-shadow: none; }
 .tchunk-label { font-family: var(--sans); font-size: 9.5px; letter-spacing: 0.7px; font-weight: 700; vertical-align: super; margin-left: 3px; color: color-mix(in srgb, var(--c) 68%, var(--chunk-ink)); }
 .gram-sentence.is-focus .tchunk[data-core="0"] { opacity: 0.34; filter: saturate(0.5); }
 .gram-sentence.is-focus .tchunk[data-core="1"] { background: color-mix(in srgb, var(--c) 16%, var(--chunk-base)); box-shadow: inset 0 -3px 0 var(--c); font-weight: 600; }
