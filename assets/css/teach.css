@@ -384,6 +384,12 @@
 }
 .tool-btn:hover { border-color: rgba(79, 70, 229, 0.36); color: var(--primary); }
 .tool-btn[aria-pressed="true"] { background: var(--primary-soft); border-color: rgba(79, 70, 229, 0.4); color: var(--primary-deep); font-weight: 650; }
+.tool-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
+.tool-btn-speak { border-color: rgba(79, 70, 229, 0.28); color: var(--primary); }
+.tool-btn-speak:hover { background: var(--primary-soft); }
+.tool-btn-speak.is-speaking { background: var(--primary-soft); border-color: rgba(79, 70, 229, 0.45); color: var(--primary-deep); font-weight: 650; }
+.tool-btn-speak.is-speaking svg { animation: speakPulse 0.9s ease-in-out infinite; }
+@keyframes speakPulse { 50% { transform: scale(1.16); opacity: 0.72; } }
 
 /* ---------- 结果：原句高亮 ---------- */
 .gram-card { margin-top: 18px; padding: 20px 20px 16px; border: 1px solid var(--line); border-radius: 16px; background: linear-gradient(180deg, var(--surface-2), var(--surface)); }
@@ -635,6 +641,9 @@ html[data-theme="dark"] .skeleton-card { border: 1px solid rgba(255, 255, 255, 0
 html[data-theme="dark"] .tool-btn { background: var(--surface); }
 html[data-theme="dark"] .tool-btn:hover { border-color: rgba(139, 156, 255, 0.45); color: var(--primary); }
 html[data-theme="dark"] .tool-btn[aria-pressed="true"] { color: var(--primary-deep); border-color: rgba(139, 156, 255, 0.5); }
+html[data-theme="dark"] .tool-btn-speak { color: #c7d2fe; border-color: rgba(139, 156, 255, 0.46); }
+html[data-theme="dark"] .tool-btn-speak:hover,
+html[data-theme="dark"] .tool-btn-speak.is-speaking { background: rgba(109, 120, 255, 0.18); color: #e0e7ff; border-color: rgba(139, 156, 255, 0.55); }
 
 html[data-theme="dark"] .result-panel { background: var(--surface); }
 html[data-theme="dark"] .comp-role { background: color-mix(in srgb, var(--c) 16%, var(--surface)); border-color: color-mix(in srgb, var(--c) 40%, transparent); }
