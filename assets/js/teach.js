@@ -169,7 +169,7 @@
   }
 
   /* ---------------- 本地例句库 ----------------
-     未勾选 AI 时，直接读取 assets/data/sentences.json 中预置的解析结果。
+     未切换到 AI 时，直接读取 assets/data/sentences.json 中预置的解析结果。
   ------------------------------------------------------- */
   function loadLocalSentences() {
     if (localLoadPromise) return localLoadPromise;
@@ -382,7 +382,7 @@
       <div class="state-empty">
         <div class="empty-art">Aa</div>
         <h2 class="empty-title">输入一句英文，看看它的骨架</h2>
-        <p>默认从本地 100 句例句库解析；点左侧「随机例句」即可试，勾选「AI」可联网解析任意句子。</p>
+        <p>默认从本地 100 句例句库解析；点左侧「随机例句」即可试，切换到「AI」可联网解析任意句子。</p>
         <p class="empty-note">解析完成后，句子会按成分分色高亮，主谓宾骨架单独拎出来。</p>
       </div>`;
   }
@@ -626,11 +626,11 @@
       const hit = findLocalSentence(sentence);
       if (!hit) {
         currentSource = "";
-        let message = "本地例句库中没有找到这句。勾选「AI」后可联网解析任意句子。";
+        let message = "本地例句库中没有找到这句。切换到「AI」后可联网解析任意句子。";
         if (localLoadFailed) {
           message = location.protocol === "file:"
             ? "浏览器禁止 file:// 读取本地 JSON，请用本地服务器打开页面（例如 python3 -m http.server）。"
-            : "本地例句库加载失败，请检查 assets/data/sentences.json，或勾选「AI」联网解析。";
+            : "本地例句库加载失败，请检查 assets/data/sentences.json，或切换到「AI」联网解析。";
         }
         renderError(message, { retry: false });
         return;
