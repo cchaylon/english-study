@@ -34,9 +34,10 @@
 8. clauses 列出主句与各从句，type 取 主句/宾语从句/定语从句/状语从句/表语从句/同位语从句/并列句。
 9. keyPoints 给 2-3 条中文学习要点，点明易错处，每条不超过 40 字。
 10. translation 给出自然、准确的中文翻译。
+11. patternAnalysis 说明句型判定：why 说明为什么是这个基本句型（结合主句的主语、谓语、宾语/表语/宾补），judge 说明判断依据，contrast 说明为何不是最容易混淆的其他句型。三条均为中文，每条不超过 60 字。
 
 输出 JSON 结构：
-{"translation":"中文翻译","basicPattern":"主谓宾","basicFormula":"S+V+O","pattern":"SVO","patternName":"主谓宾","chunks":[{"text":"I","role":"subject","label":"主语","note":"一句话成分说明","clause":""}],"skeleton":"I ...","clauses":[{"type":"主句","text":"...","note":"..."}],"keyPoints":["..."]}`;
+{"translation":"中文翻译","basicPattern":"主谓宾","basicFormula":"S+V+O","pattern":"SVO","patternName":"主谓宾","chunks":[{"text":"I","role":"subject","label":"主语","note":"一句话成分说明","clause":""}],"skeleton":"I ...","clauses":[{"type":"主句","text":"...","note":"..."}],"patternAnalysis":{"why":"...","judge":"...","contrast":"..."},"keyPoints":["..."]}`;
 
   /* ---------------- 语法角色 ------------- */
   const ROLES = {
@@ -151,7 +152,6 @@
   const LOCAL_DATA_URL = "assets/data/sentences.json";
 
   let busy = false;
-  let currentSource = "";
   let lastSentence = "";
   let localSentences = [];
   let localLoadPromise = null;
@@ -200,10 +200,6 @@
   function aiEnabled() {
     const toggle = $("#aiToggle");
     return !!(toggle && toggle.checked);
-  }
-
-  function localSource(item) {
-    return item.grammarPoint ? "本地例句库 · " + item.grammarPoint : "本地例句库";
   }
 
   function normalizeRole(role) {
@@ -278,6 +274,14 @@
       ? declared
       : (byCode ? byCode.name : (declared || "—"));
     const basicFormula = String(raw.basicFormula || "").trim() || (byCode ? byCode.formula : "");
+    const pa = raw.patternAnalysis && typeof raw.patternAnalysis === "object" ? raw.patternAnalysis : null;
+    const patternAnalysis = pa && (pa.why || pa.judge || pa.contrast)
+      ? {
+          why: String(pa.why || "").trim(),
+          judge: String(pa.judge || "").trim(),
+          contrast: String(pa.contrast || "").trim()
+        }
+      : null;
 
     return {
       translation: String(raw.translation || "（暂无翻译）"),
@@ -289,6 +293,7 @@
       chunks,
       skeleton: String(raw.skeleton || "").trim() || displayText(chunks.filter((c) => CORE_ROLES.has(c.role))),
       clauses,
+      patternAnalysis,
       keyPoints: (Array.isArray(raw.keyPoints) ? raw.keyPoints : []).map((point) => String(point)).filter(Boolean)
     };
   }
@@ -543,9 +548,17 @@
 
     const clauseCount = data.clauses.filter((clause) => String(clause.type).trim() !== "主句").length;
 
-    const source = currentSource
-      ? `例句来源 <b>${esc(currentSource)}</b>`
-      : `AI 解析 · DeepSeek`;
+    const pa = data.patternAnalysis;
+    const patternAnalysisBlock = pa
+      ? `<div class="pattern-analysis">
+           <h3>句型解析</h3>
+           <div class="pa-grid">
+             ${pa.why ? `<div class="pa-item"><span class="pa-label">为什么是${esc(data.basicPattern || "这个句型")}</span><p>${esc(pa.why)}</p></div>` : ""}
+             ${pa.judge ? `<div class="pa-item"><span class="pa-label">怎么判断出来的</span><p>${esc(pa.judge)}</p></div>` : ""}
+             ${pa.contrast ? `<div class="pa-item"><span class="pa-label">为何不是其他句型</span><p>${esc(pa.contrast)}</p></div>` : ""}
+           </div>
+         </div>`
+      : "";
 
     output.innerHTML = `
       <div class="result">
@@ -558,7 +571,6 @@
           ${data.patternName && data.patternName !== data.basicPattern ? `<span class="pattern-full">${esc(data.patternName)}</span>` : ""}
           ${clauseCount ? `<span class="clause-count">含 ${clauseCount} 个从句</span>` : ""}
           <div class="result-tools">
-            <span class="result-source">${source}</span>
             <button class="tool-btn" type="button" id="focusBtn" aria-pressed="false">只看主干</button>
             <button class="tool-btn" type="button" id="reanalyzeBtn">重新解析</button>
           </div>
@@ -588,6 +600,7 @@
             ${keyPoints}
           </div>
         </div>
+        ${patternAnalysisBlock}
       </div>`;
 
     const sentenceBox = $("#gramSentence");
@@ -608,11 +621,6 @@
       const button = $(selector);
       if (button) button.disabled = value;
     });
-  }
-
-  function syncSource(sentence) {
-    const sample = SAMPLES.find((item) => item.text === sentence);
-    currentSource = sample ? sample.source : "";
   }
 
   async function runAnalysis(rawSentence, options) {
@@ -642,7 +650,6 @@
       if (localLoadPromise && !localSentences.length) await localLoadPromise;
       const hit = findLocalSentence(sentence);
       if (!hit) {
-        currentSource = "";
         let message = "本地例句库中没有找到这句。切换到「AI」后可联网解析任意句子。";
         if (localLoadFailed) {
           message = location.protocol === "file:"
@@ -652,7 +659,6 @@
         renderError(message, { retry: false });
         return;
       }
-      currentSource = localSource(hit);
       try {
         renderResult(normalizeResult(hit));
       } catch (e) {
@@ -663,9 +669,6 @@
       }
       return;
     }
-
-    syncSource(sentence);
-    if (opts.source) currentSource = opts.source;
 
     const cacheKey = sentence.toLowerCase();
     if (!opts.force) {
@@ -696,9 +699,7 @@
 
   function pickSample() {
     const current = ($("#sentenceInput") ? $("#sentenceInput").value.trim() : "");
-    const pool = localSentences.length
-      ? localSentences.map((item) => ({ text: item.text, source: localSource(item) }))
-      : SAMPLES;
+    const pool = localSentences.length ? localSentences : SAMPLES;
     const filtered = pool.filter((item) => item.text.toLowerCase() !== current.toLowerCase());
     const list = filtered.length ? filtered : pool;
     return list[Math.floor(Math.random() * list.length)];
@@ -711,8 +712,7 @@
       input.value = sample.text;
       updateCount();
     }
-    currentSource = sample.source;
-    runAnalysis(sample.text, { source: sample.source, scroll: true });
+    runAnalysis(sample.text, { scroll: true });
   }
 
   function updateCount() {
@@ -750,7 +750,7 @@
     $$(".sentence-chip").forEach((chip) => {
       chip.addEventListener("click", () => {
         const sentence = chip.dataset.sentence || "";
-        fillSample({ text: sentence, source: "" });
+        fillSample({ text: sentence });
       });
     });
 
@@ -779,9 +779,7 @@
     loadLocalSentences().then(() => {
       if (!preset) return;
       const hit = findLocalSentence(preset);
-      fillSample(hit
-        ? { text: hit.text, source: localSource(hit) }
-        : { text: preset.trim(), source: "" });
+      fillSample({ text: hit ? hit.text : preset.trim() });
     });
   }
 

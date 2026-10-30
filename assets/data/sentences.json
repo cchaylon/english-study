@@ -48,7 +48,12 @@
     "keyPoints": [
       "系动词 be 后面接表语，说明主语身份。",
       "单数可数名词前要加不定冠词 a/an。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主语「My brother」+ 系动词「is」+ 表语「a doctor」，表语说明主语的状态或身份，属于主系表（SVP）。",
+      "judge": "「is」是系动词，「a doctor」回答主语“是什么/怎么样”，不是动作的承受者，所以不是宾语。",
+      "contrast": "若「is」是及物动词并带宾语，就是主谓宾；若宾语后还有补充说明宾语的成分，则是主谓宾宾补。本句没有宾语，所以不是这两类。"
+    }
   },
   {
     "text": "The children are playing in the garden.",
@@ -92,7 +97,12 @@
     "keyPoints": [
       "the 用于双方已知或特指的名词。",
       "现在进行时表示此刻正在发生的动作。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「The children」+ 谓语「are playing」，动词后没有宾语，其余「in the garden」是状语，不充当宾语，因此属于主谓（SV）。",
+      "judge": "先找谓语「are playing」，再看它后面有没有宾语；本句只有状语「in the garden」，所以判为主谓。",
+      "contrast": "若动词后接动作的承受者就是主谓宾，若接说明主语的表语就是主系表；本句既没有宾语也没有表语，所以不是其他句型。"
+    }
   },
   {
     "text": "There is some milk in the fridge.",
@@ -143,7 +153,12 @@
     "keyPoints": [
       "There be 句型表示“某处存在某物”，主语在 be 之后。",
       "milk 是不可数名词，用 is 而不是 are。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "There be 存在句：There 只是引导词，真正主语是不可数名词 some milk，谓语 is 与它保持一致；句子没有宾语，归为主谓。",
+      "judge": "去掉 There 后剩下 is some milk in the fridge，核心是“some milk + is”，即主语 + 谓语，所以判为主谓。",
+      "contrast": "它不是主系表，因为 some milk 是真正主语而非表语；也不是主谓宾，因为 is 后面没有动作的承受者。"
+    }
   },
   {
     "text": "These shoes are too expensive for me.",
@@ -194,7 +209,12 @@
     "keyPoints": [
       "these 指代近处的复数名词。",
       "too + 形容词 + for sb. 表示“对某人来说太……”。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主语「These shoes」+ 系动词「are」+ 表语「too expensive」，表语说明主语的状态或身份，属于主系表（SVP）。",
+      "judge": "「are」是系动词，「too expensive」回答主语“是什么/怎么样”，不是动作的承受者，所以不是宾语。",
+      "contrast": "若「are」是及物动词并带宾语，就是主谓宾；若宾语后还有补充说明宾语的成分，则是主谓宾宾补。本句没有宾语，所以不是这两类。"
+    }
   },
   {
     "text": "Each student has a new textbook.",
@@ -245,7 +265,12 @@
     "keyPoints": [
       "each + 单数名词作主语时，谓语用单数。",
       "a 用于单数可数名词前，表示“一本”。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「Each student」+ 及物动词「has」+ 宾语「a new textbook」，动作有明确的承受者，属于主谓宾（SVO）。",
+      "judge": "「has」后面只有一个宾语「a new textbook」，没有再带第二个宾语，也没有补充说明宾语的成分，因此判为主谓宾。",
+      "contrast": "若再加一个指人的间接宾语，就是主谓双宾；若宾语后还有形容词/名词/不定式补充说明宾语，则是主谓宾宾补；若动词是系动词并接表语，则是主系表。"
+    }
   },
   {
     "text": "She bought herself a birthday present.",
@@ -296,7 +321,12 @@
     "keyPoints": [
       "buy sb. sth. 是典型的双宾语结构。",
       "主语和宾语指同一人时，宾语用反身代词。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "「bought」后面接间接宾语「herself」和直接宾语「a birthday present」，两者都是宾语，属于主谓双宾（SVOO）。",
+      "judge": "「bought」可以改写为“bought + 直接宾语 + for/to + 间接宾语”，两个成分都是动作涉及的对象。",
+      "contrast": "如果第二个成分是在补充说明第一个宾语的状态或身份，应判为主谓宾宾补；如果只有一个宾语，则是主谓宾，所以本句不是这两类。"
+    }
   },
   {
     "text": "The information you gave me was very useful.",
@@ -366,7 +396,12 @@
     "keyPoints": [
       "information 是不可数名词，没有复数形式。",
       "定语从句修饰先行词 information，关系代词在从句中作宾语时可省略。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主语「The information」+ 系动词「was」+ 表语「very useful」，表语说明主语的状态或身份，属于主系表（SVP）。",
+      "judge": "「was」是系动词，「very useful」回答主语“是什么/怎么样”，不是动作的承受者，所以不是宾语。",
+      "contrast": "若「was」是及物动词并带宾语，就是主谓宾；若宾语后还有补充说明宾语的成分，则是主谓宾宾补。本句没有宾语，所以不是这两类。"
+    }
   },
   {
     "text": "Neither of the answers is correct.",
@@ -410,7 +445,12 @@
     "keyPoints": [
       "neither of 表示“两者都不”，作主语时谓语用单数。",
       "correct 作表语，说明主语的性质。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主语「Neither of the answers」+ 系动词「is」+ 表语「correct」，表语说明主语的状态或身份，属于主系表（SVP）。",
+      "judge": "「is」是系动词，「correct」回答主语“是什么/怎么样”，不是动作的承受者，所以不是宾语。",
+      "contrast": "若「is」是及物动词并带宾语，就是主谓宾；若宾语后还有补充说明宾语的成分，则是主谓宾宾补。本句没有宾语，所以不是这两类。"
+    }
   },
   {
     "text": "A few of my friends live abroad.",
@@ -454,7 +494,12 @@
     "keyPoints": [
       "a few of 后接复数名词，谓语用复数。",
       "abroad 是副词，前面不加介词。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「A few of my friends」+ 谓语「live」，动词后没有宾语，其余「abroad」是状语，不充当宾语，因此属于主谓（SV）。",
+      "judge": "先找谓语「live」，再看它后面有没有宾语；本句只有状语「abroad」，所以判为主谓。",
+      "contrast": "若动词后接动作的承受者就是主谓宾，若接说明主语的表语就是主系表；本句既没有宾语也没有表语，所以不是其他句型。"
+    }
   },
   {
     "text": "The police are looking for the missing boy.",
@@ -498,7 +543,12 @@
     "keyPoints": [
       "police 作主语时谓语通常用复数。",
       "missing 是现在分词作定语，表示“失踪的”。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「The police」+ 及物动词「are looking for」+ 宾语「the missing boy」，动作有明确的承受者，属于主谓宾（SVO）。",
+      "judge": "「are looking for」后面只有一个宾语「the missing boy」，没有再带第二个宾语，也没有补充说明宾语的成分，因此判为主谓宾。",
+      "contrast": "若再加一个指人的间接宾语，就是主谓双宾；若宾语后还有形容词/名词/不定式补充说明宾语，则是主谓宾宾补；若动词是系动词并接表语，则是主系表。"
+    }
   },
   {
     "text": "He can swim very fast.",
@@ -542,7 +592,12 @@
     "keyPoints": [
       "情态动词后必须接动词原形。",
       "fast 在这里是副词，修饰 swim。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「He」+ 谓语「can swim」，动词后没有宾语，其余「very fast」是状语，不充当宾语，因此属于主谓（SV）。",
+      "judge": "先找谓语「can swim」，再看它后面有没有宾语；本句只有状语「very fast」，所以判为主谓。",
+      "contrast": "若动词后接动作的承受者就是主谓宾，若接说明主语的表语就是主系表；本句既没有宾语也没有表语，所以不是其他句型。"
+    }
   },
   {
     "text": "You must finish your homework before dinner.",
@@ -593,7 +648,12 @@
     "keyPoints": [
       "must 表示“必须”，后接动词原形。",
       "before + 名词表示“在……之前”。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「You」+ 及物动词「must finish」+ 宾语「your homework」，动作有明确的承受者，属于主谓宾（SVO）。",
+      "judge": "「must finish」后面只有一个宾语「your homework」，没有再带第二个宾语，也没有补充说明宾语的成分，因此判为主谓宾。",
+      "contrast": "若再加一个指人的间接宾语，就是主谓双宾；若宾语后还有形容词/名词/不定式补充说明宾语，则是主谓宾宾补；若动词是系动词并接表语，则是主系表。"
+    }
   },
   {
     "text": "She has to work overtime tonight.",
@@ -644,7 +704,12 @@
     "keyPoints": [
       "has to 是 have to 的第三人称单数形式，表示客观必要。",
       "overtime 作副词，意为“加班地”。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「She」+ 谓语「has to work」，动词后没有宾语，其余「overtime、tonight」是状语，不充当宾语，因此属于主谓（SV）。",
+      "judge": "先找谓语「has to work」，再看它后面有没有宾语；本句只有状语「overtime、tonight」，所以判为主谓。",
+      "contrast": "若动词后接动作的承受者就是主谓宾，若接说明主语的表语就是主系表；本句既没有宾语也没有表语，所以不是其他句型。"
+    }
   },
   {
     "text": "We should protect the environment.",
@@ -688,7 +753,12 @@
     "keyPoints": [
       "should 表示建议或义务。",
       "the environment 指我们共同的生活环境。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「We」+ 及物动词「should protect」+ 宾语「the environment」，动作有明确的承受者，属于主谓宾（SVO）。",
+      "judge": "「should protect」后面只有一个宾语「the environment」，没有再带第二个宾语，也没有补充说明宾语的成分，因此判为主谓宾。",
+      "contrast": "若再加一个指人的间接宾语，就是主谓双宾；若宾语后还有形容词/名词/不定式补充说明宾语，则是主谓宾宾补；若动词是系动词并接表语，则是主系表。"
+    }
   },
   {
     "text": "They might arrive late because of the rain.",
@@ -739,7 +809,12 @@
     "keyPoints": [
       "might 表示可能性较低。",
       "because of 是介词短语，后接名词；because 后接句子。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「They」+ 谓语「might arrive」，动词后没有宾语，其余「late、because of the rain」是状语，不充当宾语，因此属于主谓（SV）。",
+      "judge": "先找谓语「might arrive」，再看它后面有没有宾语；本句只有状语「late、because of the rain」，所以判为主谓。",
+      "contrast": "若动词后接动作的承受者就是主谓宾，若接说明主语的表语就是主系表；本句既没有宾语也没有表语，所以不是其他句型。"
+    }
   },
   {
     "text": "I used to live in Shanghai.",
@@ -783,7 +858,12 @@
     "keyPoints": [
       "used to do 表示过去常常做，现在不了。",
       "注意区分 be used to doing（习惯于）。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「I」+ 谓语「used to live」，动词后没有宾语，其余「in Shanghai」是状语，不充当宾语，因此属于主谓（SV）。",
+      "judge": "先找谓语「used to live」，再看它后面有没有宾语；本句只有状语「in Shanghai」，所以判为主谓。",
+      "contrast": "若动词后接动作的承受者就是主谓宾，若接说明主语的表语就是主系表；本句既没有宾语也没有表语，所以不是其他句型。"
+    }
   },
   {
     "text": "You had better see a doctor.",
@@ -827,7 +907,12 @@
     "keyPoints": [
       "had better 后接动词原形，否定式为 had better not do。",
       "see a doctor 是固定搭配，意为“看医生”。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「You」+ 及物动词「had better see」+ 宾语「a doctor」，动作有明确的承受者，属于主谓宾（SVO）。",
+      "judge": "「had better see」后面只有一个宾语「a doctor」，没有再带第二个宾语，也没有补充说明宾语的成分，因此判为主谓宾。",
+      "contrast": "若再加一个指人的间接宾语，就是主谓双宾；若宾语后还有形容词/名词/不定式补充说明宾语，则是主谓宾宾补；若动词是系动词并接表语，则是主系表。"
+    }
   },
   {
     "text": "He seems to know the answer.",
@@ -871,7 +956,12 @@
     "keyPoints": [
       "seem 是系动词，可接不定式作表语。",
       "seem to do 表示“似乎做某事”。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主语「He」+ 系动词「seems」+ 表语「to know the answer」，表语说明主语的状态或身份，属于主系表（SVP）。",
+      "judge": "「seems」是系动词，「to know the answer」回答主语“是什么/怎么样”，不是动作的承受者，所以不是宾语。",
+      "contrast": "若「seems」是及物动词并带宾语，就是主谓宾；若宾语后还有补充说明宾语的成分，则是主谓宾宾补。本句没有宾语，所以不是这两类。"
+    }
   },
   {
     "text": "The soup tastes delicious.",
@@ -915,7 +1005,12 @@
     "keyPoints": [
       "taste 作系动词，后接形容词而不是副词。",
       "类似用法的还有 smell、sound、feel。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主语「The soup」+ 系动词「tastes」+ 表语「delicious」，表语说明主语的状态或身份，属于主系表（SVP）。",
+      "judge": "「tastes」是系动词，「delicious」回答主语“是什么/怎么样”，不是动作的承受者，所以不是宾语。",
+      "contrast": "若「tastes」是及物动词并带宾语，就是主谓宾；若宾语后还有补充说明宾语的成分，则是主谓宾宾补。本句没有宾语，所以不是这两类。"
+    }
   },
   {
     "text": "Please turn off the lights.",
@@ -959,7 +1054,12 @@
     "keyPoints": [
       "祈使句以动词原形开头，主语 you 通常省略。",
       "turn off 是“动词 + 副词”的短语动词。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "本句是祈使句，主语 you 省略；turn off 是及物短语动词，the lights 是它的宾语，所以是主谓宾。",
+      "judge": "祈使句以动词原形开头，默认主语为 you；找到宾语 the lights，即构成“（you）+ turn off + the lights”。",
+      "contrast": "turn off 后带宾语，因此不是主谓；the lights 是动作承受者而不是表语，因此也不是主系表。"
+    }
   },
   {
     "text": "This is the most interesting book I have ever read.",
@@ -1022,7 +1122,12 @@
     "keyPoints": [
       "形容词最高级前通常加 the。",
       "先行词在定语从句中作宾语时，关系代词可以省略。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主语「This」+ 系动词「is」+ 表语「the most interesting book」，表语说明主语的状态或身份，属于主系表（SVP）。",
+      "judge": "「is」是系动词，「the most interesting book」回答主语“是什么/怎么样”，不是动作的承受者，所以不是宾语。",
+      "contrast": "若「is」是及物动词并带宾语，就是主谓宾；若宾语后还有补充说明宾语的成分，则是主谓宾宾补。本句没有宾语，所以不是这两类。"
+    }
   },
   {
     "text": "He runs faster than his brother.",
@@ -1073,7 +1178,12 @@
     "keyPoints": [
       "faster 是副词 fast 的比较级。",
       "比较对象要一致：他和他哥哥比。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「He」+ 谓语「runs」，动词后没有宾语，其余「faster、than his brother」是状语，不充当宾语，因此属于主谓（SV）。",
+      "judge": "先找谓语「runs」，再看它后面有没有宾语；本句只有状语「faster、than his brother」，所以判为主谓。",
+      "contrast": "若动词后接动作的承受者就是主谓宾，若接说明主语的表语就是主系表；本句既没有宾语也没有表语，所以不是其他句型。"
+    }
   },
   {
     "text": "The weather is getting warmer and warmer.",
@@ -1117,7 +1227,12 @@
     "keyPoints": [
       "get 作系动词，后接形容词作表语。",
       "比较级 + and + 比较级表示程度递增。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主语「The weather」+ 系动词「is getting」+ 表语「warmer and warmer」，表语说明主语的状态或身份，属于主系表（SVP）。",
+      "judge": "「is getting」是系动词，「warmer and warmer」回答主语“是什么/怎么样”，不是动作的承受者，所以不是宾语。",
+      "contrast": "若「is getting」是及物动词并带宾语，就是主谓宾；若宾语后还有补充说明宾语的成分，则是主谓宾宾补。本句没有宾语，所以不是这两类。"
+    }
   },
   {
     "text": "She is as tall as her mother.",
@@ -1161,7 +1276,12 @@
     "keyPoints": [
       "as ... as 中间用形容词或副词原级。",
       "同级比较表示“和……一样”。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主语「She」+ 系动词「is」+ 表语「as tall as her mother」，表语说明主语的状态或身份，属于主系表（SVP）。",
+      "judge": "「is」是系动词，「as tall as her mother」回答主语“是什么/怎么样”，不是动作的承受者，所以不是宾语。",
+      "contrast": "若「is」是及物动词并带宾语，就是主谓宾；若宾语后还有补充说明宾语的成分，则是主谓宾宾补。本句没有宾语，所以不是这两类。"
+    }
   },
   {
     "text": "There are twenty students in the classroom.",
@@ -1212,7 +1332,12 @@
     "keyPoints": [
       "twenty 是基数词，后接可数名词复数。",
       "There be 句型中 be 与后面的真正主语保持一致。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "There be 存在句：There 只是引导词，真正主语是复数名词 twenty students，谓语 are 与它保持一致；句子没有宾语，归为主谓。",
+      "judge": "去掉 There 后核心是“twenty students + are”，即主语 + 谓语，所以判为主谓。",
+      "contrast": "它不是主系表，因为 twenty students 是真正主语而非表语；也不是主谓宾，因为 are 后面没有动作的承受者。"
+    }
   },
   {
     "text": "I have two hundred books.",
@@ -1256,7 +1381,12 @@
     "keyPoints": [
       "hundred 前有具体数词时，用单数形式。",
       "hundreds of 表示“成百上千的”，要用复数。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「I」+ 及物动词「have」+ 宾语「two hundred books」，动作有明确的承受者，属于主谓宾（SVO）。",
+      "judge": "「have」后面只有一个宾语「two hundred books」，没有再带第二个宾语，也没有补充说明宾语的成分，因此判为主谓宾。",
+      "contrast": "若再加一个指人的间接宾语，就是主谓双宾；若宾语后还有形容词/名词/不定式补充说明宾语，则是主谓宾宾补；若动词是系动词并接表语，则是主系表。"
+    }
   },
   {
     "text": "He arrived on the third of May.",
@@ -1300,7 +1430,12 @@
     "keyPoints": [
       "third 是序数词，表示“第三”。",
       "具体某一天前用介词 on。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「He」+ 谓语「arrived」，动词后没有宾语，其余「on the third of May」是状语，不充当宾语，因此属于主谓（SV）。",
+      "judge": "先找谓语「arrived」，再看它后面有没有宾语；本句只有状语「on the third of May」，所以判为主谓。",
+      "contrast": "若动词后接动作的承受者就是主谓宾，若接说明主语的表语就是主系表；本句既没有宾语也没有表语，所以不是其他句型。"
+    }
   },
   {
     "text": "The sun rises in the east.",
@@ -1344,7 +1479,12 @@
     "keyPoints": [
       "世界上独一无二的事物前用定冠词 the。",
       "表示客观规律用一般现在时。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「The sun」+ 谓语「rises」，动词后没有宾语，其余「in the east」是状语，不充当宾语，因此属于主谓（SV）。",
+      "judge": "先找谓语「rises」，再看它后面有没有宾语；本句只有状语「in the east」，所以判为主谓。",
+      "contrast": "若动词后接动作的承受者就是主谓宾，若接说明主语的表语就是主系表；本句既没有宾语也没有表语，所以不是其他句型。"
+    }
   },
   {
     "text": "An apple a day keeps the doctor away.",
@@ -1395,7 +1535,12 @@
     "keyPoints": [
       "keep + 宾语 + 形容词/副词表示“使……保持……”。",
       "主语 an apple a day 视为单数，谓语用 keeps。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "「keeps」后接宾语「the doctor」，再由「away」补充说明宾语，属于主谓宾宾补（SVOC）。",
+      "judge": "「away」不是另一个独立宾语，而是说明「the doctor」的状态、身份或动作；去掉它句意不完整，所以是宾语补足语。",
+      "contrast": "若第二个成分能独立作宾语并改写为 for/to 结构，就是主谓双宾；若无宾语、系动词后直接跟表语，则是主系表。本句两者都不符合。"
+    }
   },
   {
     "text": "He speaks English very well.",
@@ -1446,7 +1591,12 @@
     "keyPoints": [
       "well 是副词，修饰动词 speak；good 是形容词。",
       "very 修饰副词 well，作程度状语。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「He」+ 及物动词「speaks」+ 宾语「English」，动作有明确的承受者，属于主谓宾（SVO）。",
+      "judge": "「speaks」后面只有一个宾语「English」，没有再带第二个宾语，也没有补充说明宾语的成分，因此判为主谓宾。",
+      "contrast": "若再加一个指人的间接宾语，就是主谓双宾；若宾语后还有形容词/名词/不定式补充说明宾语，则是主谓宾宾补；若动词是系动词并接表语，则是主系表。"
+    }
   },
   {
     "text": "The cat is under the table.",
@@ -1490,7 +1640,12 @@
     "keyPoints": [
       "under 表示“在……下面”。",
       "介词短语作表语，说明主语的位置。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主语「The cat」+ 系动词「is」+ 表语「under the table」，表语说明主语的状态或身份，属于主系表（SVP）。",
+      "judge": "「is」是系动词，「under the table」回答主语“是什么/怎么样”，不是动作的承受者，所以不是宾语。",
+      "contrast": "若「is」是及物动词并带宾语，就是主谓宾；若宾语后还有补充说明宾语的成分，则是主谓宾宾补。本句没有宾语，所以不是这两类。"
+    }
   },
   {
     "text": "We will meet at the station at six.",
@@ -1541,7 +1696,12 @@
     "keyPoints": [
       "at 用于具体地点和具体时刻。",
       "两个介词短语分别表示地点和时间。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「We」+ 谓语「will meet」，动词后没有宾语，其余「at the station、at six」是状语，不充当宾语，因此属于主谓（SV）。",
+      "judge": "先找谓语「will meet」，再看它后面有没有宾语；本句只有状语「at the station、at six」，所以判为主谓。",
+      "contrast": "若动词后接动作的承受者就是主谓宾，若接说明主语的表语就是主系表；本句既没有宾语也没有表语，所以不是其他句型。"
+    }
   },
   {
     "text": "He is good at playing basketball.",
@@ -1585,7 +1745,12 @@
     "keyPoints": [
       "be good at 表示“擅长”，at 是介词。",
       "介词后面的动词要用动名词形式。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主语「He」+ 系动词「is」+ 表语「good at playing basketball」，表语说明主语的状态或身份，属于主系表（SVP）。",
+      "judge": "「is」是系动词，「good at playing basketball」回答主语“是什么/怎么样”，不是动作的承受者，所以不是宾语。",
+      "contrast": "若「is」是及物动词并带宾语，就是主谓宾；若宾语后还有补充说明宾语的成分，则是主谓宾宾补。本句没有宾语，所以不是这两类。"
+    }
   },
   {
     "text": "Although it was raining, they went out.",
@@ -1648,7 +1813,12 @@
     "keyPoints": [
       "although 引导让步状语从句，意为“虽然”。",
       "英语中 although 和 but 不能同时使用。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「they」+ 谓语「went out」，动词后没有宾语，因此属于主谓（SV）。",
+      "judge": "先找谓语「went out」，再看它后面有没有宾语；本句只有主语和谓语，所以判为主谓。",
+      "contrast": "若动词后接动作的承受者就是主谓宾，若接说明主语的表语就是主系表；本句既没有宾语也没有表语，所以不是其他句型。"
+    }
   },
   {
     "text": "Because he was ill, he stayed at home.",
@@ -1725,7 +1895,12 @@
     "keyPoints": [
       "because 引导原因状语从句，语气最强。",
       "英语中 because 和 so 不能同时使用。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「he」+ 谓语「stayed」，动词后没有宾语，其余「at home」是状语，不充当宾语，因此属于主谓（SV）。",
+      "judge": "先找谓语「stayed」，再看它后面有没有宾语；本句只有状语「at home」，所以判为主谓。",
+      "contrast": "若动词后接动作的承受者就是主谓宾，若接说明主语的表语就是主系表；本句既没有宾语也没有表语，所以不是其他句型。"
+    }
   },
   {
     "text": "Both Tom and Jerry are my friends.",
@@ -1769,7 +1944,12 @@
     "keyPoints": [
       "both ... and ... 连接两个主语时，谓语用复数。",
       "并列连词连接的两个成分在句中作用相同。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主语「Both Tom and Jerry」+ 系动词「are」+ 表语「my friends」，表语说明主语的状态或身份，属于主系表（SVP）。",
+      "judge": "「are」是系动词，「my friends」回答主语“是什么/怎么样”，不是动作的承受者，所以不是宾语。",
+      "contrast": "若「are」是及物动词并带宾语，就是主谓宾；若宾语后还有补充说明宾语的成分，则是主谓宾宾补。本句没有宾语，所以不是这两类。"
+    }
   },
   {
     "text": "Either you or he is wrong.",
@@ -1813,7 +1993,12 @@
     "keyPoints": [
       "either ... or ... 表示“要么……要么……”。",
       "连接并列主语时，谓语遵循就近原则。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主语「Either you or he」+ 系动词「is」+ 表语「wrong」，表语说明主语的状态或身份，属于主系表（SVP）。",
+      "judge": "「is」是系动词，「wrong」回答主语“是什么/怎么样”，不是动作的承受者，所以不是宾语。",
+      "contrast": "若「is」是及物动词并带宾语，就是主谓宾；若宾语后还有补充说明宾语的成分，则是主谓宾宾补。本句没有宾语，所以不是这两类。"
+    }
   },
   {
     "text": "Not only did she sing, but she also danced.",
@@ -1885,7 +2070,12 @@
     "keyPoints": [
       "not only 置于句首时，前一个分句要部分倒装。",
       "not only ... but also ... 连接两个并列分句。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "not only 置于句首引起部分倒装，还原后是 she sang；sing 是不及物动词，没有宾语，所以是主谓。",
+      "judge": "先还原倒装语序 she sang, but she also danced；第一个分句只有主语和不及物动词，故判为主谓。",
+      "contrast": "倒装只改变语序，不改变成分关系；若还原后动词带宾语才是主谓宾，本句 sing 和 dance 都不带宾语，所以不是主谓宾。"
+    }
   },
   {
     "text": "What a beautiful day it is!",
@@ -1936,7 +2126,12 @@
     "keyPoints": [
       "感叹句结构：What + a/an + 形容词 + 名词 + 主谓！",
       "感叹句常把被感叹部分提到句首。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主语「it」+ 系动词「is」+ 表语「a beautiful day」，表语说明主语的状态或身份，属于主系表（SVP）。",
+      "judge": "「is」是系动词，「a beautiful day」回答主语“是什么/怎么样”，不是动作的承受者，所以不是宾语。",
+      "contrast": "若「is」是及物动词并带宾语，就是主谓宾；若宾语后还有补充说明宾语的成分，则是主谓宾宾补。本句没有宾语，所以不是这两类。"
+    }
   },
   {
     "text": "Oh no, I forgot my keys!",
@@ -1987,7 +2182,12 @@
     "keyPoints": [
       "感叹词独立使用，不作句子成分。",
       "forget 的过去式是 forgot。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「I」+ 及物动词「forgot」+ 宾语「my keys」，动作有明确的承受者，属于主谓宾（SVO）。",
+      "judge": "「forgot」后面只有一个宾语「my keys」，没有再带第二个宾语，也没有补充说明宾语的成分，因此判为主谓宾。",
+      "contrast": "若再加一个指人的间接宾语，就是主谓双宾；若宾语后还有形容词/名词/不定式补充说明宾语，则是主谓宾宾补；若动词是系动词并接表语，则是主系表。"
+    }
   },
   {
     "text": "Birds fly.",
@@ -2024,7 +2224,12 @@
     "keyPoints": [
       "主语 + 不及物动词构成主谓结构。",
       "fly 在这里是不及物动词。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「Birds」+ 谓语「fly」，动词后没有宾语，因此属于主谓（SV）。",
+      "judge": "先找谓语「fly」，再看它后面有没有宾语；本句只有主语和谓语，所以判为主谓。",
+      "contrast": "若动词后接动作的承受者就是主谓宾，若接说明主语的表语就是主系表；本句既没有宾语也没有表语，所以不是其他句型。"
+    }
   },
   {
     "text": "The baby smiled happily.",
@@ -2068,7 +2273,12 @@
     "keyPoints": [
       "状语修饰谓语，说明动作方式。",
       "主谓结构可以带状语，但仍是主谓句。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「The baby」+ 谓语「smiled」，动词后没有宾语，其余「happily」是状语，不充当宾语，因此属于主谓（SV）。",
+      "judge": "先找谓语「smiled」，再看它后面有没有宾语；本句只有状语「happily」，所以判为主谓。",
+      "contrast": "若动词后接动作的承受者就是主谓宾，若接说明主语的表语就是主系表；本句既没有宾语也没有表语，所以不是其他句型。"
+    }
   },
   {
     "text": "She opened the window.",
@@ -2112,7 +2322,12 @@
     "keyPoints": [
       "主语 + 及物动词 + 宾语构成主谓宾结构。",
       "open 在这里是及物动词。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「She」+ 及物动词「opened」+ 宾语「the window」，动作有明确的承受者，属于主谓宾（SVO）。",
+      "judge": "「opened」后面只有一个宾语「the window」，没有再带第二个宾语，也没有补充说明宾语的成分，因此判为主谓宾。",
+      "contrast": "若再加一个指人的间接宾语，就是主谓双宾；若宾语后还有形容词/名词/不定式补充说明宾语，则是主谓宾宾补；若动词是系动词并接表语，则是主系表。"
+    }
   },
   {
     "text": "My father bought me a new bike.",
@@ -2163,7 +2378,12 @@
     "keyPoints": [
       "双宾语结构中，间接宾语通常指人，直接宾语指物。",
       "buy sb. sth. 可改为 buy sth. for sb.。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "「bought」后面接间接宾语「me」和直接宾语「a new bike」，两者都是宾语，属于主谓双宾（SVOO）。",
+      "judge": "「bought」可以改写为“bought + 直接宾语 + for/to + 间接宾语”，两个成分都是动作涉及的对象。",
+      "contrast": "如果第二个成分是在补充说明第一个宾语的状态或身份，应判为主谓宾宾补；如果只有一个宾语，则是主谓宾，所以本句不是这两类。"
+    }
   },
   {
     "text": "The teacher asked us to read the text.",
@@ -2214,7 +2434,12 @@
     "keyPoints": [
       "ask sb. to do sth. 是常见的宾补结构。",
       "宾语 us 是 to read 的逻辑主语。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "「asked」后接宾语「us」，再由「to read the text」补充说明宾语，属于主谓宾宾补（SVOC）。",
+      "judge": "「to read the text」不是另一个独立宾语，而是说明「us」的状态、身份或动作；去掉它句意不完整，所以是宾语补足语。",
+      "contrast": "若第二个成分能独立作宾语并改写为 for/to 结构，就是主谓双宾；若无宾语、系动词后直接跟表语，则是主系表。本句两者都不符合。"
+    }
   },
   {
     "text": "We elected him monitor.",
@@ -2265,7 +2490,12 @@
     "keyPoints": [
       "elect sb. + 职位名词，职位前通常不加冠词。",
       "名词作宾补，说明宾语的身份。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "「elected」后接宾语「him」，再由「monitor」补充说明宾语，属于主谓宾宾补（SVOC）。",
+      "judge": "「monitor」不是另一个独立宾语，而是说明「him」的状态、身份或动作；去掉它句意不完整，所以是宾语补足语。",
+      "contrast": "若第二个成分能独立作宾语并改写为 for/to 结构，就是主谓双宾；若无宾语、系动词后直接跟表语，则是主系表。本句两者都不符合。"
+    }
   },
   {
     "text": "The cake smells sweet.",
@@ -2309,7 +2539,12 @@
     "keyPoints": [
       "系动词后接形容词作表语，不用副词。",
       "smell 可作感官系动词。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主语「The cake」+ 系动词「smells」+ 表语「sweet」，表语说明主语的状态或身份，属于主系表（SVP）。",
+      "judge": "「smells」是系动词，「sweet」回答主语“是什么/怎么样”，不是动作的承受者，所以不是宾语。",
+      "contrast": "若「smells」是及物动词并带宾语，就是主谓宾；若宾语后还有补充说明宾语的成分，则是主谓宾宾补。本句没有宾语，所以不是这两类。"
+    }
   },
   {
     "text": "He became a doctor.",
@@ -2353,7 +2588,12 @@
     "keyPoints": [
       "become 是系动词，后接名词或形容词作表语。",
       "表语说明主语的身份。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主语「He」+ 系动词「became」+ 表语「a doctor」，表语说明主语的状态或身份，属于主系表（SVP）。",
+      "judge": "「became」是系动词，「a doctor」回答主语“是什么/怎么样”，不是动作的承受者，所以不是宾语。",
+      "contrast": "若「became」是及物动词并带宾语，就是主谓宾；若宾语后还有补充说明宾语的成分，则是主谓宾宾补。本句没有宾语，所以不是这两类。"
+    }
   },
   {
     "text": "They kept the room clean.",
@@ -2404,7 +2644,12 @@
     "keyPoints": [
       "keep + 宾语 + 形容词，表示“使……保持……”。",
       "形容词 clean 说明宾语 the room 的状态。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "「kept」后接宾语「the room」，再由「clean」补充说明宾语，属于主谓宾宾补（SVOC）。",
+      "judge": "「clean」不是另一个独立宾语，而是说明「the room」的状态、身份或动作；去掉它句意不完整，所以是宾语补足语。",
+      "contrast": "若第二个成分能独立作宾语并改写为 for/to 结构，就是主谓双宾；若无宾语、系动词后直接跟表语，则是主系表。本句两者都不符合。"
+    }
   },
   {
     "text": "I found the book interesting.",
@@ -2455,7 +2700,12 @@
     "keyPoints": [
       "find + 宾语 + 形容词，表示“发现……怎么样”。",
       "interesting 说明宾语 the book 的性质。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "「found」后接宾语「the book」，再由「interesting」补充说明宾语，属于主谓宾宾补（SVOC）。",
+      "judge": "「interesting」不是另一个独立宾语，而是说明「the book」的状态、身份或动作；去掉它句意不完整，所以是宾语补足语。",
+      "contrast": "若第二个成分能独立作宾语并改写为 for/to 结构，就是主谓双宾；若无宾语、系动词后直接跟表语，则是主系表。本句两者都不符合。"
+    }
   },
   {
     "text": "She made him angry.",
@@ -2506,7 +2756,12 @@
     "keyPoints": [
       "make + 宾语 + 形容词，表示“使……变得……”。",
       "angry 说明宾语 him 的状态。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "「made」后接宾语「him」，再由「angry」补充说明宾语，属于主谓宾宾补（SVOC）。",
+      "judge": "「angry」不是另一个独立宾语，而是说明「him」的状态、身份或动作；去掉它句意不完整，所以是宾语补足语。",
+      "contrast": "若第二个成分能独立作宾语并改写为 for/to 结构，就是主谓双宾；若无宾语、系动词后直接跟表语，则是主系表。本句两者都不符合。"
+    }
   },
   {
     "text": "The meeting lasted two hours.",
@@ -2550,7 +2805,12 @@
     "keyPoints": [
       "last 是不及物动词，后面不是宾语而是时间状语。",
       "表示持续多久用 for + 时间段。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「The meeting」+ 谓语「lasted」，动词后没有宾语，其余「two hours」是状语，不充当宾语，因此属于主谓（SV）。",
+      "judge": "先找谓语「lasted」，再看它后面有没有宾语；本句只有状语「two hours」，所以判为主谓。",
+      "contrast": "若动词后接动作的承受者就是主谓宾，若接说明主语的表语就是主系表；本句既没有宾语也没有表语，所以不是其他句型。"
+    }
   },
   {
     "text": "Do you like classical music?",
@@ -2601,7 +2861,12 @@
     "keyPoints": [
       "一般疑问句把助动词提到主语前。",
       "实义动词 like 在疑问句中还原为原形。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "本句是祈使句，主语 you 省略；「Do」+ 宾语「classical music」构成主谓宾（SVO）。",
+      "judge": "「Do」后面只有一个宾语「classical music」，没有再带第二个宾语，也没有补充说明宾语的成分，因此判为主谓宾。",
+      "contrast": "若再加一个指人的间接宾语，就是主谓双宾；若宾语后还有形容词/名词/不定式补充说明宾语，则是主谓宾宾补；若动词是系动词并接表语，则是主系表。"
+    }
   },
   {
     "text": "Where did you buy that coat?",
@@ -2659,7 +2924,12 @@
     "keyPoints": [
       "特殊疑问句以疑问词开头，助动词提前。",
       "did 后面的动词用原形。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "本句是祈使句，主语 you 省略；「did」+ 宾语「that coat」构成主谓宾（SVO）。",
+      "judge": "「did」后面只有一个宾语「that coat」，没有再带第二个宾语，也没有补充说明宾语的成分，因此判为主谓宾。",
+      "contrast": "若再加一个指人的间接宾语，就是主谓双宾；若宾语后还有形容词/名词/不定式补充说明宾语，则是主谓宾宾补；若动词是系动词并接表语，则是主系表。"
+    }
   },
   {
     "text": "Who is knocking at the door?",
@@ -2703,7 +2973,12 @@
     "keyPoints": [
       "疑问词作主语时，语序与陈述句相同。",
       "knock at the door 是固定搭配。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「Who」+ 谓语「is knocking」，动词后没有宾语，其余「at the door」是状语，不充当宾语，因此属于主谓（SV）。",
+      "judge": "先找谓语「is knocking」，再看它后面有没有宾语；本句只有状语「at the door」，所以判为主谓。",
+      "contrast": "若动词后接动作的承受者就是主谓宾，若接说明主语的表语就是主系表；本句既没有宾语也没有表语，所以不是其他句型。"
+    }
   },
   {
     "text": "Open the door, please.",
@@ -2747,7 +3022,12 @@
     "keyPoints": [
       "祈使句以动词原形开头，主语省略。",
       "please 可放在句首或句末。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "本句是祈使句，主语 you 省略；Open 是及物动词，the door 是它的宾语，所以是主谓宾。",
+      "judge": "祈使句默认主语为 you；Open 后直接跟宾语 the door，构成“（you）+ Open + the door”。",
+      "contrast": "动词后带宾语，所以不是主谓；the door 不是说明主语的表语，所以也不是主系表。"
+    }
   },
   {
     "text": "Don't be late again.",
@@ -2798,7 +3078,12 @@
     "keyPoints": [
       "否定祈使句用 Don't + 动词原形。",
       "be late 表示“迟到”。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "否定祈使句，主语 you 省略；be 是系动词，late 说明主语的状态，构成主系表。",
+      "judge": "Don't 后接动词原形 be，再接形容词 late；be + 形容词是典型的系表结构。",
+      "contrast": "late 不是动作的承受者，所以不是宾语，排除主谓宾；句中没有宾语补足语，也排除主谓宾宾补。"
+    }
   },
   {
     "text": "How beautiful the flowers are!",
@@ -2849,7 +3134,12 @@
     "keyPoints": [
       "感叹句结构：How + 形容词/副词 + 主谓！",
       "How 修饰形容词或副词。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主语「the flowers」+ 系动词「are」+ 表语「beautiful」，表语说明主语的状态或身份，属于主系表（SVP）。",
+      "judge": "「are」是系动词，「beautiful」回答主语“是什么/怎么样”，不是动作的承受者，所以不是宾语。",
+      "contrast": "若「are」是及物动词并带宾语，就是主谓宾；若宾语后还有补充说明宾语的成分，则是主谓宾宾补。本句没有宾语，所以不是这两类。"
+    }
   },
   {
     "text": "How time flies!",
@@ -2893,7 +3183,12 @@
     "keyPoints": [
       "感叹句 How + 副词 + 主谓！",
       "fly 在这里表示“（时间）飞逝”。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「time」+ 谓语「flies」，动词后没有宾语，其余「How」是状语，不充当宾语，因此属于主谓（SV）。",
+      "judge": "先找谓语「flies」，再看它后面有没有宾语；本句只有状语「How」，所以判为主谓。",
+      "contrast": "若动词后接动作的承受者就是主谓宾，若接说明主语的表语就是主系表；本句既没有宾语也没有表语，所以不是其他句型。"
+    }
   },
   {
     "text": "There will be a concert tomorrow.",
@@ -2944,7 +3239,12 @@
     "keyPoints": [
       "There be 句型表示“某处/某时存在某物”。",
       "will be 后接单数主语 a concert。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "There be 存在句的将来时：There 只是引导词，真正主语是 a concert，will be 是谓语；句子没有宾语，归为主谓。",
+      "judge": "去掉 There 后核心是“a concert + will be”，即主语 + 谓语，所以判为主谓。",
+      "contrast": "它不是主系表，a concert 是真正主语；也不是主谓宾，因为 will be 后面没有动作的承受者。"
+    }
   },
   {
     "text": "I get up at seven every morning.",
@@ -2995,7 +3295,12 @@
     "keyPoints": [
       "一般现在时表示习惯性动作。",
       "get up 是“动词 + 副词”的短语动词。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「I」+ 谓语「get up」，动词后没有宾语，其余「at seven、every morning」是状语，不充当宾语，因此属于主谓（SV）。",
+      "judge": "先找谓语「get up」，再看它后面有没有宾语；本句只有状语「at seven、every morning」，所以判为主谓。",
+      "contrast": "若动词后接动作的承受者就是主谓宾，若接说明主语的表语就是主系表；本句既没有宾语也没有表语，所以不是其他句型。"
+    }
   },
   {
     "text": "She is reading a novel now.",
@@ -3046,7 +3351,12 @@
     "keyPoints": [
       "现在进行时结构为 be + 动词 -ing。",
       "now 常与现在进行时连用。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「She」+ 及物动词「is reading」+ 宾语「a novel」，动作有明确的承受者，属于主谓宾（SVO）。",
+      "judge": "「is reading」后面只有一个宾语「a novel」，没有再带第二个宾语，也没有补充说明宾语的成分，因此判为主谓宾。",
+      "contrast": "若再加一个指人的间接宾语，就是主谓双宾；若宾语后还有形容词/名词/不定式补充说明宾语，则是主谓宾宾补；若动词是系动词并接表语，则是主系表。"
+    }
   },
   {
     "text": "They have lived here for ten years.",
@@ -3097,7 +3407,12 @@
     "keyPoints": [
       "现在完成时表示过去开始、持续到现在的动作。",
       "for + 时间段常与现在完成时连用。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「They」+ 谓语「have lived」，动词后没有宾语，其余「here、for ten years」是状语，不充当宾语，因此属于主谓（SV）。",
+      "judge": "先找谓语「have lived」，再看它后面有没有宾语；本句只有状语「here、for ten years」，所以判为主谓。",
+      "contrast": "若动词后接动作的承受者就是主谓宾，若接说明主语的表语就是主系表；本句既没有宾语也没有表语，所以不是其他句型。"
+    }
   },
   {
     "text": "He has just finished his homework.",
@@ -3141,7 +3456,12 @@
     "keyPoints": [
       "现在完成时结构为 have/has + 过去分词。",
       "just 通常放在 have/has 和过去分词之间。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「He」+ 及物动词「has just finished」+ 宾语「his homework」，动作有明确的承受者，属于主谓宾（SVO）。",
+      "judge": "「has just finished」后面只有一个宾语「his homework」，没有再带第二个宾语，也没有补充说明宾语的成分，因此判为主谓宾。",
+      "contrast": "若再加一个指人的间接宾语，就是主谓双宾；若宾语后还有形容词/名词/不定式补充说明宾语，则是主谓宾宾补；若动词是系动词并接表语，则是主系表。"
+    }
   },
   {
     "text": "We visited the museum last Sunday.",
@@ -3192,7 +3512,12 @@
     "keyPoints": [
       "一般过去时表示过去某个时间发生的动作。",
       "last Sunday 是明确的过去时间。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「We」+ 及物动词「visited」+ 宾语「the museum」，动作有明确的承受者，属于主谓宾（SVO）。",
+      "judge": "「visited」后面只有一个宾语「the museum」，没有再带第二个宾语，也没有补充说明宾语的成分，因此判为主谓宾。",
+      "contrast": "若再加一个指人的间接宾语，就是主谓双宾；若宾语后还有形容词/名词/不定式补充说明宾语，则是主谓宾宾补；若动词是系动词并接表语，则是主系表。"
+    }
   },
   {
     "text": "I was watching TV when he called.",
@@ -3262,7 +3587,12 @@
     "keyPoints": [
       "过去进行时表示过去某一时刻正在进行的动作。",
       "when 引导的从句常用一般过去时，表示突然发生的动作。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「I」+ 及物动词「was watching」+ 宾语「TV」，动作有明确的承受者，属于主谓宾（SVO）。",
+      "judge": "「was watching」后面只有一个宾语「TV」，没有再带第二个宾语，也没有补充说明宾语的成分，因此判为主谓宾。",
+      "contrast": "若再加一个指人的间接宾语，就是主谓双宾；若宾语后还有形容词/名词/不定式补充说明宾语，则是主谓宾宾补；若动词是系动词并接表语，则是主系表。"
+    }
   },
   {
     "text": "She will call you tomorrow.",
@@ -3313,7 +3643,12 @@
     "keyPoints": [
       "一般将来时用 will + 动词原形。",
       "tomorrow 表示将来的时间。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「She」+ 及物动词「will call」+ 宾语「you」，动作有明确的承受者，属于主谓宾（SVO）。",
+      "judge": "「will call」后面只有一个宾语「you」，没有再带第二个宾语，也没有补充说明宾语的成分，因此判为主谓宾。",
+      "contrast": "若再加一个指人的间接宾语，就是主谓双宾；若宾语后还有形容词/名词/不定式补充说明宾语，则是主谓宾宾补；若动词是系动词并接表语，则是主系表。"
+    }
   },
   {
     "text": "They are going to build a new bridge.",
@@ -3357,7 +3692,12 @@
     "keyPoints": [
       "be going to 表示计划或打算。",
       "a new bridge 中 new 作前置定语。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「They」+ 及物动词「are going to build」+ 宾语「a new bridge」，动作有明确的承受者，属于主谓宾（SVO）。",
+      "judge": "「are going to build」后面只有一个宾语「a new bridge」，没有再带第二个宾语，也没有补充说明宾语的成分，因此判为主谓宾。",
+      "contrast": "若再加一个指人的间接宾语，就是主谓双宾；若宾语后还有形容词/名词/不定式补充说明宾语，则是主谓宾宾补；若动词是系动词并接表语，则是主系表。"
+    }
   },
   {
     "text": "By the end of last year, he had worked there for five years.",
@@ -3415,7 +3755,12 @@
     "keyPoints": [
       "过去完成时表示“过去的过去”。",
       "by the end of + 过去时间常与过去完成时连用。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「he」+ 谓语「had worked」，动词后没有宾语，其余「By the end of last year、there、for five years」是状语，不充当宾语，因此属于主谓（SV）。",
+      "judge": "先找谓语「had worked」，再看它后面有没有宾语；本句只有状语「By the end of last year、there、for five years」，所以判为主谓。",
+      "contrast": "若动词后接动作的承受者就是主谓宾，若接说明主语的表语就是主系表；本句既没有宾语也没有表语，所以不是其他句型。"
+    }
   },
   {
     "text": "The letter was written by Tom.",
@@ -3459,7 +3804,12 @@
     "keyPoints": [
       "被动语态结构为 be + 过去分词。",
       "动作执行者用 by 引导。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主语 The letter 是动作的承受者，was written 是一般过去时被动语态，执行者由 by Tom 引出；被动句没有宾语，归为主谓。",
+      "judge": "看到 be + 过去分词（was written），且主语不是动作发出者，就按被动的主谓结构判断。",
+      "contrast": "还原主动句 Tom wrote the letter 后，the letter 才作宾语、句子才是主谓宾；本句用被动结构，所以不是主谓宾，也不是主系表。"
+    }
   },
   {
     "text": "The bridge is being repaired now.",
@@ -3503,7 +3853,12 @@
     "keyPoints": [
       "现在进行时被动语态结构为 is/are being + 过去分词。",
       "repair 是及物动词，可用于被动语态。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主语 The bridge 是动作的承受者，is being repaired 是现在进行时被动语态；被动句没有宾语，归为主谓。",
+      "judge": "看到 is being + 过去分词，且主语不是动作发出者，就按被动的主谓结构判断。",
+      "contrast": "还原主动句 They are repairing the bridge 后，the bridge 才作宾语；本句是被动结构，所以不是主谓宾，也不是主系表。"
+    }
   },
   {
     "text": "The work will be finished by Friday.",
@@ -3547,7 +3902,12 @@
     "keyPoints": [
       "一般将来时被动语态结构为 will be + 过去分词。",
       "by Friday 表示“到周五为止”。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主语 The work 是动作的承受者，will be finished 是一般将来时被动语态；被动句没有宾语，归为主谓。",
+      "judge": "看到 will be + 过去分词，且主语不是动作发出者，就按被动的主谓结构判断。",
+      "contrast": "还原主动句 They will finish the work 后，the work 才作宾语；本句是被动结构，所以不是主谓宾。"
+    }
   },
   {
     "text": "I like coffee, but my sister prefers tea.",
@@ -3619,7 +3979,12 @@
     "keyPoints": [
       "并列句由并列连词连接两个独立分句。",
       "but 表示转折关系。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「I」+ 及物动词「like」+ 宾语「coffee」，动作有明确的承受者，属于主谓宾（SVO）。本句含并列分句，基本句型以第一个分句为准。",
+      "judge": "「like」后面只有一个宾语「coffee」，没有再带第二个宾语，也没有补充说明宾语的成分，因此判为主谓宾。",
+      "contrast": "若再加一个指人的间接宾语，就是主谓双宾；若宾语后还有形容词/名词/不定式补充说明宾语，则是主谓宾宾补；若动词是系动词并接表语，则是主系表。"
+    }
   },
   {
     "text": "He is tired, so he went to bed early.",
@@ -3691,7 +4056,12 @@
     "keyPoints": [
       "so 表示结果，连接两个并列分句。",
       "go to bed 是固定短语，意为“上床睡觉”。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主语「He」+ 系动词「is」+ 表语「tired」，表语说明主语的状态或身份，属于主系表（SVP）。本句含并列分句，基本句型以第一个分句为准。",
+      "judge": "「is」是系动词，「tired」回答主语“是什么/怎么样”，不是动作的承受者，所以不是宾语。",
+      "contrast": "若「is」是及物动词并带宾语，就是主谓宾；若宾语后还有补充说明宾语的成分，则是主谓宾宾补。本句没有宾语，所以不是这两类。"
+    }
   },
   {
     "text": "Study hard, or you will fail the exam.",
@@ -3756,7 +4126,12 @@
     "keyPoints": [
       "祈使句 + or + 分句，表示“否则……”。",
       "or 在这里不是“或者”，而是“否则”。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "这是由 or 连接的并列句，基本句型按第一个分句 Study hard 判断：主语 you 省略，hard 是状语，没有宾语，因此是主谓。",
+      "judge": "先把 or 前后分成两个分句；第一个分句是祈使句，动词 Study 后只有状语 hard，没有宾语，所以是主谓。",
+      "contrast": "第二个分句 you will fail the exam 才是主谓宾，但它是并列的另一个分句，不改变整句按第一分句判断的主谓句型。"
+    }
   },
   {
     "text": "I know that he is honest.",
@@ -3826,7 +4201,12 @@
     "keyPoints": [
       "宾语从句用 that 引导时，that 可省略。",
       "宾语从句要用陈述语序。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「I」+ 及物动词「know」+ 宾语「that he is honest（宾语从句）」，动作有明确的承受者，属于主谓宾（SVO）。",
+      "judge": "「know」后面接的是由一个完整从句承担的宾语「that he is honest（宾语从句）」，没有第二个宾语，也没有宾补，因此判为主谓宾。",
+      "contrast": "若再加一个指人的间接宾语，就是主谓双宾；若宾语后还有形容词/名词/不定式补充说明宾语，则是主谓宾宾补；若动词是系动词并接表语，则是主系表。"
+    }
   },
   {
     "text": "She asked me whether I could help her.",
@@ -3903,7 +4283,12 @@
     "keyPoints": [
       "whether 引导宾语从句，表示“是否”。",
       "宾语从句必须用陈述语序。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "「asked」后面接间接宾语「me」和直接宾语「whether I could help her（宾语从句）」，两者都是宾语，属于主谓双宾（SVOO）。",
+      "judge": "间接宾语是「me」，直接宾语由从句「whether I could help her」承担；两个成分都作宾语，因此是双宾而不是宾补。",
+      "contrast": "如果第二个成分是在补充说明第一个宾语的状态或身份，应判为主谓宾宾补；如果只有一个宾语，则是主谓宾，所以本句不是这两类。"
+    }
   },
   {
     "text": "The book that you lent me is very interesting.",
@@ -3980,7 +4365,12 @@
     "keyPoints": [
       "定语从句修饰前面的先行词。",
       "关系代词 that 在从句中作宾语。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主语「The book」+ 系动词「is」+ 表语「very interesting」，表语说明主语的状态或身份，属于主系表（SVP）。",
+      "judge": "「is」是系动词，「very interesting」回答主语“是什么/怎么样”，不是动作的承受者，所以不是宾语。",
+      "contrast": "若「is」是及物动词并带宾语，就是主谓宾；若宾语后还有补充说明宾语的成分，则是主谓宾宾补。本句没有宾语，所以不是这两类。"
+    }
   },
   {
     "text": "This is the house where I grew up.",
@@ -4050,7 +4440,12 @@
     "keyPoints": [
       "先行词是地点时，定语从句可用关系副词 where。",
       "where 在从句中作地点状语。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主语「This」+ 系动词「is」+ 表语「the house」，表语说明主语的状态或身份，属于主系表（SVP）。",
+      "judge": "「is」是系动词，「the house」回答主语“是什么/怎么样”，不是动作的承受者，所以不是宾语。",
+      "contrast": "若「is」是及物动词并带宾语，就是主谓宾；若宾语后还有补充说明宾语的成分，则是主谓宾宾补。本句没有宾语，所以不是这两类。"
+    }
   },
   {
     "text": "The news that he won the prize surprised us.",
@@ -4127,7 +4522,12 @@
     "keyPoints": [
       "同位语从句解释抽象名词的内容，that 不作成分。",
       "注意区别于定语从句：that 在定语从句中要作成分。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「The news」+ 及物动词「surprised」+ 宾语「us」，动作有明确的承受者，属于主谓宾（SVO）。",
+      "judge": "「surprised」后面只有一个宾语「us」，没有再带第二个宾语，也没有补充说明宾语的成分，因此判为主谓宾。",
+      "contrast": "若再加一个指人的间接宾语，就是主谓双宾；若宾语后还有形容词/名词/不定式补充说明宾语，则是主谓宾宾补；若动词是系动词并接表语，则是主系表。"
+    }
   },
   {
     "text": "What he said made us laugh.",
@@ -4183,7 +4583,12 @@
     "keyPoints": [
       "主语从句可在句中作主语。",
       "make sb. do sth. 中不定式不带 to。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "「made」后接宾语「us」，再由「laugh」补充说明宾语，属于主谓宾宾补（SVOC）。",
+      "judge": "「laugh」不是另一个独立宾语，而是说明「us」的状态、身份或动作；去掉它句意不完整，所以是宾语补足语。",
+      "contrast": "若第二个成分能独立作宾语并改写为 for/to 结构，就是主谓双宾；若无宾语、系动词后直接跟表语，则是主系表。本句两者都不符合。"
+    }
   },
   {
     "text": "It is important that we protect nature.",
@@ -4260,7 +4665,12 @@
     "keyPoints": [
       "it 可作形式主语，真正主语由 that 从句后置。",
       "从句用陈述语序。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主语「It」+ 系动词「is」+ 表语「important」，表语说明主语的状态或身份，属于主系表（SVP）。",
+      "judge": "「is」是系动词，「important」回答主语“是什么/怎么样”，不是动作的承受者，所以不是宾语。",
+      "contrast": "若「is」是及物动词并带宾语，就是主谓宾；若宾语后还有补充说明宾语的成分，则是主谓宾宾补。本句没有宾语，所以不是这两类。"
+    }
   },
   {
     "text": "The reason why he left is unknown.",
@@ -4330,7 +4740,12 @@
     "keyPoints": [
       "why 引导定语从句，修饰表示原因的名词。",
       "unknown 作表语，表示“未知的”。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主语「The reason」+ 系动词「is」+ 表语「unknown」，表语说明主语的状态或身份，属于主系表（SVP）。",
+      "judge": "「is」是系动词，「unknown」回答主语“是什么/怎么样”，不是动作的承受者，所以不是宾语。",
+      "contrast": "若「is」是及物动词并带宾语，就是主谓宾；若宾语后还有补充说明宾语的成分，则是主谓宾宾补。本句没有宾语，所以不是这两类。"
+    }
   },
   {
     "text": "He ran so fast that nobody could catch him.",
@@ -4407,7 +4822,12 @@
     "keyPoints": [
       "so + 形容词/副词 + that 引导结果状语从句。",
       "that 从句中谓语用 could，表示过去的能力。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「He」+ 谓语「ran」，动词后没有宾语，其余「so fast」是状语，不充当宾语，因此属于主谓（SV）。",
+      "judge": "先找谓语「ran」，再看它后面有没有宾语；本句只有状语「so fast」，所以判为主谓。",
+      "contrast": "若动词后接动作的承受者就是主谓宾，若接说明主语的表语就是主系表；本句既没有宾语也没有表语，所以不是其他句型。"
+    }
   },
   {
     "text": "If I were you, I would apologize.",
@@ -4477,7 +4897,12 @@
     "keyPoints": [
       "与现在事实相反：从句用过去式，be 用 were。",
       "主句用 would + 动词原形。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「I」+ 谓语「would apologize」，动词后没有宾语，因此属于主谓（SV）。",
+      "judge": "先找谓语「would apologize」，再看它后面有没有宾语；本句只有主语和谓语，所以判为主谓。",
+      "contrast": "若动词后接动作的承受者就是主谓宾，若接说明主语的表语就是主系表；本句既没有宾语也没有表语，所以不是其他句型。"
+    }
   },
   {
     "text": "I wish I had more time.",
@@ -4540,7 +4965,12 @@
     "keyPoints": [
       "wish 后接与现在事实相反的愿望，从句用过去式。",
       "had 在这里不是过去完成时，而是虚拟语气。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「I」+ 及物动词「wish」+ 宾语「I had more time（宾语从句）」，动作有明确的承受者，属于主谓宾（SVO）。",
+      "judge": "「wish」后面接的是由一个完整从句承担的宾语「I had more time（宾语从句）」，没有第二个宾语，也没有宾补，因此判为主谓宾。",
+      "contrast": "若再加一个指人的间接宾语，就是主谓双宾；若宾语后还有形容词/名词/不定式补充说明宾语，则是主谓宾宾补；若动词是系动词并接表语，则是主系表。"
+    }
   },
   {
     "text": "The man standing under the tree is my uncle.",
@@ -4591,7 +5021,12 @@
     "keyPoints": [
       "现在分词短语作定语，相当于 who is standing ...。",
       "分词短语作定语放在名词之后。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主语「The man」+ 系动词「is」+ 表语「my uncle」，表语说明主语的状态或身份，属于主系表（SVP）。",
+      "judge": "「is」是系动词，「my uncle」回答主语“是什么/怎么样”，不是动作的承受者，所以不是宾语。",
+      "contrast": "若「is」是及物动词并带宾语，就是主谓宾；若宾语后还有补充说明宾语的成分，则是主谓宾宾补。本句没有宾语，所以不是这两类。"
+    }
   },
   {
     "text": "Having finished the work, she went home.",
@@ -4635,7 +5070,12 @@
     "keyPoints": [
       "分词作状语时，其逻辑主语与主句主语一致。",
       "having finished 表示动作先于主句动作发生。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「she」+ 谓语「went home」，动词后没有宾语，其余「Having finished the work」是状语，不充当宾语，因此属于主谓（SV）。",
+      "judge": "先找谓语「went home」，再看它后面有没有宾语；本句只有状语「Having finished the work」，所以判为主谓。",
+      "contrast": "若动词后接动作的承受者就是主谓宾，若接说明主语的表语就是主系表；本句既没有宾语也没有表语，所以不是其他句型。"
+    }
   },
   {
     "text": "To learn a language well, you need patience.",
@@ -4686,7 +5126,12 @@
     "keyPoints": [
       "不定式可作目的状语，表示“为了……”。",
       "不定式的逻辑主语通常是主句主语。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「you」+ 及物动词「need」+ 宾语「patience」，动作有明确的承受者，属于主谓宾（SVO）。",
+      "judge": "「need」后面只有一个宾语「patience」，没有再带第二个宾语，也没有补充说明宾语的成分，因此判为主谓宾。",
+      "contrast": "若再加一个指人的间接宾语，就是主谓双宾；若宾语后还有形容词/名词/不定式补充说明宾语，则是主谓宾宾补；若动词是系动词并接表语，则是主系表。"
+    }
   },
   {
     "text": "I enjoy listening to music.",
@@ -4730,7 +5175,12 @@
     "keyPoints": [
       "enjoy 后接动名词作宾语。",
       "listen to 是固定搭配。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「I」+ 及物动词「enjoy」+ 宾语「listening to music」，动作有明确的承受者，属于主谓宾（SVO）。",
+      "judge": "「enjoy」后面只有一个宾语「listening to music」，没有再带第二个宾语，也没有补充说明宾语的成分，因此判为主谓宾。",
+      "contrast": "若再加一个指人的间接宾语，就是主谓双宾；若宾语后还有形容词/名词/不定式补充说明宾语，则是主谓宾宾补；若动词是系动词并接表语，则是主系表。"
+    }
   },
   {
     "text": "He asked me to close the door.",
@@ -4781,7 +5231,12 @@
     "keyPoints": [
       "ask sb. to do sth. 是常见的宾补结构。",
       "不定式的逻辑主语是宾语 me。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "「asked」后接宾语「me」，再由「to close the door」补充说明宾语，属于主谓宾宾补（SVOC）。",
+      "judge": "「to close the door」不是另一个独立宾语，而是说明「me」的状态、身份或动作；去掉它句意不完整，所以是宾语补足语。",
+      "contrast": "若第二个成分能独立作宾语并改写为 for/to 结构，就是主谓双宾；若无宾语、系动词后直接跟表语，则是主系表。本句两者都不符合。"
+    }
   },
   {
     "text": "The homework finished, we went out.",
@@ -4832,7 +5287,12 @@
     "keyPoints": [
       "独立主格有自己的逻辑主语，与主句主语不同。",
       "过去分词表示被动或完成的动作。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "前半部分 The homework finished 是独立主格（名词 + 过去分词），不是主句；主句 we went out 中 went out 是不及物短语动词，没有宾语，所以是主谓。",
+      "judge": "先剔除独立主格，只看主句 we went out：主语 we + 谓语 went out，没有宾语，故判为主谓。",
+      "contrast": "独立主格只是状语性结构，不是宾语或从句；主句没有宾语，所以不是主谓宾。"
+    }
   },
   {
     "text": "Never have I seen such a beautiful sunset.",
@@ -4890,7 +5350,12 @@
     "keyPoints": [
       "否定副词 never 置于句首时，助动词提前构成倒装。",
       "现在完成时的过去分词 seen 保持不变。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "否定副词 Never 置于句首引起部分倒装，还原后是 I have never seen such a beautiful sunset；seen 后带宾语，因此是主谓宾。",
+      "judge": "先还原为 I have never seen...，找到主语 I、谓语 have seen、宾语 such a beautiful sunset，故判为主谓宾。",
+      "contrast": "倒装不改变句型；如果 seen 后没有宾语才是主谓，本句有明确宾语，所以不是主谓。"
+    }
   },
   {
     "text": "It was Tom who broke the window.",
@@ -4955,7 +5420,12 @@
     "keyPoints": [
       "强调句结构：It is/was + 被强调部分 + who/that + 其他。",
       "被强调的是人时，连接词可用 who 或 that。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "这是强调句 It was ... who ...，主句骨架是 It + was + Tom：was 是系动词，Tom 是表语，因此按主系表判断。",
+      "judge": "先去掉强调框架 who broke the window，剩下 It was Tom，即主语 + 系动词 + 表语。",
+      "contrast": "真正的谓语 broke 位于 who 引导的剩余部分，不构成主句的宾语；所以主句不是主谓宾，也不是主谓。"
+    }
   },
   {
     "text": "Hardly had he arrived when it began to rain.",
@@ -5039,7 +5509,12 @@
     "keyPoints": [
       "hardly 置于句首时，主句部分倒装。",
       "hardly ... when ... 表示“刚……就……”。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "Hardly 置于句首引起部分倒装，还原后主句是 he had hardly arrived；arrive 是不及物动词，没有宾语，所以主句是主谓。",
+      "judge": "先还原主句语序 he had arrived，再判断：只有主语 he 和不及物动词 arrive，故为主谓；when 从句另作状语从句。",
+      "contrast": "从句 it began to rain 的结构不改变主句判断；主句没有宾语，所以不是主谓宾。"
+    }
   },
   {
     "text": "The more you read, the more you learn.",
@@ -5109,7 +5584,12 @@
     "keyPoints": [
       "the + 比较级，the + 比较级，表示“越……越……”。",
       "两个分句都用陈述语序。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "这是“the + 比较级, the + 比较级”结构，两个分句都用陈述语序；主句 the more you learn 中主语是 you，谓语 learn 不带宾语，所以是主谓。",
+      "judge": "先找到两个分句的主干 you read / you learn，均为主语 + 不及物动词，没有宾语，故判为主谓。",
+      "contrast": "前移的 the more 是状语，不是宾语；不能因为句首有比较级成分就误判为主谓宾。"
+    }
   },
   {
     "text": "The scientist whose research changed our lives won the prize.",
@@ -5186,7 +5666,12 @@
     "keyPoints": [
       "whose 引导定语从句，表示“……的”。",
       "主句的主干是 The scientist won the prize。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「The scientist」+ 及物动词「won」+ 宾语「the prize」，动作有明确的承受者，属于主谓宾（SVO）。",
+      "judge": "「won」后面只有一个宾语「the prize」，没有再带第二个宾语，也没有补充说明宾语的成分，因此判为主谓宾。",
+      "contrast": "若再加一个指人的间接宾语，就是主谓双宾；若宾语后还有形容词/名词/不定式补充说明宾语，则是主谓宾宾补；若动词是系动词并接表语，则是主系表。"
+    }
   },
   {
     "text": "Although the task was difficult, they managed to finish it on time.",
@@ -5270,7 +5755,12 @@
     "keyPoints": [
       "manage to do 表示“设法做成某事”。",
       "although 引导让步状语从句，不能与 but 连用。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「they」+ 及物动词「managed」+ 宾语「to finish it」，动作有明确的承受者，属于主谓宾（SVO）。",
+      "judge": "「managed」后面只有一个宾语「to finish it」，没有再带第二个宾语，也没有补充说明宾语的成分，因此判为主谓宾。",
+      "contrast": "若再加一个指人的间接宾语，就是主谓双宾；若宾语后还有形容词/名词/不定式补充说明宾语，则是主谓宾宾补；若动词是系动词并接表语，则是主系表。"
+    }
   },
   {
     "text": "I don't know whether the meeting will be held in the hall or in the classroom.",
@@ -5340,7 +5830,12 @@
     "keyPoints": [
       "whether ... or ... 表示两种可能的选择。",
       "宾语从句用陈述语序，被动语态为 will be held。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主句是主语「I」+ 及物动词「don't know」+ 宾语「whether the meeting will be held in the hall or in the classroom（宾语从句）」，动作有明确的承受者，属于主谓宾（SVO）。",
+      "judge": "「don't know」后面接的是由一个完整从句承担的宾语「whether the meeting will be held in the hall or in the classroom（宾语从句）」，没有第二个宾语，也没有宾补，因此判为主谓宾。",
+      "contrast": "若再加一个指人的间接宾语，就是主谓双宾；若宾语后还有形容词/名词/不定式补充说明宾语，则是主谓宾宾补；若动词是系动词并接表语，则是主系表。"
+    }
   },
   {
     "text": "What surprised me most was that he refused to help.",
@@ -5436,6 +5931,11 @@
     "keyPoints": [
       "主语从句 + 系动词 + 表语从句是常见长难句结构。",
       "refuse to do 表示“拒绝做某事”。"
-    ]
+    ],
+    "patternAnalysis": {
+      "why": "主语是主语从句 What surprised me most，was 是系动词，that he refused to help 是表语从句，说明主语内容，因此是主系表。",
+      "judge": "先找主句骨架：主语从句 + was + 表语从句；was 是系动词，前后都不是动作的承受关系。",
+      "contrast": "如果把 was 后的 that 从句当成宾语，就会误判为主谓宾；但 was 是系动词、that 从句是表语从句，所以是主系表。"
+    }
   }
 ]

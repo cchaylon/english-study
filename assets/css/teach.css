@@ -368,8 +368,6 @@
 .clause-count { font-size: 11px; color: var(--violet); font-weight: 650; }
 
 .result-tools { margin-left: auto; display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
-.result-source { font-size: 11.5px; color: var(--muted); }
-.result-source b { color: var(--ink-2); font-weight: 650; }
 .tool-btn {
   height: 32px;
   padding: 0 12px;
@@ -541,6 +539,39 @@
   margin-top: 2px;
 }
 
+/* ---------- 结果：句型解析 ---------- */
+.pattern-analysis {
+  margin-top: 16px;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+}
+.pattern-analysis h3 {
+  margin: 0 0 12px;
+  font-size: 11px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--primary);
+  font-weight: 800;
+}
+.pa-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.pa-item {
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface-2);
+}
+.pa-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: var(--primary);
+}
+.pa-item p { margin: 0; font-size: 12.5px; line-height: 1.75; color: var(--ink-2); }
+
 /* ---------- 响应式 ---------- */
 @media (max-width: 1180px) {
   .analyzer-grid { grid-template-columns: 320px minmax(0, 1fr); }
@@ -555,6 +586,7 @@
   .analyzer-grid { grid-template-columns: 1fr; }
   .input-card { position: static; }
   .result-grid { grid-template-columns: 1fr; }
+  .pa-grid { grid-template-columns: 1fr; }
   .output-card { min-height: 440px; }
   .state-empty { min-height: 380px; }
   .analyzer-copy h1 { font-size: clamp(40px, 7vw, 54px); }
