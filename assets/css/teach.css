@@ -562,22 +562,13 @@
   color: var(--primary);
   font-weight: 800;
 }
-.pa-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-.pa-item {
-  padding: 12px 14px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: var(--surface-2);
+.pa-text {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.9;
+  color: var(--ink-2);
+  text-align: justify;
 }
-.pa-label {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 10.5px;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-  color: var(--primary);
-}
-.pa-item p { margin: 0; font-size: 12.5px; line-height: 1.75; color: var(--ink-2); }
 
 /* ---------- 响应式 ---------- */
 @media (max-width: 1180px) {
@@ -593,7 +584,6 @@
   .analyzer-grid { grid-template-columns: 1fr; }
   .input-card { position: static; }
   .result-grid { grid-template-columns: 1fr; }
-  .pa-grid { grid-template-columns: 1fr; }
   .output-card { min-height: 440px; }
   .state-empty { min-height: 380px; }
   .analyzer-copy h1 { font-size: clamp(40px, 7vw, 54px); }
