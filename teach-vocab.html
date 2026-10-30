@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem("lingua.theme");
+        var dark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+      } catch (e) { /* 忽略隐私模式限制 */ }
+    })();
+  </script>
+  <title>我来教你 · 单词扩展 | LINGUA 英语进阶学堂</title>
+  <meta name="description" content="我来教你：AI 单词扩展。按词根词缀拆词，串联词族派生、同义替换、高频搭配与例句，并给出记忆钩子，面向托业 800 分以下学习者。">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%231e5a4a'/%3E%3Ctext x='20' y='27' font-family='Georgia' font-size='20' fill='%23f3e7cd' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="stylesheet" href="assets/css/teach.css">
+  <link rel="stylesheet" href="assets/css/vocab.css">
+</head>
+<body data-page="teach" data-teach="vocab">
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="index.html" aria-label="LINGUA 首页">
+        <span class="logo-mark">L</span>
+        <span class="logo-text"><b>LINGUA</b><span>英语进阶学堂</span></span>
+      </a>
+      <nav class="main-nav" aria-label="主导航">
+        <a href="index.html#catalog">课程目录</a>
+        <a href="index.html#roadmap">学习路径</a>
+        <a href="lesson-01.html">核心语法</a>
+        <a href="teach.html" class="is-active">我来教你</a>
+        <a href="index.html#about">关于本站</a>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="切换到深色模式" aria-pressed="false" title="切换到深色模式">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6" stroke-linecap="round"/></svg>
+        </button>
+        <a class="search-jump" href="index.html#catalog">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="7" cy="7" r="4.6"/><path d="m10.6 10.6 3 3" stroke-linecap="round"/></svg>
+          <span>搜索课程</span><kbd>/</kbd>
+        </a>
+        <button class="nav-toggle" aria-label="打开菜单" aria-expanded="false">
+          <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h14M3 10h14M3 14h14" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 功能模块条：句子分析 / 单词扩展 各自独立页面，这里负责切换 -->
+    <section class="modules" id="modules" aria-label="我来教你功能模块">
+      <div class="container">
+        <div class="module-bar" id="moduleGrid"></div>
+      </div>
+    </section>
+
+    <!-- 单词扩展工作区 -->
+    <section class="analyzer vocab" id="expand" aria-labelledby="vocabTitle">
+      <div class="container">
+        <header class="analyzer-head">
+          <div class="analyzer-copy">
+            <span class="eyebrow">TEACH ME · Word Expander</span>
+            <h1 id="vocabTitle">单词扩展</h1>
+            <p>拆开词根词缀，串起词族派生、同义替换与高频搭配，一个词带出一族词，并给出记忆钩子与例句。</p>
+          </div>
+          <div class="pattern-ref">
+            <span class="pattern-ref-label">高频词根</span>
+            <div class="pattern-ref-list">
+              <span>spect <em>看</em></span>
+              <span>port <em>运</em></span>
+              <span>dict <em>说</em></span>
+              <span>form <em>形</em></span>
+              <span>tract <em>拉</em></span>
+              <span>bene <em>好</em></span>
+            </div>
+          </div>
+        </header>
+
+        <div class="analyzer-grid">
+          <aside class="input-card vocab-input-card">
+            <div class="input-head">
+              <div class="input-head-copy">
+                <span class="input-tag">单词</span>
+                <h3>输入要扩展的英文单词</h3>
+              </div>
+              <span class="input-mode-note">AI 实时扩展</span>
+            </div>
+            <textarea id="wordInput" class="sentence-input word-input" maxlength="60" rows="2"
+              placeholder="例如：sustainable"
+              aria-label="待扩展的英文单词"></textarea>
+            <div class="input-meta">
+              <span id="wordCount">0 / 60</span>
+              <span>单个单词或短语，最多 60 个字符</span>
+            </div>
+            <div class="input-actions">
+              <button class="btn btn-primary" id="expandBtn" type="button">扩展这个词</button>
+              <button class="btn btn-ghost" id="randomWordBtn" type="button">换一个</button>
+            </div>
+            <div class="input-samples">
+              <span class="samples-label">试一试</span>
+              <button class="sentence-chip" type="button" data-word="sustainable">sustainable</button>
+              <button class="sentence-chip" type="button" data-word="significant">significant</button>
+              <button class="sentence-chip" type="button" data-word="commit">commit</button>
+              <button class="sentence-chip" type="button" data-word="benefit">benefit</button>
+            </div>
+            <p class="input-tip">由 DeepSeek 实时生成词根词缀、词族、同义替换与搭配；同一单词会缓存，二次查询更快。</p>
+          </aside>
+
+          <div class="output-card" id="vocabOutput" aria-live="polite">
+            <div class="state-empty">
+              <div class="empty-art">W</div>
+              <h2 class="empty-title">输入一个单词，看它怎么长出来</h2>
+              <p>直接输入你想记住的单词，或点左侧示例与「换一个」。</p>
+              <p class="empty-note">扩展完成后，会给出词根词缀拆解、词族派生、同义替换、高频搭配与例句。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="about">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <b>LINGUA · 英语进阶学堂</b>
+          <p>一个按等级组织的英语学习资料站。课程目录与课时信息来自现有教学资料，核心语法体系提供在线图文精讲，「我来教你」提供 AI 语法工具。</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <b>学习</b>
+            <a href="index.html#catalog">课程总目录</a>
+            <a href="index.html#roadmap">学习路径</a>
+            <a href="lesson-01.html">核心语法体系</a>
+          </div>
+          <div class="footer-col">
+            <b>工具</b>
+            <a href="teach.html">句子分析</a>
+            <a href="teach-vocab.html">单词扩展</a>
+            <a href="teach.html#modules">功能模块</a>
+          </div>
+          <div class="footer-col">
+            <b>更多</b>
+            <a href="index.html?level=B2#catalog">B2 融会贯通</a>
+            <a href="index.html?level=C1#catalog">C1 王者英语</a>
+            <a href="course.html?id=21">核心语法课程页</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 LINGUA · 学习资料整理与展示</span>
+        <span>按顺序学习，比盲目收藏更重要</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/site.js"></script>
+  <script src="assets/js/vocab.js"></script>
+</body>
+</html>

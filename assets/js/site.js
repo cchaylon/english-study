@@ -81,6 +81,59 @@
     });
   }
 
+  /* ---------- 我来教你：功能模块条 ----------
+     句子分析与单词扩展是各自独立的页面，模块条只负责页面间跳转；
+     新增模块：向 TEACH_MODULES 追加一条记录即可（status: live / soon）。
+  ------------------------------------------------------- */
+  const TEACH_MODULES = [
+    {
+      id: "sentence",
+      title: "句子分析",
+      desc: "拆解句子成分，识别五大句型与从句结构，分色高亮主干骨架。",
+      status: "live",
+      href: "teach.html",
+      icon: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 5h14M3 10h9M3 15h11" stroke-linecap="round"/><circle cx="16" cy="10" r="1.6" fill="currentColor" stroke="none"/></svg>'
+    },
+    {
+      id: "vocab",
+      title: "单词扩展",
+      desc: "按词根词缀拆词，串联同义替换与高频搭配，一个词带出一族词。",
+      status: "live",
+      href: "teach-vocab.html",
+      icon: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="3"/><path d="M7 7h6M7 10h6M7 13h4" stroke-linecap="round"/></svg>'
+    },
+    {
+      id: "speak",
+      title: "发音跟读",
+      desc: "逐词标注连读、弱读与语调，跟读一句得分一句。",
+      status: "soon",
+      icon: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 8v4M8 5v10M12 7v6M16 9v2" stroke-linecap="round"/></svg>'
+    },
+    {
+      id: "writing",
+      title: "写作批改",
+      desc: "提交一段英文，逐句纠错并给出更地道的改写版本。",
+      status: "soon",
+      icon: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m4 15 1.6-4.4L14 2.2l3.8 3.8-8.4 8.4L5 15H4Z" stroke-linejoin="round"/><path d="m12.4 4 3.6 3.6" stroke-linecap="round"/></svg>'
+    }
+  ];
+
+  window.LINGUA_TEACH_MODULES = TEACH_MODULES;
+
+  function initTeachModules() {
+    const bar = $("#moduleGrid");
+    if (!bar) return;
+    const current = document.body.dataset.teach || "";
+
+    bar.innerHTML = '<span class="module-bar-label">我来教你</span>' + TEACH_MODULES.map((mod) => {
+      if (mod.status !== "live") {
+        return `<span class="module-pill is-soon" title="${mod.desc}">${mod.icon}<span>${mod.title}</span><em>即将上线</em></span>`;
+      }
+      const active = mod.id === current ? " is-active" : "";
+      return `<a class="module-pill is-live${active}" href="${mod.href}" title="${mod.desc}">${mod.icon}<span>${mod.title}</span></a>`;
+    }).join("");
+  }
+
   /* ---------- 首页目录 ---------- */
   function initCatalog() {
     const grid = $("#courseGrid");
@@ -403,6 +456,7 @@
   document.addEventListener("DOMContentLoaded", () => {
     initTheme();
     initMobileNav();
+    initTeachModules();
     initCatalog();
     initCoursePage();
     initLesson();

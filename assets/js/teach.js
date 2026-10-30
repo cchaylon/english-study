@@ -106,46 +106,6 @@
     { text: "It's not that I don't like him; it's that he never listens.", source: "《老友记》 · 进阶" }
   ];
 
-  /* ---------------- 模块注册表（扩展入口） -------------
-     新增功能卡片：向 MODULES 追加一条记录即可。
-     status: "live" 可点击；"soon" 为占位预告。
-  ------------------------------------------------------- */
-  const MODULES = [
-    {
-      id: "sentence",
-      title: "句子分析",
-      desc: "拆解句子成分，识别五大句型与从句结构，分色高亮主干骨架。",
-      status: "live",
-      href: "#analyze",
-      accent: "#4f46e5",
-      icon: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 5h14M3 10h9M3 15h11" stroke-linecap="round"/><circle cx="16" cy="10" r="1.6" fill="currentColor" stroke="none"/></svg>'
-    },
-    {
-      id: "vocab",
-      title: "词汇拆解",
-      desc: "按词根词缀拆词，串联同义替换，一节课记住一组高频词。",
-      status: "soon",
-      accent: "#0891b2",
-      icon: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="3"/><path d="M7 7h6M7 10h6M7 13h4" stroke-linecap="round"/></svg>'
-    },
-    {
-      id: "speak",
-      title: "发音跟读",
-      desc: "逐词标注连读、弱读与语调，跟读一句得分一句。",
-      status: "soon",
-      accent: "#f43f5e",
-      icon: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 8v4M8 5v10M12 7v6M16 9v2" stroke-linecap="round"/></svg>'
-    },
-    {
-      id: "writing",
-      title: "写作批改",
-      desc: "提交一段英文，逐句纠错并给出更地道的改写版本。",
-      status: "soon",
-      accent: "#16a34a",
-      icon: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m4 15 1.6-4.4L14 2.2l3.8 3.8-8.4 8.4L5 15H4Z" stroke-linejoin="round"/><path d="m12.4 4 3.6 3.6" stroke-linecap="round"/></svg>'
-    }
-  ];
-
   /* ---------------- 状态 ---------------- */
   const CACHE_KEY = "lingua.teach.sentence.cache.v1";
   const CACHE_LIMIT = 30;
@@ -359,26 +319,6 @@
     if (/failed to fetch|networkerror|load failed/i.test(message)) return "无法连接 DeepSeek 服务，请检查网络后重试。";
     if (/JSON|解析结果为空/i.test(message)) return "AI 返回的结构不符合预期，换一句或重试一次。";
     return "解析失败：" + message;
-  }
-
-  /* ---------------- 渲染：模块选择条 ---------------- */
-  function renderModules() {
-    const bar = $("#moduleGrid");
-    if (!bar) return;
-
-    bar.innerHTML = `<span class="module-bar-label">我来教你</span>` + MODULES.map((mod) => {
-      const live = mod.status === "live";
-      return live
-        ? `<button class="module-pill is-live is-active" type="button" data-target="${mod.href}" title="${esc(mod.desc)}">${mod.icon}<span>${esc(mod.title)}</span></button>`
-        : `<span class="module-pill is-soon" title="${esc(mod.desc)}">${mod.icon}<span>${esc(mod.title)}</span><em>即将上线</em></span>`;
-    }).join("");
-
-    $$(".module-pill.is-live", bar).forEach((pill) => {
-      pill.addEventListener("click", () => {
-        const target = document.querySelector(pill.dataset.target || "");
-        if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-    });
   }
 
   /* ---------------- 渲染：状态 ---------------- */
@@ -778,7 +718,6 @@
   /* ---------------- 初始化 ---------------- */
   function init() {
     if (!output) return;
-    renderModules();
     bindEvents();
     updateCount();
     renderEmpty();
@@ -801,7 +740,7 @@
 
   /* 扩展接口：后续模块可复用解析能力 */
   window.LinguaTeach = {
-    modules: MODULES,
+    modules: window.LINGUA_TEACH_MODULES || [],
     samples: SAMPLES,
     analyze: runAnalysis,
     loadLocal: loadLocalSentences,

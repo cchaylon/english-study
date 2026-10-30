@@ -1,0 +1,253 @@
+/* ==========================================================================
+   LINGUA · 我来教你（TEACH ME）
+   单词扩展工作区：词根词缀拆解、词族、同义替换、搭配与例句
+   仅作用于“单词扩展”页面，句子分析页不加载本文件
+   ========================================================================== */
+
+/* ---------- 输入区补充 ---------- */
+.input-mode-note {
+  flex: none;
+  font-size: 10px;
+  letter-spacing: 0.6px;
+  font-weight: 800;
+  color: var(--primary);
+  background: var(--primary-soft);
+  border: 1px solid color-mix(in srgb, var(--primary) 26%, transparent);
+  border-radius: 6px;
+  padding: 5px 8px;
+  white-space: nowrap;
+}
+
+.word-input { min-height: 76px; font-size: 20px; line-height: 1.5; }
+
+/* ---------- 结果：单词头部 ---------- */
+.word-badge code { font-size: 12px; }
+
+.word-card { position: relative; }
+
+.word-headline { display: flex; flex-direction: column; gap: 6px; }
+
+.word-title {
+  margin: 2px 0 0;
+  font-family: var(--serif);
+  font-size: clamp(30px, 3.4vw, 42px);
+  line-height: 1.15;
+  letter-spacing: -0.6px;
+  color: var(--ink);
+  word-break: break-word;
+}
+
+.word-pron { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.word-phonetic { font-family: var(--mono); font-size: 13.5px; color: var(--muted); }
+.word-pos {
+  font-size: 11px;
+  font-weight: 750;
+  color: var(--role-predicative);
+  background: color-mix(in srgb, var(--role-predicative) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--role-predicative) 28%, transparent);
+  border-radius: 5px;
+  padding: 2px 7px;
+}
+
+.word-core {
+  margin: 14px 0 0;
+  font-size: 16.5px;
+  line-height: 1.75;
+  color: var(--ink-2);
+  padding: 11px 14px;
+  border-radius: 10px;
+  border-left: 3px solid var(--primary);
+  background: color-mix(in srgb, var(--primary) 6%, transparent);
+}
+
+/* ---------- 释义列表 ---------- */
+.sense-block { margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--line); }
+.sense-list { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 7px; }
+.sense-list li { display: flex; align-items: baseline; gap: 8px; font-size: 14px; line-height: 1.7; color: var(--ink-2); }
+.sense-list em {
+  flex-shrink: 0;
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  min-width: 34px;
+}
+
+/* ---------- 词根词缀拆解 ---------- */
+.parts-card {
+  margin-top: 16px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: linear-gradient(180deg, var(--surface-2), var(--surface));
+}
+
+.parts-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.parts-count { font-size: 11px; color: var(--muted); font-family: var(--mono); }
+
+.parts-flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.part-chip {
+  --pc: var(--primary);
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: baseline;
+  gap: 2px 8px;
+  padding: 9px 13px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--pc) 30%, transparent);
+  background: color-mix(in srgb, var(--pc) 8%, var(--surface));
+}
+.part-chip b {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--pc) 68%, var(--ink));
+  letter-spacing: 0.2px;
+}
+.part-chip em {
+  justify-self: end;
+  font-style: normal;
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: color-mix(in srgb, var(--pc) 72%, var(--ink));
+  background: color-mix(in srgb, var(--pc) 14%, transparent);
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+.part-chip > span { grid-column: 1 / -1; font-size: 12px; color: var(--ink-2); line-height: 1.5; }
+
+.parts-plus {
+  align-self: center;
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--muted);
+  padding: 0 1px;
+}
+
+.parts-notes {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 12px 0 0;
+  border-top: 1px dashed var(--line);
+  display: grid;
+  gap: 6px;
+}
+.parts-notes li { font-size: 12.5px; line-height: 1.7; color: var(--muted); }
+.parts-notes b { font-family: var(--mono); font-weight: 700; margin-right: 7px; }
+
+.parts-empty { margin: 14px 0 0; font-size: 12.5px; line-height: 1.75; color: var(--muted); }
+
+/* ---------- 词族 / 同义：双列 ---------- */
+.vocab-grid { grid-template-columns: 1fr 1fr; }
+
+.family-list, .syn-list { display: grid; gap: 8px; }
+
+.family-item {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  align-items: baseline;
+  gap: 8px;
+  padding: 9px 11px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface-2);
+}
+.family-item b { font-family: var(--serif); font-size: 15.5px; font-weight: 650; color: var(--ink); }
+.family-item em { font-style: normal; font-family: var(--mono); font-size: 10px; color: var(--muted); }
+.family-item span { font-size: 12.5px; color: var(--ink-2); line-height: 1.5; justify-self: end; text-align: right; }
+
+.syn-item {
+  padding: 9px 11px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface-2);
+}
+.syn-head { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.syn-head b { font-family: var(--serif); font-size: 15.5px; font-weight: 650; color: var(--ink); }
+.syn-head span { font-size: 12.5px; color: var(--ink-2); }
+.syn-item em { display: block; margin-top: 3px; font-style: normal; font-size: 11.5px; line-height: 1.6; color: var(--muted); }
+
+/* ---------- 高频搭配 ---------- */
+.colloc-panel { margin-top: 16px; }
+.colloc-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.colloc-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--surface-2);
+}
+.colloc-chip b { font-family: var(--serif); font-size: 14.5px; font-weight: 600; color: var(--ink); }
+.colloc-chip em { font-style: normal; font-size: 11.5px; color: var(--muted); }
+
+/* ---------- 例句 ---------- */
+.example-panel { margin-top: 16px; }
+.example-list { list-style: none; margin: 0; padding: 0; counter-reset: ex; display: grid; gap: 10px; }
+.example-list li {
+  counter-increment: ex;
+  position: relative;
+  padding: 10px 12px 10px 38px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: var(--surface-2);
+}
+.example-list li::before {
+  content: counter(ex);
+  position: absolute;
+  left: 12px;
+  top: 11px;
+  width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--primary);
+  border: 1px solid color-mix(in srgb, var(--primary) 30%, transparent);
+  border-radius: 50%;
+}
+.ex-en { margin: 0; font-family: var(--serif); font-size: 15px; line-height: 1.65; color: var(--ink); }
+.ex-zh { margin: 4px 0 0; font-size: 12.5px; line-height: 1.65; color: var(--muted); }
+
+/* ---------- 记忆钩子 ---------- */
+.memory-card { margin-top: 16px; }
+.memory-text { font-size: clamp(17px, 1.9vw, 23px); line-height: 1.7; }
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 980px) {
+  .vocab-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 760px) {
+  .word-title { font-size: clamp(26px, 9vw, 34px); }
+  .word-input { min-height: 64px; font-size: 18px; }
+  .parts-card { padding: 16px; border-radius: 14px; }
+  .part-chip { padding: 8px 11px; }
+  .part-chip b { font-size: 18px; }
+  .family-item { grid-template-columns: auto auto; }
+  .family-item span { grid-column: 1 / -1; justify-self: start; text-align: left; }
+  .example-list li { padding: 9px 11px 9px 34px; }
+  .example-list li::before { left: 10px; top: 10px; }
+}
+
+/* ---------- 深色模式 ---------- */
+html[data-theme="dark"] .word-core { background: rgba(109, 120, 255, 0.12); }
+html[data-theme="dark"] .parts-card { background: linear-gradient(180deg, var(--surface-2), var(--surface)); }
+html[data-theme="dark"] .part-chip { background: color-mix(in srgb, var(--pc) 16%, var(--surface)); }
+html[data-theme="dark"] .family-item,
+html[data-theme="dark"] .syn-item,
+html[data-theme="dark"] .colloc-chip,
+html[data-theme="dark"] .example-list li { background: var(--surface-2); }
+html[data-theme="dark"] .word-pos { background: rgba(34, 211, 238, 0.14); }
+html[data-theme="dark"] .input-mode-note { background: rgba(109, 120, 255, 0.14); }
+html[data-theme="dark"] .memory-card { border: 1px solid rgba(255, 255, 255, 0.1); }
