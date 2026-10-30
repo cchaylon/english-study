@@ -81,8 +81,20 @@
         <div class="analyzer-grid">
           <aside class="input-card">
             <div class="input-head">
-              <span class="input-tag">输入</span>
-              <h3>写下要拆解的英文句子</h3>
+              <div class="input-head-copy">
+                <span class="input-tag">输入</span>
+                <h3>写下要拆解的英文句子</h3>
+              </div>
+              <div class="mode-switch" role="radiogroup" aria-label="解析模式">
+                <input class="mode-input" type="radio" name="analysisMode" id="modeLocal" checked>
+                <label class="mode-opt" for="modeLocal" title="使用本地 100 句例句库，离线可用">本地</label>
+                <input class="mode-input" type="radio" name="analysisMode" id="aiToggle">
+                <label class="mode-opt" for="aiToggle" title="调用 DeepSeek 联网解析任意句子">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 2.5 9.4 6l3.6 1.4-3.6 1.4L8 12.3l-1.4-3.5L3 7.4 6.6 6 8 2.5Z" stroke-linejoin="round"/><path d="M12.6 11.2 13.2 13l1.8.6-1.8.6-.6 1.8-.6-1.8L10.8 14l1.8-.6.6-1.8Z" stroke-linejoin="round"/></svg>
+                  AI
+                </label>
+                <span class="mode-thumb" aria-hidden="true"></span>
+              </div>
             </div>
             <textarea id="sentenceInput" class="sentence-input" maxlength="240" rows="5"
               placeholder="例如：The book that you lent me is very interesting."
@@ -94,11 +106,6 @@
             <div class="input-actions">
               <button class="btn btn-primary" id="analyzeBtn" type="button">拆解句子</button>
               <button class="btn btn-ghost" id="randomBtn" type="button">随机例句</button>
-              <label class="ai-toggle" title="勾选后调用 DeepSeek 解析任意句子">
-                <input type="checkbox" id="aiToggle">
-                <span class="ai-toggle-box" aria-hidden="true"></span>
-                <span class="ai-toggle-text">AI</span>
-              </label>
             </div>
             <div class="input-samples">
               <span class="samples-label">试一试</span>
@@ -106,7 +113,7 @@
               <button class="sentence-chip" type="button" data-sentence="I don't know whether the meeting will be held in the hall or in the classroom.">I don't know whether the meeting will be held in the hall or in the classroom.</button>
               <button class="sentence-chip" type="button" data-sentence="What surprised me most was that he refused to help.">What surprised me most was that he refused to help.</button>
             </div>
-            <p class="input-tip">默认从本地 100 句例句库解析，离线可用；勾选「AI」后由 DeepSeek 实时解析任意句子。</p>
+            <p class="input-tip">默认使用本地 100 句例句库，离线可用；切换到「AI」后由 DeepSeek 实时解析任意句子。</p>
           </aside>
 
           <div class="output-card" id="analyzerOutput" aria-live="polite">
