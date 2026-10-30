@@ -567,77 +567,34 @@
 }
 
 /* ==========================================================================
-   深色模式：字体、底色、语法高亮同步切换，保证对比度
+   深色模式：站点级变量与公共组件已由 site.css 的 html[data-theme="dark"] 切换，
+   这里只补充语法分析工作区的局部配色，保证高亮与文字对比度
    ========================================================================== */
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-    --bg: #070a12;
-    --surface: #10141e;
-    --surface-2: #161c28;
-    --ink: #edf1fb;
-    --ink-2: #c6d0e2;
-    --muted: #97a3b8;
-    --line: rgba(255, 255, 255, 0.09);
-    --line-strong: rgba(255, 255, 255, 0.2);
-    --primary: #8b9cff;
-    --primary-deep: #dbe2ff;
-    --primary-soft: rgba(109, 120, 255, 0.16);
-    --violet: #a78bfa;
-    --cyan: #22d3ee;
-    --role-predicative: #22d3ee;
-    --chunk-base: #131a26;
-    --chunk-ink: #eaf0ff;
-    --shadow: 0 24px 50px -28px rgba(0, 0, 0, 0.8);
-    --shadow-soft: 0 14px 32px -22px rgba(0, 0, 0, 0.7);
-  }
-
-  body { background: var(--bg); }
-  body::before {
-    background:
-      radial-gradient(900px 480px at 4% -6%, rgba(79, 70, 229, 0.16), transparent 62%),
-      radial-gradient(760px 520px at 102% 2%, rgba(6, 182, 212, 0.12), transparent 64%),
-      radial-gradient(640px 420px at 78% 88%, rgba(244, 63, 94, 0.08), transparent 66%);
-  }
-  ::selection { background: rgba(139, 156, 255, 0.3); color: #fff; }
-
-  .site-header { background: rgba(7, 10, 18, 0.86); border-bottom-color: var(--line); }
-  .site-footer { background: #0b0f18; }
-  .main-nav.is-open { background: #0d121c; }
-  .search-jump, .nav-toggle, .btn-ghost { background: var(--surface); color: var(--ink-2); border-color: var(--line); }
-  .search-jump:hover { border-color: rgba(139, 156, 255, 0.45); }
-  .search-jump kbd { border-color: var(--line-strong); color: var(--muted); }
-
-  .btn-primary, .pattern-badge, .logo-mark, .empty-art, .module-pill.is-active {
-    background: linear-gradient(135deg, #4338ca, #6d28d9);
-    color: #fff;
-  }
-  .module-pill.is-live.is-active { background: linear-gradient(135deg, #4338ca, #6d28d9); color: #fff; border-color: transparent; }
-  .btn-primary { box-shadow: 0 16px 30px -18px rgba(67, 56, 202, 0.9); }
-
-  .input-card { background: radial-gradient(320px 200px at 100% 0%, rgba(99, 102, 241, 0.12), transparent 68%), var(--surface); }
-  .sentence-input { background: var(--surface-2); color: var(--ink); }
-  .sentence-input::placeholder { color: var(--muted); }
-  .sentence-input:focus { background: var(--surface); box-shadow: 0 0 0 3px rgba(139, 156, 255, 0.18); }
-  .sentence-chip { background: var(--surface); }
-  .sentence-chip:hover { background: rgba(109, 120, 255, 0.14); color: var(--primary-deep); }
-
-  .shimmer { background: linear-gradient(90deg, #1a2130 25%, #232c3d 37%, #1a2130 63%); }
-  .loading-head { color: var(--primary-deep); }
-  .spinner { border-color: rgba(139, 156, 255, 0.28); border-top-color: var(--primary); }
-
-  .gram-card { background: linear-gradient(180deg, var(--surface-2), var(--surface)); }
-  .gram-translation { background: rgba(34, 211, 238, 0.1); }
-  .skeleton-card { border: 1px solid rgba(255, 255, 255, 0.1); }
-  .tool-btn { background: var(--surface); }
-  .tool-btn:hover { border-color: rgba(139, 156, 255, 0.45); color: var(--primary); }
-  .tool-btn[aria-pressed="true"] { color: var(--primary-deep); border-color: rgba(139, 156, 255, 0.5); }
-
-  .result-panel { background: var(--surface); }
-  .comp-role { background: color-mix(in srgb, var(--c) 16%, var(--surface)); border-color: color-mix(in srgb, var(--c) 40%, transparent); }
-  .clause-type { background: rgba(167, 139, 250, 0.16); }
-  .state-error .err-badge { background: rgba(244, 63, 94, 0.14); border-color: rgba(244, 63, 94, 0.4); color: #fda4af; }
-  .result-panel h3 { color: var(--primary); }
-  .module-bar { background: var(--surface); }
-  .module-pill.is-live { background: rgba(109, 120, 255, 0.14); }
+html[data-theme="dark"] .input-card {
+  background: radial-gradient(320px 200px at 100% 0%, rgba(99, 102, 241, 0.12), transparent 68%), var(--surface);
 }
+html[data-theme="dark"] .sentence-input { background: var(--surface-2); color: var(--ink); }
+html[data-theme="dark"] .sentence-input::placeholder { color: var(--muted); }
+html[data-theme="dark"] .sentence-input:focus { background: var(--surface); box-shadow: 0 0 0 3px rgba(139, 156, 255, 0.18); }
+html[data-theme="dark"] .sentence-chip { background: var(--surface); }
+html[data-theme="dark"] .sentence-chip:hover { background: rgba(109, 120, 255, 0.14); color: var(--primary-deep); }
+
+html[data-theme="dark"] .shimmer { background: linear-gradient(90deg, #1a2130 25%, #232c3d 37%, #1a2130 63%); }
+html[data-theme="dark"] .loading-head { color: var(--primary-deep); }
+html[data-theme="dark"] .spinner { border-color: rgba(139, 156, 255, 0.28); border-top-color: var(--primary); }
+
+html[data-theme="dark"] .gram-card { background: linear-gradient(180deg, var(--surface-2), var(--surface)); }
+html[data-theme="dark"] .gram-translation { background: rgba(34, 211, 238, 0.1); }
+html[data-theme="dark"] .skeleton-card { border: 1px solid rgba(255, 255, 255, 0.1); }
+html[data-theme="dark"] .tool-btn { background: var(--surface); }
+html[data-theme="dark"] .tool-btn:hover { border-color: rgba(139, 156, 255, 0.45); color: var(--primary); }
+html[data-theme="dark"] .tool-btn[aria-pressed="true"] { color: var(--primary-deep); border-color: rgba(139, 156, 255, 0.5); }
+
+html[data-theme="dark"] .result-panel { background: var(--surface); }
+html[data-theme="dark"] .comp-role { background: color-mix(in srgb, var(--c) 16%, var(--surface)); border-color: color-mix(in srgb, var(--c) 40%, transparent); }
+html[data-theme="dark"] .clause-type { background: rgba(167, 139, 250, 0.16); }
+html[data-theme="dark"] .state-error .err-badge { background: rgba(244, 63, 94, 0.14); border-color: rgba(244, 63, 94, 0.4); color: #fda4af; }
+html[data-theme="dark"] .result-panel h3 { color: var(--primary); }
+html[data-theme="dark"] .module-bar { background: var(--surface); }
+html[data-theme="dark"] .module-pill.is-live { background: rgba(109, 120, 255, 0.14); }
+html[data-theme="dark"] .module-pill.is-live.is-active { background: linear-gradient(135deg, #4338ca, #6d28d9); color: #fff; border-color: transparent; }
