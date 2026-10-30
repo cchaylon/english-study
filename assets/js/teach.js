@@ -122,9 +122,10 @@
     },
     {
       id: "vocab",
-      title: "词汇拆解",
-      desc: "按词根词缀拆词，串联同义替换，一节课记住一组高频词。",
-      status: "soon",
+      title: "单词扩展",
+      desc: "音标拼读、释义、搭配、分层例句、词族、构词、语义、主题与习语，一次展开并归档词根。",
+      status: "live",
+      href: "#word",
       accent: "#0891b2",
       icon: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="3"/><path d="M7 7h6M7 10h6M7 13h4" stroke-linecap="round"/></svg>'
     },
@@ -366,15 +367,18 @@
     const bar = $("#moduleGrid");
     if (!bar) return;
 
-    bar.innerHTML = `<span class="module-bar-label">我来教你</span>` + MODULES.map((mod) => {
+    bar.innerHTML = `<span class="module-bar-label">我来教你</span>` + MODULES.map((mod, index) => {
       const live = mod.status === "live";
+      const active = live && index === MODULES.findIndex((item) => item.status === "live");
       return live
-        ? `<button class="module-pill is-live is-active" type="button" data-target="${mod.href}" title="${esc(mod.desc)}">${mod.icon}<span>${esc(mod.title)}</span></button>`
+        ? `<button class="module-pill is-live${active ? " is-active" : ""}" type="button" data-target="${mod.href}" title="${esc(mod.desc)}">${mod.icon}<span>${esc(mod.title)}</span></button>`
         : `<span class="module-pill is-soon" title="${esc(mod.desc)}">${mod.icon}<span>${esc(mod.title)}</span><em>即将上线</em></span>`;
     }).join("");
 
     $$(".module-pill.is-live", bar).forEach((pill) => {
       pill.addEventListener("click", () => {
+        $$(".module-pill.is-live", bar).forEach((item) => item.classList.remove("is-active"));
+        pill.classList.add("is-active");
         const target = document.querySelector(pill.dataset.target || "");
         if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
       });
@@ -776,10 +780,894 @@
     }
   }
 
+  /* ============================================================
+     单词扩展（WORD EXPANSION）
+     全部数据由 DeepSeek 生成；结果本地缓存，词根自动归档复习
+     ============================================================ */
+
+  const WORD_SYSTEM_PROMPT = `你是资深英语词汇教学专家，面向备战托业/雅思的中国学习者。
+任务：为用户给出的英文单词生成一张「单词扩展」词卡，只输出严格 JSON（不要 markdown、不要解释文字）。
+
+硬性要求：
+1. 所有字符串内不得出现英文双引号；不要使用直接引语，需要引用时用中文「」。
+2. 内容精炼不重复；例句自然准确，符合分层：basic 简单句、exam 托业/雅思风格、native 地道原句。
+3. 音标用国际音标，中文用简体中文。
+
+字段与数量：
+{"word":"单词小写原形",
+"phoneticUK":"英式音标，带斜杠","phoneticUS":"美式音标，带斜杠",
+"pos":["n.","v."],
+"mnemonic":{"syllables":[{"part":"音节","ipa":"该音节音标"}],"stress":"重音位置说明","respell":"重拼读法，如 TRANSS-port","memory":"巧记联想，用中文说明拆词含义","spelling":"拼写记忆提示"},
+"senses":[{"pos":"词性","cn":"中文释义","en":"英文释义（不超过 10 词）","note":"用法提示（不超过 12 字，可空）"}],
+"forms":[{"label":"复数 / 过去式 等","value":"变形"}],
+"collocations":[{"pattern":"含 ... 的搭配","meaning":"中文","example":"英文例句"}],
+"patterns":[{"pattern":"含 ... 的句型","meaning":"中文","example":"英文例句"}],
+"pitfalls":[{"wrong":"错误表达","right":"正确表达","note":"中文提示"}],
+"examples":{"basic":[{"en":"","cn":""}],"exam":[{"en":"","cn":""}],"native":[{"en":"","cn":""}]},
+"family":[{"word":"派生词","pos":"词性","meaning":"中文","note":"关系说明，可空"}],
+"morphology":{"breakdown":"trans- + port","prefixes":[{"part":"trans-","meaning":"横过"}],"root":{"part":"port","meaning":"carry 携带","origin":"拉丁语 portare"},"suffixes":[{"part":"-ation","meaning":"名词后缀"}],"explain":"构词逻辑，不超过 20 字"},
+"rootWords":[{"word":"同词根词","pos":"词性","meaning":"中文","note":"构件说明，不超过 14 字"}],
+"semantics":{"synonyms":[{"word":"近义词","nuance":"细微差别，不超过 14 字","example":"英文例句"}],"antonyms":[{"word":"反义词","note":"中文说明"}],"confusables":[{"word":"形近易混词","note":"中文区分"}]},
+"themes":[{"name":"主题场景","words":["关联词","关联词","关联词","关联词"]}],
+"idioms":[{"phrase":"习语","meaning":"中文","example":"英文例句"}],
+"review":{"roots":["port"],"tip":"复习提示，不超过 20 字"}}
+
+数量上限：senses 2-3；forms 0-5（无变化用 []）；collocations 3；patterns 2；pitfalls 2；examples 每层 2；family 3-4；rootWords 4；semantics 每类 2；themes 2（每主题 4 词）；idioms 2（没有真实习语用 []）；review.roots 1-2（只写词根本身，不带连字符）。
+只输出 JSON，不要任何多余文字。`;
+
+  const WORD_CACHE_KEY = "lingua.word.cache.v1";
+  const WORD_CACHE_LIMIT = 24;
+  const ROOTBOOK_KEY = "lingua.word.rootbook.v1";
+  const SPEAK_ICON = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 6h2.4L8 3.6v8.8L5.4 10H3V6Z" stroke-linejoin="round"/><path d="M10.4 5.6a3.4 3.4 0 0 1 0 4.8M12.4 3.8a6 6 0 0 1 0 8.4" stroke-linecap="round"/></svg>';
+  const WORD_LAYERS = [
+    { key: "basic", label: "基础" },
+    { key: "exam", label: "真题" },
+    { key: "native", label: "原生" }
+  ];
+
+  let wordBusy = false;
+  let lastWord = "";
+  let wordOutputEl = null;
+  let wordVoices = [];
+  let reviewState = { root: "", items: [], index: 0, flipped: false };
+
+  const listOf = (value) => (Array.isArray(value) ? value : []);
+  const objOf = (value) => (value && typeof value === "object" && !Array.isArray(value) ? value : {});
+  const txt = (value) => String(value == null ? "" : value).trim();
+  const cleanRoot = (value) => txt(value).replace(/^-+|-+$/g, "").replace(/[\s，,、+]+/g, "");
+
+  function cleanWordInput(value) {
+    return txt(value).toLowerCase().replace(/[^a-z'-]/g, "");
+  }
+
+  /* ---------- 存储：词卡缓存 + 词根复习库 ---------- */
+  function readWordCache() {
+    try {
+      const raw = JSON.parse(localStorage.getItem(WORD_CACHE_KEY) || "{}");
+      return raw && typeof raw === "object" ? raw : {};
+    } catch (e) { return {}; }
+  }
+
+  function writeWordCache(word, data) {
+    try {
+      const cache = readWordCache();
+      cache[word] = data;
+      const keys = Object.keys(cache);
+      while (keys.length > WORD_CACHE_LIMIT) delete cache[keys.shift()];
+      localStorage.setItem(WORD_CACHE_KEY, JSON.stringify(cache));
+    } catch (e) { /* 隐私模式忽略 */ }
+  }
+
+  function readRootbook() {
+    try {
+      const raw = JSON.parse(localStorage.getItem(ROOTBOOK_KEY) || "[]");
+      return Array.isArray(raw) ? raw.filter((item) => item && item.word) : [];
+    } catch (e) { return []; }
+  }
+
+  function saveRootEntry(data) {
+    if (!data || !data.word) return;
+    try {
+      const entries = readRootbook();
+      const entry = {
+        word: data.word,
+        roots: listOf(data.review && data.review.roots),
+        meaning: txt(data.senses && data.senses[0] && data.senses[0].cn) || "—",
+        phonetic: txt(data.phoneticUK) || txt(data.phoneticUS),
+        breakdown: txt(data.morphology && data.morphology.breakdown),
+        ts: Date.now()
+      };
+      const index = entries.findIndex((item) => item.word === entry.word);
+      if (index >= 0) entries[index] = entry;
+      else entries.unshift(entry);
+      while (entries.length > 48) entries.pop();
+      localStorage.setItem(ROOTBOOK_KEY, JSON.stringify(entries));
+    } catch (e) { /* 隐私模式忽略 */ }
+  }
+
+  function rootGroups(entries) {
+    const map = new Map();
+    entries.forEach((entry) => {
+      listOf(entry.roots).forEach((root) => {
+        if (!root) return;
+        if (!map.has(root)) map.set(root, []);
+        map.get(root).push(entry);
+      });
+    });
+    return Array.from(map.entries()).sort((a, b) => b[1].length - a[1].length);
+  }
+
+  /* ---------- 发音 ---------- */
+  function loadWordVoices() {
+    if (!("speechSynthesis" in window)) return;
+    const refresh = () => { wordVoices = window.speechSynthesis.getVoices() || []; };
+    refresh();
+    window.speechSynthesis.onvoiceschanged = refresh;
+  }
+
+  function speakWord(text, accent) {
+    if (!("speechSynthesis" in window) || !text) return false;
+    try {
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(String(text));
+      const lang = accent === "uk" ? "en-GB" : "en-US";
+      const voice = wordVoices.find((item) => item.lang === lang)
+        || wordVoices.find((item) => String(item.lang || "").toLowerCase().startsWith("en"));
+      if (voice) utter.voice = voice;
+      utter.lang = voice ? voice.lang : lang;
+      utter.rate = 0.9;
+      window.speechSynthesis.speak(utter);
+      return true;
+    } catch (e) { return false; }
+  }
+
+  /* ---------- JSON 容错解析 ---------- */
+  function repairLooseJson(text) {
+    let out = "";
+    let inStr = false;
+    let escape = false;
+    for (let i = 0; i < text.length; i += 1) {
+      const ch = text[i];
+      if (inStr) {
+        if (escape) { out += ch; escape = false; continue; }
+        if (ch === "\\") { out += ch; escape = true; continue; }
+        if (ch === '"') {
+          let next = i + 1;
+          while (next < text.length && /\s/.test(text[next])) next += 1;
+          const follower = text[next];
+          if (follower === undefined || follower === "," || follower === "}" || follower === "]" || follower === ":") {
+            inStr = false;
+            out += ch;
+          } else {
+            out += '\\"';
+          }
+          continue;
+        }
+        if (ch === "\n" || ch === "\r") { out += "\\n"; continue; }
+        out += ch;
+        continue;
+      }
+      if (ch === '"') inStr = true;
+      out += ch;
+    }
+    if (inStr) out += '"';
+    let fixed = out.replace(/,\s*([}\]])/g, "$1");
+    // 补齐未闭合的括号
+    const stack = [];
+    inStr = false;
+    escape = false;
+    for (let i = 0; i < fixed.length; i += 1) {
+      const ch = fixed[i];
+      if (inStr) {
+        if (escape) escape = false;
+        else if (ch === "\\") escape = true;
+        else if (ch === '"') inStr = false;
+        continue;
+      }
+      if (ch === '"') inStr = true;
+      else if (ch === "{" || ch === "[") stack.push(ch);
+      else if (ch === "}" || ch === "]") stack.pop();
+    }
+    while (stack.length) fixed += stack.pop() === "{" ? "}" : "]";
+    return fixed;
+  }
+
+  function parseWordResponse(content) {
+    let text = txt(content).replace(/^```(?:json)?/i, "").replace(/```$/i, "").trim();
+    const start = text.indexOf("{");
+    const end = text.lastIndexOf("}");
+    if (start !== -1 && end !== -1) text = text.slice(start, end + 1);
+    try {
+      return JSON.parse(text);
+    } catch (e) {
+      try {
+        return JSON.parse(repairLooseJson(text));
+      } catch (err) {
+        throw new Error("AI 返回的 JSON 无法解析");
+      }
+    }
+  }
+
+  /* ---------- 归一化 ---------- */
+  function normalizeWordResult(raw) {
+    if (!raw || typeof raw !== "object") throw new Error("AI 返回内容为空");
+    const word = txt(raw.word).toLowerCase();
+    if (!word) throw new Error("AI 未返回单词");
+
+    const senses = listOf(raw.senses).map((s) => ({
+      pos: txt(s.pos),
+      cn: txt(s.cn),
+      en: txt(s.en),
+      note: txt(s.note)
+    })).filter((s) => s.cn || s.en);
+    if (!senses.length) throw new Error("AI 未返回释义");
+
+    const mnemonicRaw = objOf(raw.mnemonic);
+    const mnemonic = {
+      syllables: listOf(mnemonicRaw.syllables).map((s) => ({ part: txt(s.part), ipa: txt(s.ipa) })).filter((s) => s.part),
+      stress: txt(mnemonicRaw.stress),
+      respell: txt(mnemonicRaw.respell),
+      memory: txt(mnemonicRaw.memory),
+      spelling: txt(mnemonicRaw.spelling)
+    };
+
+    const morphRaw = objOf(raw.morphology);
+    const rootRaw = objOf(morphRaw.root);
+    const morphology = {
+      breakdown: txt(morphRaw.breakdown),
+      prefixes: listOf(morphRaw.prefixes).map((p) => ({ part: txt(p.part), meaning: txt(p.meaning) })).filter((p) => p.part),
+      root: {
+        part: cleanRoot(rootRaw.part),
+        meaning: txt(rootRaw.meaning),
+        origin: txt(rootRaw.origin)
+      },
+      suffixes: listOf(morphRaw.suffixes).map((p) => ({ part: txt(p.part), meaning: txt(p.meaning) })).filter((p) => p.part),
+      explain: txt(morphRaw.explain)
+    };
+
+    let roots = listOf(objOf(raw.review).roots).map(cleanRoot).filter(Boolean);
+    if (!roots.length && morphology.root.part) roots = [morphology.root.part];
+    roots = Array.from(new Set(roots.map((r) => r.toLowerCase())));
+
+    const examplesRaw = objOf(raw.examples);
+    const examples = {};
+    WORD_LAYERS.forEach((layer) => {
+      examples[layer.key] = listOf(examplesRaw[layer.key])
+        .map((e) => ({ en: txt(e.en), cn: txt(e.cn) }))
+        .filter((e) => e.en || e.cn);
+    });
+
+    const semRaw = objOf(raw.semantics);
+
+    return {
+      word,
+      phoneticUK: txt(raw.phoneticUK),
+      phoneticUS: txt(raw.phoneticUS),
+      pos: listOf(raw.pos).map(txt).filter(Boolean),
+      mnemonic,
+      senses,
+      forms: listOf(raw.forms).map((f) => ({ label: txt(f.label), value: txt(f.value) })).filter((f) => f.label || f.value),
+      collocations: listOf(raw.collocations).map((c) => ({ pattern: txt(c.pattern), meaning: txt(c.meaning), example: txt(c.example) })).filter((c) => c.pattern || c.meaning),
+      patterns: listOf(raw.patterns).map((p) => ({ pattern: txt(p.pattern), meaning: txt(p.meaning), example: txt(p.example) })).filter((p) => p.pattern || p.meaning),
+      pitfalls: listOf(raw.pitfalls).map((p) => ({ wrong: txt(p.wrong), right: txt(p.right), note: txt(p.note) })).filter((p) => p.wrong || p.right),
+      examples,
+      family: listOf(raw.family).map((f) => ({ word: txt(f.word), pos: txt(f.pos), meaning: txt(f.meaning), note: txt(f.note) })).filter((f) => f.word),
+      morphology,
+      rootWords: listOf(raw.rootWords).map((r) => ({ word: txt(r.word), pos: txt(r.pos), meaning: txt(r.meaning), note: txt(r.note) })).filter((r) => r.word),
+      semantics: {
+        synonyms: listOf(semRaw.synonyms).map((s) => ({ word: txt(s.word), nuance: txt(s.nuance), example: txt(s.example) })).filter((s) => s.word),
+        antonyms: listOf(semRaw.antonyms).map((s) => ({ word: txt(s.word), note: txt(s.note) })).filter((s) => s.word),
+        confusables: listOf(semRaw.confusables).map((s) => ({ word: txt(s.word), note: txt(s.note) })).filter((s) => s.word)
+      },
+      themes: listOf(raw.themes).map((t) => ({ name: txt(t.name), words: listOf(t.words).map(txt).filter(Boolean) })).filter((t) => t.name || t.words.length),
+      idioms: listOf(raw.idioms).map((i) => ({ phrase: txt(i.phrase), meaning: txt(i.meaning), example: txt(i.example) })).filter((i) => i.phrase),
+      review: {
+        roots,
+        tip: txt(objOf(raw.review).tip)
+      }
+    };
+  }
+
+  /* ---------- 请求 DeepSeek ---------- */
+  async function callDeepSeekWord(word) {
+    const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+    const timer = controller ? setTimeout(() => controller.abort(), DEEPSEEK.timeout) : null;
+    try {
+      const response = await fetch(DEEPSEEK.endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + DEEPSEEK.apiKey
+        },
+        body: JSON.stringify({
+          model: DEEPSEEK.model,
+          messages: [
+            { role: "system", content: WORD_SYSTEM_PROMPT },
+            { role: "user", content: "请扩展单词：" + word }
+          ],
+          response_format: { type: "json_object" },
+          temperature: 0.3,
+          max_tokens: 4096,
+          stream: false
+        }),
+        signal: controller ? controller.signal : undefined
+      });
+      if (!response.ok) throw new Error("HTTP " + response.status);
+      const payload = await response.json();
+      const choice = payload && payload.choices && payload.choices[0];
+      const content = choice && choice.message && choice.message.content;
+      if (!content) throw new Error("AI 未返回内容");
+      return content;
+    } finally {
+      if (timer) clearTimeout(timer);
+    }
+  }
+
+  async function requestWordExpansion(word) {
+    let lastError = null;
+    for (let attempt = 0; attempt < 2; attempt += 1) {
+      const content = await callDeepSeekWord(word);
+      try {
+        return normalizeWordResult(parseWordResponse(content));
+      } catch (err) {
+        lastError = err;
+      }
+    }
+    throw lastError || new Error("AI 返回的结构不符合预期");
+  }
+
+  function describeWordError(err) {
+    const message = String((err && err.message) || err || "");
+    if (/abort|timeout/i.test(message)) return "生成超时了，请稍后重试。";
+    if (message.includes("401")) return "API 密钥无效或已失效（401），请检查密钥配置。";
+    if (message.includes("402")) return "DeepSeek 账户余额不足（402）。";
+    if (message.includes("429")) return "请求过于频繁（429），稍等片刻再试。";
+    if (/failed to fetch|networkerror|load failed/i.test(message)) return "无法连接 DeepSeek 服务，请检查网络后重试。";
+    if (/JSON|解析|释义|内容为空/i.test(message)) return "AI 返回的内容不完整，换一个词或再试一次。";
+    return "生成失败：" + message;
+  }
+
+  /* ---------- 词根复习库 ---------- */
+  function renderRootbook() {
+    const box = $("#rootbook");
+    if (!box) return;
+    const entries = readRootbook();
+    if (!entries.length) {
+      box.innerHTML = `
+        <div class="rootbook-head"><span class="rootbook-title">词根复习库</span></div>
+        <p class="rootbook-empty">展开单词后会自动归档词根，同根词在这里成组，方便一起复习。</p>`;
+      return;
+    }
+    const groups = rootGroups(entries);
+    box.innerHTML = `
+      <div class="rootbook-head">
+        <span class="rootbook-title">词根复习库</span>
+        <span class="rootbook-meta">${groups.length} 个词根 · ${entries.length} 个单词</span>
+      </div>
+      <div class="rootbook-groups">
+        ${groups.slice(0, 6).map(([root, list]) => `
+          <div class="root-group">
+            <div class="root-group-head">
+              <span class="root-name">${esc(root)}</span>
+              <button class="root-review-btn" type="button" data-review-root="${esc(root)}">复习 ${list.length}</button>
+            </div>
+            <div class="root-group-words">
+              ${list.map((entry) => `<button class="root-word" type="button" data-word="${esc(entry.word)}">${esc(entry.word)}</button>`).join("")}
+            </div>
+          </div>`).join("")}
+      </div>`;
+  }
+
+  /* ---------- 渲染：状态 ---------- */
+  function renderWordEmpty() {
+    if (!wordOutputEl) return;
+    wordOutputEl.innerHTML = `
+      <div class="state-empty">
+        <div class="empty-art">W</div>
+        <h2 class="empty-title">输入一个单词，展开一整张词卡</h2>
+        <p>从怎么读、怎么写到怎么用，连同词根与同根词一起归档，方便成组复习。</p>
+        <p class="empty-note">点左侧示例词即可试：transport、predict、construct、inspect、commit。</p>
+      </div>`;
+  }
+
+  function renderWordLoading(word) {
+    if (!wordOutputEl) return;
+    wordOutputEl.innerHTML = `
+      <div class="state-loading">
+        <div class="loading-head"><span class="spinner"></span>正在生成「${esc(word)}」词卡…</div>
+        <p style="margin:12px 0 0;font-size:13px;color:var(--muted);line-height:1.7">巧记拼读、释义、搭配、例句、词族、构词、语义、主题、习语一次生成。</p>
+        <div class="shimmer tall"></div>
+        <div class="shimmer s1"></div>
+        <div class="shimmer s2"></div>
+        <div class="shimmer s3"></div>
+        <div class="shimmer s4"></div>
+      </div>`;
+  }
+
+  function renderWordError(message, options) {
+    if (!wordOutputEl) return;
+    const opts = options || {};
+    const showRetry = opts.retry !== false && !!lastWord;
+    wordOutputEl.innerHTML = `
+      <div class="state-error">
+        <span class="err-badge">生成失败</span>
+        <h3>这次没能展开这个词</h3>
+        <p>${esc(message)}</p>
+        ${showRetry ? '<button class="btn btn-primary" type="button" id="wordRetryBtn">重新生成</button>' : ""}
+      </div>`;
+  }
+
+  /* ---------- 渲染：词卡 ---------- */
+  function wordCard(num, title, sub, body, extra) {
+    return `<section class="w-card${extra ? " " + extra : ""}">
+      <header class="w-card-head">
+        <span class="w-num">${esc(num)}</span>
+        <div class="w-card-titles">
+          <h3>${esc(title)}</h3>
+          <p class="w-card-sub">${esc(sub)}</p>
+        </div>
+      </header>
+      ${body}
+    </section>`;
+  }
+
+  function renderWordResult(data) {
+    if (!wordOutputEl) return;
+    const posChips = data.pos.map((pos) => `<span class="w-pos">${esc(pos)}</span>`).join("");
+
+    const phonetics = [];
+    if (data.phoneticUK) {
+      phonetics.push(`<span class="w-phon-item"><b>UK</b><span>${esc(data.phoneticUK)}</span><button class="w-speak" type="button" data-speak="${esc(data.word)}" data-accent="uk" title="英式发音" aria-label="英式发音">${SPEAK_ICON}</button></span>`);
+    }
+    if (data.phoneticUS) {
+      phonetics.push(`<span class="w-phon-item"><b>US</b><span>${esc(data.phoneticUS)}</span><button class="w-speak" type="button" data-speak="${esc(data.word)}" data-accent="us" title="美式发音" aria-label="美式发音">${SPEAK_ICON}</button></span>`);
+    }
+    if (!phonetics.length) {
+      phonetics.push(`<button class="w-speak" type="button" data-speak="${esc(data.word)}" data-accent="us" title="发音" aria-label="发音">${SPEAK_ICON}</button>`);
+    }
+
+    const heroSide = [
+      data.mnemonic.stress ? `<span class="w-stress">${esc(data.mnemonic.stress)}</span>` : "",
+      data.mnemonic.respell ? `<span class="w-respell">${esc(data.mnemonic.respell)}</span>` : ""
+    ].filter(Boolean).join("");
+
+    const formsRow = data.forms.length ? `
+      <div class="w-forms-row">
+        <span class="w-forms-label">变形</span>
+        ${data.forms.map((form) => `<span class="w-form"><em>${esc(form.label)}</em><b>${esc(form.value)}</b></span>`).join("")}
+      </div>` : "";
+
+    const syllables = data.mnemonic.syllables.length
+      ? data.mnemonic.syllables.map((s) => `<span class="w-syl"><b>${esc(s.part)}</b>${s.ipa ? `<em>${esc(s.ipa)}</em>` : ""}</span>`).join('<span class="w-syl-dot">·</span>')
+      : `<span class="w-syl"><b>${esc(data.word)}</b><em>${esc(data.phoneticUK || data.phoneticUS)}</em></span>`;
+
+    const mnemonicBody = `
+      <div class="w-syllables">${syllables}</div>
+      ${data.mnemonic.memory ? `<div class="w-memory-row"><span class="w-tag is-rose">巧记</span><p>${esc(data.mnemonic.memory)}</p></div>` : ""}
+      ${data.mnemonic.spelling ? `<div class="w-memory-row"><span class="w-tag is-emerald">拼写</span><p>${esc(data.mnemonic.spelling)}</p></div>` : ""}
+      ${data.mnemonic.stress || data.mnemonic.respell ? `<p class="w-mnemonic-note">${[data.mnemonic.stress, data.mnemonic.respell ? "重拼：" + data.mnemonic.respell : ""].filter(Boolean).map(esc).join(" · ")}</p>` : ""}`;
+
+    const sensesBody = `<div class="w-sense-list">${data.senses.map((sense) => `
+      <div class="w-sense">
+        <span class="w-sense-pos">${esc(sense.pos || "—")}</span>
+        <div class="w-sense-body">
+          <p class="w-sense-cn">${esc(sense.cn || sense.en)}</p>
+          ${sense.cn && sense.en ? `<p class="w-sense-en">${esc(sense.en)}</p>` : ""}
+          ${sense.note ? `<p class="w-sense-note">${esc(sense.note)}</p>` : ""}
+        </div>
+      </div>`).join("")}</div>`;
+
+    const collocations = data.collocations.length ? data.collocations.map((item) => `
+      <div class="w-colloc">
+        <code>${esc(item.pattern)}</code>
+        <span class="w-colloc-meaning">${esc(item.meaning)}</span>
+        ${item.example ? `<p class="w-colloc-example">${esc(item.example)}</p>` : ""}
+      </div>`).join("") : '<p class="w-empty-line">暂无高频搭配。</p>';
+
+    const patterns = data.patterns.length ? data.patterns.map((item) => `
+      <div class="w-pattern">
+        <code>${esc(item.pattern)}</code>
+        <span>${esc(item.meaning)}</span>
+        ${item.example ? `<p>${esc(item.example)}</p>` : ""}
+      </div>`).join("") : '<p class="w-empty-line">暂无常用句型。</p>';
+
+    const pitfalls = data.pitfalls.length ? data.pitfalls.map((item) => `
+      <div class="w-pitfall">
+        <span class="w-pit-wrong"><i>✕</i>${esc(item.wrong)}</span>
+        <span class="w-pit-right"><i>✓</i>${esc(item.right)}</span>
+        ${item.note ? `<span class="w-pit-note">${esc(item.note)}</span>` : ""}
+      </div>`).join("") : '<p class="w-empty-line">暂无易错点记录。</p>';
+
+    const usageBody = `
+      <h4 class="w-sub-h">高频搭配 <em>Collocation</em></h4>
+      <div class="w-colloc-list">${collocations}</div>
+      <div class="w-usage-split">
+        <div>
+          <h4 class="w-sub-h">常用句型 <em>Pattern</em></h4>
+          <div class="w-pattern-list">${patterns}</div>
+        </div>
+        <div>
+          <h4 class="w-sub-h">易错提醒 <em>Pitfall</em></h4>
+          <div class="w-pitfall-list">${pitfalls}</div>
+        </div>
+      </div>`;
+
+    const tabs = WORD_LAYERS.map((layer, index) => `<button class="w-tab${index === 0 ? " is-active" : ""}" type="button" data-layer="${layer.key}">${layer.label}</button>`).join("");
+    const examplePanels = WORD_LAYERS.map((layer, index) => {
+      const list = data.examples[layer.key] || [];
+      return `<div class="w-example-panel" data-panel="${layer.key}"${index ? " hidden" : ""}>
+        ${list.length ? list.map((ex) => `
+          <div class="w-example">
+            <p class="w-example-en">${esc(ex.en)}</p>
+            ${ex.cn ? `<p class="w-example-cn">${esc(ex.cn)}</p>` : ""}
+          </div>`).join("") : '<p class="w-empty-line">这一层暂无例句。</p>'}
+      </div>`;
+    }).join("");
+    const examplesBody = `<div class="w-tabs" role="tablist">${tabs}</div>${examplePanels}`;
+
+    const familyList = data.family.length ? data.family.map((item) => `
+      <div class="w-leaf">
+        <span class="w-leaf-pos">${esc(item.pos || "词")}</span>
+        <div class="w-leaf-body">
+          <b>${esc(item.word)}</b>
+          <span>${esc(item.meaning)}${item.note ? ` · ${esc(item.note)}` : ""}</span>
+        </div>
+      </div>`).join("") : '<p class="w-empty-line">暂无派生词。</p>';
+    const familyBody = `
+      <div class="w-tree">
+        <div class="w-tree-core"><b>${esc(data.word)}</b><span>核心词 · ${esc(data.pos.join(" / ") || "word")}</span></div>
+        <div class="w-tree-list">${familyList}</div>
+      </div>`;
+
+    const parts = [];
+    data.morphology.prefixes.forEach((item) => parts.push({ part: item.part, meaning: item.meaning, kind: "prefix" }));
+    if (data.morphology.root.part) parts.push({ part: data.morphology.root.part, meaning: data.morphology.root.meaning, kind: "root" });
+    data.morphology.suffixes.forEach((item) => parts.push({ part: item.part, meaning: item.meaning, kind: "suffix" }));
+    const morphChain = parts.length
+      ? `${parts.map((part, index) => `${index ? '<span class="w-op">+</span>' : ""}<span class="w-morph-part is-${part.kind}"><b>${esc(part.part)}</b><em>${esc(part.meaning)}</em></span>`).join("")}<span class="w-op">=</span><span class="w-morph-result">${esc(data.word)}</span>`
+      : `<span class="w-morph-result">${esc(data.word)}</span>`;
+    const rootWordChips = data.rootWords.length ? data.rootWords.map((item) => `
+      <button class="w-rootword" type="button" data-word="${esc(item.word)}" title="${esc(item.note || item.meaning)}">
+        <b>${esc(item.word)}</b><span>${esc(item.pos ? item.pos + " " : "")}${esc(item.meaning)}</span>
+      </button>`).join("") : '<p class="w-empty-line">暂无同词根词。</p>';
+    const morphologyBody = `
+      <div class="w-morph-chain">${morphChain}</div>
+      ${data.morphology.explain ? `<p class="w-morph-explain">${esc(data.morphology.explain)}</p>` : ""}
+      <h4 class="w-sub-h">同词根词 <em>Same Root</em></h4>
+      <div class="w-rootwords">${rootWordChips}</div>`;
+
+    const synonyms = data.semantics.synonyms.length ? data.semantics.synonyms.map((item) => `
+      <div class="w-sem-row">
+        <b>${esc(item.word)}</b>
+        ${item.nuance ? `<span>${esc(item.nuance)}</span>` : ""}
+        ${item.example ? `<p>${esc(item.example)}</p>` : ""}
+      </div>`).join("") : '<p class="w-empty-line">暂无。</p>';
+    const antonyms = data.semantics.antonyms.length ? data.semantics.antonyms.map((item) => `
+      <div class="w-sem-row"><b>${esc(item.word)}</b>${item.note ? `<span>${esc(item.note)}</span>` : ""}</div>`).join("") : '<p class="w-empty-line">暂无。</p>';
+    const confusables = data.semantics.confusables.length ? data.semantics.confusables.map((item) => `
+      <div class="w-sem-row"><b>${esc(item.word)}</b>${item.note ? `<span>${esc(item.note)}</span>` : ""}</div>`).join("") : '<p class="w-empty-line">暂无。</p>';
+    const semanticsBody = `
+      <div class="w-sem-grid">
+        <div class="w-sem-col"><h4>近义辨析</h4>${synonyms}</div>
+        <div class="w-sem-col"><h4>反义词</h4>${antonyms}</div>
+        <div class="w-sem-col"><h4>形近易混</h4>${confusables}</div>
+      </div>`;
+
+    const themesBody = data.themes.length ? data.themes.map((theme) => `
+      <div class="w-theme">
+        <div class="w-theme-head"><span>${esc(theme.name)}</span></div>
+        <div class="w-tags">${theme.words.map((item) => `<button class="w-tag-item" type="button" data-word="${esc(item)}">${esc(item)}</button>`).join("")}</div>
+      </div>`).join("") : '<p class="w-empty-line">暂无主题聚类。</p>';
+
+    const idiomsBody = data.idioms.length ? data.idioms.map((item) => `
+      <div class="w-idiom">
+        <div class="w-idiom-head"><b>${esc(item.phrase)}</b><span>${esc(item.meaning)}</span></div>
+        ${item.example ? `<p>${esc(item.example)}</p>` : ""}
+      </div>`).join("") : '<p class="w-empty-line">暂无常用习语，避免编造。</p>';
+
+    const savedEntries = readRootbook();
+    const sameRoot = savedEntries.filter((entry) => entry.word !== data.word && listOf(entry.roots).some((root) => data.review.roots.includes(root)));
+    const reviewRoot = data.review.roots[0] || "";
+    const reviewBody = `
+      <div class="w-review-head">
+        <div>
+          <span class="card-label">ROOT REVIEW · 词根复习</span>
+          <div class="w-root-pills">${data.review.roots.map((root) => `<span class="w-root-pill">${esc(root)}</span>`).join("") || '<span class="w-root-pill">—</span>'}</div>
+          ${data.review.tip ? `<p class="w-review-tip">${esc(data.review.tip)}</p>` : ""}
+        </div>
+        <button class="btn btn-ghost" type="button" data-review-root="${esc(reviewRoot)}"${reviewRoot ? "" : " disabled"}>复习同根词${sameRoot.length ? ` (${sameRoot.length + 1})` : ""}</button>
+      </div>
+      <div class="w-review-words">
+        ${sameRoot.length ? sameRoot.map((entry) => `<button class="w-review-word" type="button" data-word="${esc(entry.word)}"><b>${esc(entry.word)}</b><span>${esc(entry.meaning)}</span></button>`).join("") : '<p class="w-empty-line">复习库里还没有同根词，先点下方同词根词展开，它们会自动加入这一组。</p>'}
+      </div>
+      <h4 class="w-sub-h">同词根词 <em>点击展开并归档</em></h4>
+      <div class="w-rootwords">${rootWordChips}</div>`;
+
+    wordOutputEl.innerHTML = `
+      <div class="word-result">
+        <div class="w-hero">
+          <span class="w-ghost" aria-hidden="true">${esc((data.word[0] || "W").toUpperCase())}</span>
+          <div class="w-hero-main">
+            <span class="card-label">WORD · 单词卡</span>
+            <div class="w-title-row">
+              <h2 class="w-word">${esc(data.word)}</h2>
+              <span class="w-pos-chips">${posChips}</span>
+            </div>
+            <div class="w-phon">${phonetics.join("")}</div>
+          </div>
+          <div class="w-hero-side">${heroSide}</div>
+          ${formsRow}
+        </div>
+
+        <div class="w-grid">
+          ${wordCard("00", "巧记拼读", "拆词发音与拼写记忆", mnemonicBody, "span2")}
+          ${wordCard("01", "基础释义", "按词性与义项排列", sensesBody, "span2")}
+          ${wordCard("02", "用法", "搭配 · 句型 · 易错提醒", usageBody, "span2")}
+          ${wordCard("03", "例句", "基础 / 真题 / 原生", examplesBody, "span2")}
+          ${wordCard("04", "词族树", "词性派生", familyBody)}
+          ${wordCard("05", "构词", "词根词缀 + 同根词", morphologyBody)}
+          ${wordCard("06", "语义扩展", "近义辨析 · 反义词 · 形近易混", semanticsBody, "span2")}
+          ${wordCard("07", "主题聚类", "同场景关联词", themesBody)}
+          ${wordCard("08", "习语", "Idioms", idiomsBody)}
+          ${wordCard("09", "词根复习", "同词根单词统一复习", reviewBody, "span2")}
+        </div>
+      </div>`;
+  }
+
+  /* ---------- 词根复习弹层 ---------- */
+  function ensureReviewModal() {
+    if ($("#wordReview")) return;
+    const modal = document.createElement("div");
+    modal.id = "wordReview";
+    modal.className = "wrm";
+    modal.hidden = true;
+    modal.innerHTML = `
+      <div class="wrm-backdrop" data-wrm-close></div>
+      <div class="wrm-panel" role="dialog" aria-modal="true" aria-labelledby="wrmRoot">
+        <div class="wrm-head">
+          <div>
+            <span class="wrm-kicker">词根复习 · Root Review</span>
+            <h3 id="wrmRoot">—</h3>
+          </div>
+          <button class="wrm-close" type="button" data-wrm-close aria-label="关闭">×</button>
+        </div>
+        <div class="wrm-stage">
+          <div class="wrm-card" id="wrmCard" role="button" tabindex="0" aria-label="翻面">
+            <div class="wrm-face wrm-front">
+              <span class="wrm-index" data-wrm-index>1 / 1</span>
+              <b class="wrm-word" id="wrmWord">—</b>
+              <span class="wrm-phon" id="wrmPhon"></span>
+              <span class="wrm-hint">点击翻面看释义</span>
+            </div>
+            <div class="wrm-face wrm-back">
+              <span class="wrm-index" data-wrm-index>1 / 1</span>
+              <b class="wrm-meaning" id="wrmMeaning">—</b>
+              <span class="wrm-breakdown" id="wrmBreakdown"></span>
+              <span class="wrm-roots" id="wrmRoots"></span>
+            </div>
+          </div>
+        </div>
+        <div class="wrm-actions">
+          <button class="btn btn-ghost" type="button" id="wrmPrev">上一个</button>
+          <button class="btn btn-primary" type="button" id="wrmFlip">翻面</button>
+          <button class="btn btn-ghost" type="button" id="wrmNext">下一个</button>
+        </div>
+        <div class="wrm-progress" id="wrmProgress">1 / 1</div>
+      </div>`;
+    document.body.appendChild(modal);
+
+    modal.addEventListener("click", (event) => {
+      if (event.target.closest("[data-wrm-close]")) closeReview();
+    });
+    $("#wrmPrev", modal).addEventListener("click", () => moveReview(-1));
+    $("#wrmNext", modal).addEventListener("click", () => moveReview(1));
+    $("#wrmFlip", modal).addEventListener("click", () => flipReview());
+    $("#wrmCard", modal).addEventListener("click", () => flipReview());
+  }
+
+  function openReview(root) {
+    ensureReviewModal();
+    const entries = readRootbook().filter((entry) => listOf(entry.roots).includes(root));
+    if (!entries.length) return;
+    reviewState = { root, items: entries, index: 0, flipped: false };
+    const modal = $("#wordReview");
+    modal.hidden = false;
+    document.body.classList.add("wrm-open");
+    $("#wrmRoot", modal).textContent = root;
+    renderReviewCard();
+    const flip = $("#wrmFlip");
+    if (flip) flip.focus();
+  }
+
+  function renderReviewCard() {
+    const modal = $("#wordReview");
+    if (!modal) return;
+    const item = reviewState.items[reviewState.index];
+    if (!item) return;
+    const card = $("#wrmCard", modal);
+    card.classList.toggle("is-flipped", reviewState.flipped);
+    $("#wrmWord", modal).textContent = item.word || "—";
+    $("#wrmPhon", modal).textContent = item.phonetic || "";
+    $("#wrmMeaning", modal).textContent = item.meaning || "—";
+    $("#wrmBreakdown", modal).textContent = item.breakdown || "";
+    $("#wrmRoots", modal).textContent = "词根：" + (listOf(item.roots).join(" / ") || "—");
+    const progress = `${reviewState.index + 1} / ${reviewState.items.length} · ${reviewState.root}`;
+    $("#wrmProgress", modal).textContent = progress;
+    $$("[data-wrm-index]", modal).forEach((el) => { el.textContent = `${reviewState.index + 1} / ${reviewState.items.length}`; });
+    const flip = $("#wrmFlip", modal);
+    if (flip) flip.textContent = reviewState.flipped ? "回到单词" : "翻面";
+  }
+
+  function moveReview(delta) {
+    if (!reviewState.items.length) return;
+    reviewState.index = (reviewState.index + delta + reviewState.items.length) % reviewState.items.length;
+    reviewState.flipped = false;
+    renderReviewCard();
+  }
+
+  function flipReview() {
+    reviewState.flipped = !reviewState.flipped;
+    renderReviewCard();
+  }
+
+  function closeReview() {
+    const modal = $("#wordReview");
+    if (modal) modal.hidden = true;
+    document.body.classList.remove("wrm-open");
+  }
+
+  /* ---------- 交互 ---------- */
+  function updateWordCount() {
+    const input = $("#wordInput");
+    const counter = $("#wordCount");
+    if (input && counter) counter.textContent = `${input.value.length} / 24`;
+  }
+
+  function setWordBusy(value) {
+    wordBusy = value;
+    const button = $("#expandBtn");
+    if (button) button.disabled = value;
+    $$(".word-chip").forEach((chip) => { chip.disabled = value; });
+  }
+
+  function switchExampleLayer(tab) {
+    const layer = tab.dataset.layer;
+    $$("[data-layer]", wordOutputEl).forEach((item) => item.classList.toggle("is-active", item.dataset.layer === layer));
+    $$("[data-panel]", wordOutputEl).forEach((panel) => { panel.hidden = panel.dataset.panel !== layer; });
+  }
+
+  async function expandWord(rawWord, options) {
+    if (wordBusy || !wordOutputEl) return;
+    const opts = options || {};
+    const word = cleanWordInput(rawWord);
+
+    if (!word) {
+      renderWordError("请输入一个英文单词。", { retry: false });
+      return;
+    }
+    if (word.length > 24) {
+      renderWordError("单词太长了，请控制在 24 个字符以内。", { retry: false });
+      return;
+    }
+    if (!/^[a-z][a-z'-]*$/.test(word)) {
+      renderWordError("只支持单个英文单词，请去掉空格、数字或中文。", { retry: false });
+      return;
+    }
+
+    lastWord = word;
+    const input = $("#wordInput");
+    if (input && input.value.trim().toLowerCase() !== word) input.value = word;
+    updateWordCount();
+
+    const cached = readWordCache()[word];
+    if (cached && !opts.force) {
+      try {
+        const data = normalizeWordResult(cached);
+        saveRootEntry(data);
+        renderWordResult(data);
+        renderRootbook();
+        if (opts.scroll !== false && window.innerWidth < 980) {
+          wordOutputEl.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+        return;
+      } catch (e) { /* 缓存损坏则重新生成 */ }
+    }
+
+    setWordBusy(true);
+    renderWordLoading(word);
+
+    try {
+      const data = await requestWordExpansion(word);
+      writeWordCache(word, data);
+      saveRootEntry(data);
+      renderWordResult(data);
+      renderRootbook();
+    } catch (err) {
+      renderWordError(describeWordError(err));
+    } finally {
+      setWordBusy(false);
+      if (window.innerWidth < 980) wordOutputEl.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+
+  function bindWordEvents() {
+    const input = $("#wordInput");
+    if (input) {
+      input.addEventListener("input", updateWordCount);
+      input.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          expandWord(input.value, { scroll: true });
+        }
+      });
+    }
+
+    const button = $("#expandBtn");
+    if (button && input) button.addEventListener("click", () => expandWord(input.value, { scroll: true }));
+
+    $$(".word-chip").forEach((chip) => {
+      chip.addEventListener("click", () => {
+        const word = chip.dataset.word || "";
+        if (input) input.value = word;
+        updateWordCount();
+        expandWord(word, { scroll: true });
+      });
+    });
+
+    if (wordOutputEl) {
+      wordOutputEl.addEventListener("click", (event) => {
+        const speakBtn = event.target.closest("[data-speak]");
+        if (speakBtn) { speakWord(speakBtn.dataset.speak, speakBtn.dataset.accent); return; }
+        const wordBtn = event.target.closest("[data-word]");
+        if (wordBtn) { expandWord(wordBtn.dataset.word, { scroll: true }); return; }
+        const tab = event.target.closest("[data-layer]");
+        if (tab) { switchExampleLayer(tab); return; }
+        const reviewBtn = event.target.closest("[data-review-root]");
+        if (reviewBtn && !reviewBtn.disabled) { openReview(reviewBtn.dataset.reviewRoot); return; }
+        if (event.target.closest("#wordRetryBtn") && lastWord) expandWord(lastWord, { force: true });
+      });
+    }
+
+    const rootbook = $("#rootbook");
+    if (rootbook) {
+      rootbook.addEventListener("click", (event) => {
+        const reviewBtn = event.target.closest("[data-review-root]");
+        if (reviewBtn) { openReview(reviewBtn.dataset.reviewRoot); return; }
+        const wordBtn = event.target.closest("[data-word]");
+        if (wordBtn) expandWord(wordBtn.dataset.word, { scroll: true });
+      });
+    }
+
+    document.addEventListener("keydown", (event) => {
+      const modal = $("#wordReview");
+      if (!modal || modal.hidden) return;
+      if (event.key === "Escape") closeReview();
+      else if (event.key === "ArrowLeft") moveReview(-1);
+      else if (event.key === "ArrowRight") moveReview(1);
+      else if (event.key === " " || event.key === "Enter") {
+        if (event.target && event.target.tagName === "BUTTON") return;
+        event.preventDefault();
+        flipReview();
+      }
+    });
+  }
+
+  function initWord() {
+    wordOutputEl = $("#wordOutput");
+    if (!wordOutputEl) return;
+    renderRootbook();
+    bindWordEvents();
+    loadWordVoices();
+    const params = new URLSearchParams(location.search);
+    const preset = params.get("w");
+    if (preset) expandWord(preset);
+  }
+
   /* ---------------- 初始化 ---------------- */
   function init() {
-    if (!output) return;
     renderModules();
+    initWord();
+    if (!output) return;
     bindEvents();
     updateCount();
     renderEmpty();
@@ -807,6 +1695,9 @@
     analyze: runAnalysis,
     loadLocal: loadLocalSentences,
     getLocal: () => localSentences,
-    render: (raw) => renderResult(normalizeResult(raw))
+    render: (raw) => renderResult(normalizeResult(raw)),
+    expandWord,
+    getRootbook: readRootbook,
+    reviewRoot: openReview
   };
 })();
