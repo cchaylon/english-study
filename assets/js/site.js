@@ -18,6 +18,58 @@
     search: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="7" cy="7" r="4.6"/><path d="m10.6 10.6 3 3" stroke-linecap="round"/></svg>'
   };
 
+  /* ---------- 全局明暗主题 ---------- */
+  function initTheme() {
+    const root = document.documentElement;
+    const btn = $("[data-theme-toggle]");
+    const media = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+
+    const readStored = () => {
+      try { return localStorage.getItem("lingua.theme"); } catch (e) { return null; }
+    };
+    const writeStored = (value) => {
+      try { localStorage.setItem("lingua.theme", value); } catch (e) { /* 忽略隐私模式限制 */ }
+    };
+
+    const isDark = () => root.getAttribute("data-theme") === "dark";
+
+    const paint = () => {
+      if (!btn) return;
+      const dark = isDark();
+      btn.setAttribute("aria-pressed", String(dark));
+      btn.setAttribute("aria-label", dark ? "切换到浅色模式" : "切换到深色模式");
+      btn.title = dark ? "切换到浅色模式" : "切换到深色模式";
+    };
+
+    const apply = (dark) => {
+      root.setAttribute("data-theme", dark ? "dark" : "light");
+      paint();
+    };
+
+    // 页面 head 里的初始化脚本通常会先写入，缺失时在这里兜底
+    if (!root.getAttribute("data-theme")) {
+      const saved = readStored();
+      apply(saved ? saved === "dark" : Boolean(media && media.matches));
+    } else {
+      paint();
+    }
+
+    if (btn) {
+      btn.addEventListener("click", () => {
+        const next = !isDark();
+        apply(next);
+        writeStored(next ? "dark" : "light");
+      });
+    }
+
+    // 未手动选择过时，跟随系统主题变化
+    if (media) {
+      const onChange = (e) => { if (!readStored()) apply(e.matches); };
+      if (media.addEventListener) media.addEventListener("change", onChange);
+      else if (media.addListener) media.addListener(onChange);
+    }
+  }
+
   /* ---------- 移动端导航 ---------- */
   function initMobileNav() {
     const toggle = $(".nav-toggle");
@@ -349,6 +401,7 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
+    initTheme();
     initMobileNav();
     initCatalog();
     initCoursePage();

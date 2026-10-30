@@ -3,6 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem("lingua.theme");
+        var dark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+      } catch (e) { /* 忽略隐私模式限制 */ }
+    })();
+  </script>
   <title>我来教你 · 句子分析 | LINGUA 英语进阶学堂</title>
   <meta name="description" content="我来教你：AI 句子分析。判断句子属于五大基本句型中的哪一种，拆解成分与从句，分色高亮主干骨架，面向托业 800 分以下学习者。">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%231e5a4a'/%3E%3Ctext x='20' y='27' font-family='Georgia' font-size='20' fill='%23f3e7cd' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
@@ -25,6 +34,10 @@
         <a href="index.html#about">关于本站</a>
       </nav>
       <div class="header-actions">
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="切换到深色模式" aria-pressed="false" title="切换到深色模式">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6" stroke-linecap="round"/></svg>
+        </button>
         <a class="search-jump" href="index.html#catalog">
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="7" cy="7" r="4.6"/><path d="m10.6 10.6 3 3" stroke-linecap="round"/></svg>
           <span>搜索课程</span><kbd>/</kbd>
