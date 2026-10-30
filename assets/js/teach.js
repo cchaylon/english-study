@@ -34,10 +34,10 @@
 8. clauses 列出主句与各从句，type 取 主句/宾语从句/定语从句/状语从句/表语从句/同位语从句/并列句。
 9. keyPoints 给 2-3 条中文学习要点，点明易错处，每条不超过 40 字。
 10. translation 给出自然、准确的中文翻译。
-11. patternAnalysis 说明句型判定：why 说明为什么是这个基本句型（结合主句的主语、谓语、宾语/表语/宾补），judge 说明判断依据，contrast 说明为何不是最容易混淆的其他句型。三条均为中文，每条不超过 60 字。
+11. patternAnalysis：用一段连贯、自然的中文说明句型判定，先说明为什么是这个基本句型（结合主句的主语、谓语、宾语/表语/宾补），再说明判断依据，最后说明为何不是最容易混淆的其他句型；内容完整，不超过 180 字。
 
 输出 JSON 结构：
-{"translation":"中文翻译","basicPattern":"主谓宾","basicFormula":"S+V+O","pattern":"SVO","patternName":"主谓宾","chunks":[{"text":"I","role":"subject","label":"主语","note":"一句话成分说明","clause":""}],"skeleton":"I ...","clauses":[{"type":"主句","text":"...","note":"..."}],"patternAnalysis":{"why":"...","judge":"...","contrast":"..."},"keyPoints":["..."]}`;
+{"translation":"中文翻译","basicPattern":"主谓宾","basicFormula":"S+V+O","pattern":"SVO","patternName":"主谓宾","chunks":[{"text":"I","role":"subject","label":"主语","note":"一句话成分说明","clause":""}],"skeleton":"I ...","clauses":[{"type":"主句","text":"...","note":"..."}],"patternAnalysis":"……","keyPoints":["..."]}`;
 
   /* ---------------- 语法角色 ------------- */
   const ROLES = {
@@ -274,14 +274,19 @@
       ? declared
       : (byCode ? byCode.name : (declared || "—"));
     const basicFormula = String(raw.basicFormula || "").trim() || (byCode ? byCode.formula : "");
-    const pa = raw.patternAnalysis && typeof raw.patternAnalysis === "object" ? raw.patternAnalysis : null;
-    const patternAnalysis = pa && (pa.why || pa.judge || pa.contrast)
-      ? {
-          why: String(pa.why || "").trim(),
-          judge: String(pa.judge || "").trim(),
-          contrast: String(pa.contrast || "").trim()
-        }
-      : null;
+    let patternAnalysis = null;
+    if (typeof raw.patternAnalysis === "string") {
+      patternAnalysis = raw.patternAnalysis.trim() || null;
+    } else if (raw.patternAnalysis && typeof raw.patternAnalysis === "object") {
+      const pa = raw.patternAnalysis;
+      patternAnalysis = (pa.why || pa.judge || pa.contrast)
+        ? {
+            why: String(pa.why || "").trim(),
+            judge: String(pa.judge || "").trim(),
+            contrast: String(pa.contrast || "").trim()
+          }
+        : null;
+    }
 
     return {
       translation: String(raw.translation || "（暂无翻译）"),
@@ -494,6 +499,21 @@
     return html;
   }
 
+  /* 把 why / judge / contrast 三点合成一段连贯说明 */
+  function patternParagraph(pa) {
+    if (!pa) return "";
+    if (typeof pa === "string") return pa.trim();
+    const cut = (text) => String(text || "").trim().replace(/[。；;]\s*$/, "");
+    const why = cut(pa.why);
+    const judge = cut(pa.judge);
+    const contrast = cut(pa.contrast);
+    let text = "";
+    if (why) text += why + "。";
+    if (judge) text += "判断时，" + judge + "。";
+    if (contrast) text += "需要区分的是，" + contrast + "。";
+    return text;
+  }
+
   function renderResult(data) {
     const usedRoles = [];
     data.chunks.forEach((chunk) => {
@@ -548,15 +568,11 @@
 
     const clauseCount = data.clauses.filter((clause) => String(clause.type).trim() !== "主句").length;
 
-    const pa = data.patternAnalysis;
-    const patternAnalysisBlock = pa
+    const patternText = patternParagraph(data.patternAnalysis);
+    const patternAnalysisBlock = patternText
       ? `<div class="pattern-analysis">
            <h3>句型解析</h3>
-           <div class="pa-grid">
-             ${pa.why ? `<div class="pa-item"><span class="pa-label">为什么是${esc(data.basicPattern || "这个句型")}</span><p>${esc(pa.why)}</p></div>` : ""}
-             ${pa.judge ? `<div class="pa-item"><span class="pa-label">怎么判断出来的</span><p>${esc(pa.judge)}</p></div>` : ""}
-             ${pa.contrast ? `<div class="pa-item"><span class="pa-label">为何不是其他句型</span><p>${esc(pa.contrast)}</p></div>` : ""}
-           </div>
+           <p class="pa-text">${esc(patternText)}</p>
          </div>`
       : "";
 
