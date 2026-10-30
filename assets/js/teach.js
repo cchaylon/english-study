@@ -421,6 +421,47 @@
       </div>`;
   }
 
+  /* ---------- 句子朗读（Web Speech API） ---------- */
+  let sentenceUtter = null;
+
+  function sentenceVoice(lang) {
+    if (!("speechSynthesis" in window)) return null;
+    const voices = window.speechSynthesis.getVoices() || [];
+    return voices.find((voice) => String(voice.lang || "").replace("_", "-") === lang)
+      || voices.find((voice) => /^en/i.test(String(voice.lang || "")));
+  }
+
+  function speakSentence(text) {
+    if (!("speechSynthesis" in window) || !text) return;
+    const synth = window.speechSynthesis;
+    const button = $("#speakSentenceBtn");
+
+    if (button && button.classList.contains("is-speaking")) {
+      synth.cancel();
+      button.classList.remove("is-speaking");
+      return;
+    }
+
+    synth.cancel();
+    const utter = new SpeechSynthesisUtterance(text);
+    const voice = sentenceVoice("en-US");
+    if (voice) utter.voice = voice;
+    utter.lang = voice ? voice.lang : "en-US";
+    utter.rate = 0.92;
+    utter.pitch = 1;
+
+    sentenceUtter = utter;
+    if (button) button.classList.add("is-speaking");
+    const done = () => {
+      if (sentenceUtter !== utter) return;
+      sentenceUtter = null;
+      if (button) button.classList.remove("is-speaking");
+    };
+    utter.onend = done;
+    utter.onerror = done;
+    synth.speak(utter);
+  }
+
   /* ---------------- 渲染：分析结果 ---------------- */
   function normalizeClauseText(value) {
     return String(value || "")
@@ -585,6 +626,10 @@
           ${data.patternName && data.patternName !== data.basicPattern ? `<span class="pattern-full">${esc(data.patternName)}</span>` : ""}
           ${clauseCount ? `<span class="clause-count">含 ${clauseCount} 个从句</span>` : ""}
           <div class="result-tools">
+            <button class="tool-btn tool-btn-speak" type="button" id="speakSentenceBtn" title="朗读原句" aria-label="朗读原句">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 6h2.4L8 3.6v8.8L5.4 10H3V6Z" stroke-linejoin="round"/><path d="M10.4 5.6a3.4 3.4 0 0 1 0 4.8M12.4 3.8a6 6 0 0 1 0 8.4" stroke-linecap="round"/></svg>
+              <span>朗读</span>
+            </button>
             <button class="tool-btn" type="button" id="focusBtn" aria-pressed="false">只看主干</button>
             <button class="tool-btn" type="button" id="reanalyzeBtn">重新解析</button>
           </div>
@@ -617,6 +662,9 @@
           </div>
         </div>
       </div>`;
+
+    const speakBtn = $("#speakSentenceBtn");
+    if (speakBtn) speakBtn.addEventListener("click", () => speakSentence(displayText(data.chunks)));
 
     const sentenceBox = $("#gramSentence");
     const focusBtn = $("#focusBtn");
