@@ -1,0 +1,5441 @@
+[
+  {
+    "text": "My brother is a doctor.",
+    "grammarPoint": "名词与代词",
+    "translation": "我哥哥是一名医生。",
+    "basicPattern": "主系表",
+    "basicFormula": "S+V+P",
+    "pattern": "SVP",
+    "patternName": "主系表",
+    "chunks": [
+      {
+        "text": "My",
+        "role": "attributive",
+        "label": "定语",
+        "note": "形容词性物主代词作定语",
+        "clause": ""
+      },
+      {
+        "text": "brother",
+        "role": "subject",
+        "label": "主语",
+        "note": "名词作主语",
+        "clause": ""
+      },
+      {
+        "text": "is",
+        "role": "verb",
+        "label": "谓语",
+        "note": "系动词",
+        "clause": ""
+      },
+      {
+        "text": "a doctor.",
+        "role": "predicative",
+        "label": "表语",
+        "note": "不定冠词 + 名词作表语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "My brother is a doctor",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "My brother is a doctor.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "系动词 be 后面接表语，说明主语身份。",
+      "单数可数名词前要加不定冠词 a/an。"
+    ]
+  },
+  {
+    "text": "The children are playing in the garden.",
+    "grammarPoint": "名词与代词",
+    "translation": "孩子们正在花园里玩。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV",
+    "patternName": "主谓（带地点状语）",
+    "chunks": [
+      {
+        "text": "The children",
+        "role": "subject",
+        "label": "主语",
+        "note": "定冠词 + 名词复数作主语",
+        "clause": ""
+      },
+      {
+        "text": "are playing",
+        "role": "verb",
+        "label": "谓语",
+        "note": "现在进行时",
+        "clause": ""
+      },
+      {
+        "text": "in the garden.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "介词短语作地点状语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "The children are playing",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "The children are playing in the garden.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "the 用于双方已知或特指的名词。",
+      "现在进行时表示此刻正在发生的动作。"
+    ]
+  },
+  {
+    "text": "There is some milk in the fridge.",
+    "grammarPoint": "名词与代词",
+    "translation": "冰箱里有一些牛奶。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV",
+    "patternName": "主谓（There be 倒装）",
+    "chunks": [
+      {
+        "text": "There",
+        "role": "other",
+        "label": "其他",
+        "note": "There be 句型的引导词，无实义",
+        "clause": ""
+      },
+      {
+        "text": "is",
+        "role": "verb",
+        "label": "谓语",
+        "note": "系动词，与真正主语保持一致",
+        "clause": ""
+      },
+      {
+        "text": "some milk",
+        "role": "subject",
+        "label": "主语",
+        "note": "真正主语，不可数名词",
+        "clause": ""
+      },
+      {
+        "text": "in the fridge.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "地点状语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "There is some milk",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "There is some milk in the fridge.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "There be 句型表示“某处存在某物”，主语在 be 之后。",
+      "milk 是不可数名词，用 is 而不是 are。"
+    ]
+  },
+  {
+    "text": "These shoes are too expensive for me.",
+    "grammarPoint": "名词与代词",
+    "translation": "这双鞋对我来说太贵了。",
+    "basicPattern": "主系表",
+    "basicFormula": "S+V+P",
+    "pattern": "SVP",
+    "patternName": "主系表",
+    "chunks": [
+      {
+        "text": "These shoes",
+        "role": "subject",
+        "label": "主语",
+        "note": "指示代词 + 名词复数作主语",
+        "clause": ""
+      },
+      {
+        "text": "are",
+        "role": "verb",
+        "label": "谓语",
+        "note": "系动词",
+        "clause": ""
+      },
+      {
+        "text": "too expensive",
+        "role": "predicative",
+        "label": "表语",
+        "note": "too 修饰形容词，作表语",
+        "clause": ""
+      },
+      {
+        "text": "for me.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "对象状语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "These shoes are expensive",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "These shoes are too expensive for me.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "these 指代近处的复数名词。",
+      "too + 形容词 + for sb. 表示“对某人来说太……”。"
+    ]
+  },
+  {
+    "text": "Each student has a new textbook.",
+    "grammarPoint": "名词与代词",
+    "translation": "每个学生都有一本新课本。",
+    "basicPattern": "主谓宾",
+    "basicFormula": "S+V+O",
+    "pattern": "SVO",
+    "patternName": "主谓宾",
+    "chunks": [
+      {
+        "text": "Each",
+        "role": "attributive",
+        "label": "定语",
+        "note": "each 作定语，后接单数可数名词",
+        "clause": ""
+      },
+      {
+        "text": "student",
+        "role": "subject",
+        "label": "主语",
+        "note": "单数名词作主语",
+        "clause": ""
+      },
+      {
+        "text": "has",
+        "role": "verb",
+        "label": "谓语",
+        "note": "一般现在时，第三人称单数",
+        "clause": ""
+      },
+      {
+        "text": "a new textbook.",
+        "role": "object",
+        "label": "宾语",
+        "note": "冠词 + 形容词 + 名词作宾语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "Each student has a textbook",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "Each student has a new textbook.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "each + 单数名词作主语时，谓语用单数。",
+      "a 用于单数可数名词前，表示“一本”。"
+    ]
+  },
+  {
+    "text": "She bought herself a birthday present.",
+    "grammarPoint": "名词与代词",
+    "translation": "她给自己买了一份生日礼物。",
+    "basicPattern": "主谓双宾",
+    "basicFormula": "S+V+O+O",
+    "pattern": "SVOO",
+    "patternName": "主谓双宾",
+    "chunks": [
+      {
+        "text": "She",
+        "role": "subject",
+        "label": "主语",
+        "note": "人称代词主格作主语",
+        "clause": ""
+      },
+      {
+        "text": "bought",
+        "role": "verb",
+        "label": "谓语",
+        "note": "一般过去时",
+        "clause": ""
+      },
+      {
+        "text": "herself",
+        "role": "object",
+        "label": "宾语",
+        "note": "反身代词作间接宾语",
+        "clause": ""
+      },
+      {
+        "text": "a birthday present.",
+        "role": "object",
+        "label": "宾语",
+        "note": "直接宾语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "She bought herself a present",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "She bought herself a birthday present.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "buy sb. sth. 是典型的双宾语结构。",
+      "主语和宾语指同一人时，宾语用反身代词。"
+    ]
+  },
+  {
+    "text": "The information you gave me was very useful.",
+    "grammarPoint": "名词与代词",
+    "translation": "你给我的信息非常有用。",
+    "basicPattern": "主系表",
+    "basicFormula": "S+V+P",
+    "pattern": "SVP+定语从句",
+    "patternName": "主系表+定语从句",
+    "chunks": [
+      {
+        "text": "The information",
+        "role": "subject",
+        "label": "主语",
+        "note": "不可数名词作主语",
+        "clause": ""
+      },
+      {
+        "text": "you",
+        "role": "subject",
+        "label": "主语",
+        "note": "定语从句主语，关系代词省略",
+        "clause": "定语从句"
+      },
+      {
+        "text": "gave",
+        "role": "verb",
+        "label": "谓语",
+        "note": "定语从句谓语",
+        "clause": "定语从句"
+      },
+      {
+        "text": "me",
+        "role": "object",
+        "label": "宾语",
+        "note": "定语从句宾语",
+        "clause": "定语从句"
+      },
+      {
+        "text": "was",
+        "role": "verb",
+        "label": "谓语",
+        "note": "主句系动词",
+        "clause": ""
+      },
+      {
+        "text": "very useful.",
+        "role": "predicative",
+        "label": "表语",
+        "note": "形容词作表语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "The information was useful",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "The information was very useful",
+        "note": ""
+      },
+      {
+        "type": "定语从句",
+        "text": "you gave me",
+        "note": "修饰 information，关系代词 which/that 作宾语已省略"
+      }
+    ],
+    "keyPoints": [
+      "information 是不可数名词，没有复数形式。",
+      "定语从句修饰先行词 information，关系代词在从句中作宾语时可省略。"
+    ]
+  },
+  {
+    "text": "Neither of the answers is correct.",
+    "grammarPoint": "名词与代词",
+    "translation": "两个答案都不正确。",
+    "basicPattern": "主系表",
+    "basicFormula": "S+V+P",
+    "pattern": "SVP",
+    "patternName": "主系表",
+    "chunks": [
+      {
+        "text": "Neither of the answers",
+        "role": "subject",
+        "label": "主语",
+        "note": "neither of + 复数名词作主语",
+        "clause": ""
+      },
+      {
+        "text": "is",
+        "role": "verb",
+        "label": "谓语",
+        "note": "系动词，谓语用单数",
+        "clause": ""
+      },
+      {
+        "text": "correct.",
+        "role": "predicative",
+        "label": "表语",
+        "note": "形容词作表语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "Neither of the answers is correct",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "Neither of the answers is correct.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "neither of 表示“两者都不”，作主语时谓语用单数。",
+      "correct 作表语，说明主语的性质。"
+    ]
+  },
+  {
+    "text": "A few of my friends live abroad.",
+    "grammarPoint": "名词与代词",
+    "translation": "我有几个朋友住在国外。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV",
+    "patternName": "主谓",
+    "chunks": [
+      {
+        "text": "A few of my friends",
+        "role": "subject",
+        "label": "主语",
+        "note": "a few of + 复数名词作主语",
+        "clause": ""
+      },
+      {
+        "text": "live",
+        "role": "verb",
+        "label": "谓语",
+        "note": "一般现在时，主语为复数",
+        "clause": ""
+      },
+      {
+        "text": "abroad.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "地点副词作状语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "A few of my friends live abroad",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "A few of my friends live abroad.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "a few of 后接复数名词，谓语用复数。",
+      "abroad 是副词，前面不加介词。"
+    ]
+  },
+  {
+    "text": "The police are looking for the missing boy.",
+    "grammarPoint": "名词与代词",
+    "translation": "警察正在寻找那个失踪的男孩。",
+    "basicPattern": "主谓宾",
+    "basicFormula": "S+V+O",
+    "pattern": "SVO",
+    "patternName": "主谓宾",
+    "chunks": [
+      {
+        "text": "The police",
+        "role": "subject",
+        "label": "主语",
+        "note": "集合名词，视为复数",
+        "clause": ""
+      },
+      {
+        "text": "are looking for",
+        "role": "verb",
+        "label": "谓语",
+        "note": "现在进行时 + 短语动词",
+        "clause": ""
+      },
+      {
+        "text": "the missing boy.",
+        "role": "object",
+        "label": "宾语",
+        "note": "the + 现在分词作定语 + 名词",
+        "clause": ""
+      }
+    ],
+    "skeleton": "The police are looking for the boy",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "The police are looking for the missing boy.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "police 作主语时谓语通常用复数。",
+      "missing 是现在分词作定语，表示“失踪的”。"
+    ]
+  },
+  {
+    "text": "He can swim very fast.",
+    "grammarPoint": "动词与情态动词",
+    "translation": "他能游得很快。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV",
+    "patternName": "主谓",
+    "chunks": [
+      {
+        "text": "He",
+        "role": "subject",
+        "label": "主语",
+        "note": "人称代词主格作主语",
+        "clause": ""
+      },
+      {
+        "text": "can swim",
+        "role": "verb",
+        "label": "谓语",
+        "note": "情态动词 + 动词原形",
+        "clause": ""
+      },
+      {
+        "text": "very fast.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "程度副词修饰方式副词作状语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "He can swim",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "He can swim very fast.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "情态动词后必须接动词原形。",
+      "fast 在这里是副词，修饰 swim。"
+    ]
+  },
+  {
+    "text": "You must finish your homework before dinner.",
+    "grammarPoint": "动词与情态动词",
+    "translation": "你必须在晚饭前完成作业。",
+    "basicPattern": "主谓宾",
+    "basicFormula": "S+V+O",
+    "pattern": "SVO",
+    "patternName": "主谓宾",
+    "chunks": [
+      {
+        "text": "You",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "must finish",
+        "role": "verb",
+        "label": "谓语",
+        "note": "情态动词 must + 动词原形",
+        "clause": ""
+      },
+      {
+        "text": "your homework",
+        "role": "object",
+        "label": "宾语",
+        "note": "物主代词 + 名词作宾语",
+        "clause": ""
+      },
+      {
+        "text": "before dinner.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "介词短语作时间状语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "You must finish your homework",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "You must finish your homework before dinner.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "must 表示“必须”，后接动词原形。",
+      "before + 名词表示“在……之前”。"
+    ]
+  },
+  {
+    "text": "She has to work overtime tonight.",
+    "grammarPoint": "动词与情态动词",
+    "translation": "她今晚不得不加班。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV",
+    "patternName": "主谓",
+    "chunks": [
+      {
+        "text": "She",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "has to work",
+        "role": "verb",
+        "label": "谓语",
+        "note": "have to 表示客观需要，后接动词原形",
+        "clause": ""
+      },
+      {
+        "text": "overtime",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "副词作方式状语",
+        "clause": ""
+      },
+      {
+        "text": "tonight.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "时间状语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "She has to work overtime",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "She has to work overtime tonight.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "has to 是 have to 的第三人称单数形式，表示客观必要。",
+      "overtime 作副词，意为“加班地”。"
+    ]
+  },
+  {
+    "text": "We should protect the environment.",
+    "grammarPoint": "动词与情态动词",
+    "translation": "我们应该保护环境。",
+    "basicPattern": "主谓宾",
+    "basicFormula": "S+V+O",
+    "pattern": "SVO",
+    "patternName": "主谓宾",
+    "chunks": [
+      {
+        "text": "We",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "should protect",
+        "role": "verb",
+        "label": "谓语",
+        "note": "情态动词 should + 动词原形",
+        "clause": ""
+      },
+      {
+        "text": "the environment.",
+        "role": "object",
+        "label": "宾语",
+        "note": "定冠词 + 名词作宾语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "We should protect the environment",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "We should protect the environment.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "should 表示建议或义务。",
+      "the environment 指我们共同的生活环境。"
+    ]
+  },
+  {
+    "text": "They might arrive late because of the rain.",
+    "grammarPoint": "动词与情态动词",
+    "translation": "因为下雨，他们可能会迟到。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV",
+    "patternName": "主谓",
+    "chunks": [
+      {
+        "text": "They",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "might arrive",
+        "role": "verb",
+        "label": "谓语",
+        "note": "情态动词 might + 动词原形",
+        "clause": ""
+      },
+      {
+        "text": "late",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "副词作状语",
+        "clause": ""
+      },
+      {
+        "text": "because of the rain.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "介词短语作原因状语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "They might arrive late",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "They might arrive late because of the rain.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "might 表示可能性较低。",
+      "because of 是介词短语，后接名词；because 后接句子。"
+    ]
+  },
+  {
+    "text": "I used to live in Shanghai.",
+    "grammarPoint": "动词与情态动词",
+    "translation": "我过去常住在上海。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV",
+    "patternName": "主谓",
+    "chunks": [
+      {
+        "text": "I",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "used to live",
+        "role": "verb",
+        "label": "谓语",
+        "note": "used to + 动词原形，表示过去的习惯",
+        "clause": ""
+      },
+      {
+        "text": "in Shanghai.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "地点状语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "I used to live in Shanghai",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "I used to live in Shanghai.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "used to do 表示过去常常做，现在不了。",
+      "注意区分 be used to doing（习惯于）。"
+    ]
+  },
+  {
+    "text": "You had better see a doctor.",
+    "grammarPoint": "动词与情态动词",
+    "translation": "你最好去看医生。",
+    "basicPattern": "主谓宾",
+    "basicFormula": "S+V+O",
+    "pattern": "SVO",
+    "patternName": "主谓宾",
+    "chunks": [
+      {
+        "text": "You",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "had better see",
+        "role": "verb",
+        "label": "谓语",
+        "note": "had better + 动词原形，表示建议",
+        "clause": ""
+      },
+      {
+        "text": "a doctor.",
+        "role": "object",
+        "label": "宾语",
+        "note": "不定冠词 + 名词作宾语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "You had better see a doctor",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "You had better see a doctor.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "had better 后接动词原形，否定式为 had better not do。",
+      "see a doctor 是固定搭配，意为“看医生”。"
+    ]
+  },
+  {
+    "text": "He seems to know the answer.",
+    "grammarPoint": "动词与情态动词",
+    "translation": "他似乎知道答案。",
+    "basicPattern": "主系表",
+    "basicFormula": "S+V+P",
+    "pattern": "SVP",
+    "patternName": "主系表",
+    "chunks": [
+      {
+        "text": "He",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "seems",
+        "role": "verb",
+        "label": "谓语",
+        "note": "系动词 seem",
+        "clause": ""
+      },
+      {
+        "text": "to know the answer.",
+        "role": "predicative",
+        "label": "表语",
+        "note": "不定式短语作表语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "He seems to know the answer",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "He seems to know the answer.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "seem 是系动词，可接不定式作表语。",
+      "seem to do 表示“似乎做某事”。"
+    ]
+  },
+  {
+    "text": "The soup tastes delicious.",
+    "grammarPoint": "动词与情态动词",
+    "translation": "这汤尝起来很美味。",
+    "basicPattern": "主系表",
+    "basicFormula": "S+V+P",
+    "pattern": "SVP",
+    "patternName": "主系表",
+    "chunks": [
+      {
+        "text": "The soup",
+        "role": "subject",
+        "label": "主语",
+        "note": "定冠词 + 不可数名词作主语",
+        "clause": ""
+      },
+      {
+        "text": "tastes",
+        "role": "verb",
+        "label": "谓语",
+        "note": "感官系动词",
+        "clause": ""
+      },
+      {
+        "text": "delicious.",
+        "role": "predicative",
+        "label": "表语",
+        "note": "形容词作表语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "The soup tastes delicious",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "The soup tastes delicious.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "taste 作系动词，后接形容词而不是副词。",
+      "类似用法的还有 smell、sound、feel。"
+    ]
+  },
+  {
+    "text": "Please turn off the lights.",
+    "grammarPoint": "动词与情态动词",
+    "translation": "请把灯关掉。",
+    "basicPattern": "主谓宾",
+    "basicFormula": "S+V+O",
+    "pattern": "SVO",
+    "patternName": "主谓宾（祈使句）",
+    "chunks": [
+      {
+        "text": "Please",
+        "role": "other",
+        "label": "其他",
+        "note": "礼貌用语，不影响句子成分",
+        "clause": ""
+      },
+      {
+        "text": "turn off",
+        "role": "verb",
+        "label": "谓语",
+        "note": "祈使句谓语，短语动词",
+        "clause": ""
+      },
+      {
+        "text": "the lights.",
+        "role": "object",
+        "label": "宾语",
+        "note": "定冠词 + 名词复数作宾语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "Turn off the lights",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "Please turn off the lights.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "祈使句以动词原形开头，主语 you 通常省略。",
+      "turn off 是“动词 + 副词”的短语动词。"
+    ]
+  },
+  {
+    "text": "This is the most interesting book I have ever read.",
+    "grammarPoint": "形容词、副词、数词、冠词",
+    "translation": "这是我读过的最有趣的书。",
+    "basicPattern": "主系表",
+    "basicFormula": "S+V+P",
+    "pattern": "SVP+定语从句",
+    "patternName": "主系表+定语从句",
+    "chunks": [
+      {
+        "text": "This",
+        "role": "subject",
+        "label": "主语",
+        "note": "指示代词作主语",
+        "clause": ""
+      },
+      {
+        "text": "is",
+        "role": "verb",
+        "label": "谓语",
+        "note": "系动词",
+        "clause": ""
+      },
+      {
+        "text": "the most interesting book",
+        "role": "predicative",
+        "label": "表语",
+        "note": "the + 最高级 + 名词作表语",
+        "clause": ""
+      },
+      {
+        "text": "I",
+        "role": "subject",
+        "label": "主语",
+        "note": "定语从句主语，关系代词省略",
+        "clause": "定语从句"
+      },
+      {
+        "text": "have ever read.",
+        "role": "verb",
+        "label": "谓语",
+        "note": "定语从句谓语，现在完成时",
+        "clause": "定语从句"
+      }
+    ],
+    "skeleton": "This is the most interesting book",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "This is the most interesting book",
+        "note": ""
+      },
+      {
+        "type": "定语从句",
+        "text": "I have ever read",
+        "note": "修饰 book，关系代词 that/which 作宾语已省略"
+      }
+    ],
+    "keyPoints": [
+      "形容词最高级前通常加 the。",
+      "先行词在定语从句中作宾语时，关系代词可以省略。"
+    ]
+  },
+  {
+    "text": "He runs faster than his brother.",
+    "grammarPoint": "形容词、副词、数词、冠词",
+    "translation": "他跑得比他哥哥快。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV",
+    "patternName": "主谓",
+    "chunks": [
+      {
+        "text": "He",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "runs",
+        "role": "verb",
+        "label": "谓语",
+        "note": "一般现在时，不及物动词",
+        "clause": ""
+      },
+      {
+        "text": "faster",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "比较级副词作状语",
+        "clause": ""
+      },
+      {
+        "text": "than his brother.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "than 引导比较状语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "He runs faster",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "He runs faster than his brother.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "faster 是副词 fast 的比较级。",
+      "比较对象要一致：他和他哥哥比。"
+    ]
+  },
+  {
+    "text": "The weather is getting warmer and warmer.",
+    "grammarPoint": "形容词、副词、数词、冠词",
+    "translation": "天气越来越暖和了。",
+    "basicPattern": "主系表",
+    "basicFormula": "S+V+P",
+    "pattern": "SVP",
+    "patternName": "主系表",
+    "chunks": [
+      {
+        "text": "The weather",
+        "role": "subject",
+        "label": "主语",
+        "note": "定冠词 + 不可数名词作主语",
+        "clause": ""
+      },
+      {
+        "text": "is getting",
+        "role": "verb",
+        "label": "谓语",
+        "note": "系动词 get 的进行时，表示状态变化",
+        "clause": ""
+      },
+      {
+        "text": "warmer and warmer.",
+        "role": "predicative",
+        "label": "表语",
+        "note": "比较级叠用，表示“越来越……”",
+        "clause": ""
+      }
+    ],
+    "skeleton": "The weather is getting warmer",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "The weather is getting warmer and warmer.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "get 作系动词，后接形容词作表语。",
+      "比较级 + and + 比较级表示程度递增。"
+    ]
+  },
+  {
+    "text": "She is as tall as her mother.",
+    "grammarPoint": "形容词、副词、数词、冠词",
+    "translation": "她和她妈妈一样高。",
+    "basicPattern": "主系表",
+    "basicFormula": "S+V+P",
+    "pattern": "SVP",
+    "patternName": "主系表",
+    "chunks": [
+      {
+        "text": "She",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "is",
+        "role": "verb",
+        "label": "谓语",
+        "note": "系动词",
+        "clause": ""
+      },
+      {
+        "text": "as tall as her mother.",
+        "role": "predicative",
+        "label": "表语",
+        "note": "as + 形容词原级 + as 同级比较",
+        "clause": ""
+      }
+    ],
+    "skeleton": "She is as tall as her mother",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "She is as tall as her mother.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "as ... as 中间用形容词或副词原级。",
+      "同级比较表示“和……一样”。"
+    ]
+  },
+  {
+    "text": "There are twenty students in the classroom.",
+    "grammarPoint": "形容词、副词、数词、冠词",
+    "translation": "教室里有二十个学生。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV",
+    "patternName": "主谓（There be 倒装）",
+    "chunks": [
+      {
+        "text": "There",
+        "role": "other",
+        "label": "其他",
+        "note": "There be 句型的引导词，无实义",
+        "clause": ""
+      },
+      {
+        "text": "are",
+        "role": "verb",
+        "label": "谓语",
+        "note": "系动词，与复数主语一致",
+        "clause": ""
+      },
+      {
+        "text": "twenty students",
+        "role": "subject",
+        "label": "主语",
+        "note": "数词 + 名词复数作真正主语",
+        "clause": ""
+      },
+      {
+        "text": "in the classroom.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "地点状语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "There are twenty students",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "There are twenty students in the classroom.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "twenty 是基数词，后接可数名词复数。",
+      "There be 句型中 be 与后面的真正主语保持一致。"
+    ]
+  },
+  {
+    "text": "I have two hundred books.",
+    "grammarPoint": "形容词、副词、数词、冠词",
+    "translation": "我有两百本书。",
+    "basicPattern": "主谓宾",
+    "basicFormula": "S+V+O",
+    "pattern": "SVO",
+    "patternName": "主谓宾",
+    "chunks": [
+      {
+        "text": "I",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "have",
+        "role": "verb",
+        "label": "谓语",
+        "note": "一般现在时，表示拥有",
+        "clause": ""
+      },
+      {
+        "text": "two hundred books.",
+        "role": "object",
+        "label": "宾语",
+        "note": "数词 + hundred + 名词复数作宾语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "I have two hundred books",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "I have two hundred books.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "hundred 前有具体数词时，用单数形式。",
+      "hundreds of 表示“成百上千的”，要用复数。"
+    ]
+  },
+  {
+    "text": "He arrived on the third of May.",
+    "grammarPoint": "形容词、副词、数词、冠词",
+    "translation": "他在五月三日到达。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV",
+    "patternName": "主谓",
+    "chunks": [
+      {
+        "text": "He",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "arrived",
+        "role": "verb",
+        "label": "谓语",
+        "note": "一般过去时，不及物动词",
+        "clause": ""
+      },
+      {
+        "text": "on the third of May.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "序数词表日期，作时间状语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "He arrived on the third of May",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "He arrived on the third of May.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "third 是序数词，表示“第三”。",
+      "具体某一天前用介词 on。"
+    ]
+  },
+  {
+    "text": "The sun rises in the east.",
+    "grammarPoint": "形容词、副词、数词、冠词",
+    "translation": "太阳从东方升起。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV",
+    "patternName": "主谓",
+    "chunks": [
+      {
+        "text": "The sun",
+        "role": "subject",
+        "label": "主语",
+        "note": "定冠词 + 独一无二的事物作主语",
+        "clause": ""
+      },
+      {
+        "text": "rises",
+        "role": "verb",
+        "label": "谓语",
+        "note": "一般现在时，第三人称单数",
+        "clause": ""
+      },
+      {
+        "text": "in the east.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "介词短语作地点状语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "The sun rises in the east",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "The sun rises in the east.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "世界上独一无二的事物前用定冠词 the。",
+      "表示客观规律用一般现在时。"
+    ]
+  },
+  {
+    "text": "An apple a day keeps the doctor away.",
+    "grammarPoint": "形容词、副词、数词、冠词",
+    "translation": "一天一苹果，医生远离我。",
+    "basicPattern": "主谓宾宾补",
+    "basicFormula": "S+V+O+C",
+    "pattern": "SVOC",
+    "patternName": "主谓宾宾补",
+    "chunks": [
+      {
+        "text": "An apple a day",
+        "role": "subject",
+        "label": "主语",
+        "note": "不定冠词 + 名词作主语",
+        "clause": ""
+      },
+      {
+        "text": "keeps",
+        "role": "verb",
+        "label": "谓语",
+        "note": "一般现在时，第三人称单数",
+        "clause": ""
+      },
+      {
+        "text": "the doctor",
+        "role": "object",
+        "label": "宾语",
+        "note": "定冠词 + 名词作宾语",
+        "clause": ""
+      },
+      {
+        "text": "away.",
+        "role": "complement",
+        "label": "宾补",
+        "note": "副词作宾语补足语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "An apple a day keeps the doctor away",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "An apple a day keeps the doctor away.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "keep + 宾语 + 形容词/副词表示“使……保持……”。",
+      "主语 an apple a day 视为单数，谓语用 keeps。"
+    ]
+  },
+  {
+    "text": "He speaks English very well.",
+    "grammarPoint": "形容词、副词、数词、冠词",
+    "translation": "他英语说得非常好。",
+    "basicPattern": "主谓宾",
+    "basicFormula": "S+V+O",
+    "pattern": "SVO",
+    "patternName": "主谓宾",
+    "chunks": [
+      {
+        "text": "He",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "speaks",
+        "role": "verb",
+        "label": "谓语",
+        "note": "一般现在时，第三人称单数",
+        "clause": ""
+      },
+      {
+        "text": "English",
+        "role": "object",
+        "label": "宾语",
+        "note": "专有名词作宾语",
+        "clause": ""
+      },
+      {
+        "text": "very well.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "程度副词修饰方式副词",
+        "clause": ""
+      }
+    ],
+    "skeleton": "He speaks English well",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "He speaks English very well.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "well 是副词，修饰动词 speak；good 是形容词。",
+      "very 修饰副词 well，作程度状语。"
+    ]
+  },
+  {
+    "text": "The cat is under the table.",
+    "grammarPoint": "介词、连词、感叹词",
+    "translation": "猫在桌子下面。",
+    "basicPattern": "主系表",
+    "basicFormula": "S+V+P",
+    "pattern": "SVP",
+    "patternName": "主系表",
+    "chunks": [
+      {
+        "text": "The cat",
+        "role": "subject",
+        "label": "主语",
+        "note": "定冠词 + 名词作主语",
+        "clause": ""
+      },
+      {
+        "text": "is",
+        "role": "verb",
+        "label": "谓语",
+        "note": "系动词",
+        "clause": ""
+      },
+      {
+        "text": "under the table.",
+        "role": "predicative",
+        "label": "表语",
+        "note": "介词短语作表语，表位置",
+        "clause": ""
+      }
+    ],
+    "skeleton": "The cat is under the table",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "The cat is under the table.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "under 表示“在……下面”。",
+      "介词短语作表语，说明主语的位置。"
+    ]
+  },
+  {
+    "text": "We will meet at the station at six.",
+    "grammarPoint": "介词、连词、感叹词",
+    "translation": "我们六点在车站见面。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV",
+    "patternName": "主谓",
+    "chunks": [
+      {
+        "text": "We",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "will meet",
+        "role": "verb",
+        "label": "谓语",
+        "note": "一般将来时",
+        "clause": ""
+      },
+      {
+        "text": "at the station",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "地点状语",
+        "clause": ""
+      },
+      {
+        "text": "at six.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "时间状语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "We will meet at the station",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "We will meet at the station at six.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "at 用于具体地点和具体时刻。",
+      "两个介词短语分别表示地点和时间。"
+    ]
+  },
+  {
+    "text": "He is good at playing basketball.",
+    "grammarPoint": "介词、连词、感叹词",
+    "translation": "他擅长打篮球。",
+    "basicPattern": "主系表",
+    "basicFormula": "S+V+P",
+    "pattern": "SVP",
+    "patternName": "主系表",
+    "chunks": [
+      {
+        "text": "He",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "is",
+        "role": "verb",
+        "label": "谓语",
+        "note": "系动词",
+        "clause": ""
+      },
+      {
+        "text": "good at playing basketball.",
+        "role": "predicative",
+        "label": "表语",
+        "note": "be good at + 动名词，作表语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "He is good at playing basketball",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "He is good at playing basketball.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "be good at 表示“擅长”，at 是介词。",
+      "介词后面的动词要用动名词形式。"
+    ]
+  },
+  {
+    "text": "Although it was raining, they went out.",
+    "grammarPoint": "介词、连词、感叹词",
+    "translation": "虽然当时在下雨，他们还是出去了。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV+状语从句",
+    "patternName": "主谓+让步状语从句",
+    "chunks": [
+      {
+        "text": "Although",
+        "role": "conjunction",
+        "label": "连词",
+        "note": "让步状语从句引导词",
+        "clause": ""
+      },
+      {
+        "text": "it",
+        "role": "subject",
+        "label": "主语",
+        "note": "状语从句主语",
+        "clause": "状语从句"
+      },
+      {
+        "text": "was raining,",
+        "role": "verb",
+        "label": "谓语",
+        "note": "状语从句谓语，过去进行时",
+        "clause": "状语从句"
+      },
+      {
+        "text": "they",
+        "role": "subject",
+        "label": "主语",
+        "note": "主句主语",
+        "clause": ""
+      },
+      {
+        "text": "went out.",
+        "role": "verb",
+        "label": "谓语",
+        "note": "主句谓语，短语动词",
+        "clause": ""
+      }
+    ],
+    "skeleton": "they went out",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "they went out",
+        "note": ""
+      },
+      {
+        "type": "让步状语从句",
+        "text": "Although it was raining",
+        "note": "although 不能与 but 连用"
+      }
+    ],
+    "keyPoints": [
+      "although 引导让步状语从句，意为“虽然”。",
+      "英语中 although 和 but 不能同时使用。"
+    ]
+  },
+  {
+    "text": "Because he was ill, he stayed at home.",
+    "grammarPoint": "介词、连词、感叹词",
+    "translation": "因为他病了，所以他待在家里。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV+状语从句",
+    "patternName": "主谓+原因状语从句",
+    "chunks": [
+      {
+        "text": "Because",
+        "role": "conjunction",
+        "label": "连词",
+        "note": "原因状语从句引导词",
+        "clause": ""
+      },
+      {
+        "text": "he",
+        "role": "subject",
+        "label": "主语",
+        "note": "状语从句主语",
+        "clause": "状语从句"
+      },
+      {
+        "text": "was",
+        "role": "verb",
+        "label": "谓语",
+        "note": "状语从句系动词",
+        "clause": "状语从句"
+      },
+      {
+        "text": "ill,",
+        "role": "predicative",
+        "label": "表语",
+        "note": "状语从句表语",
+        "clause": "状语从句"
+      },
+      {
+        "text": "he",
+        "role": "subject",
+        "label": "主语",
+        "note": "主句主语",
+        "clause": ""
+      },
+      {
+        "text": "stayed",
+        "role": "verb",
+        "label": "谓语",
+        "note": "主句谓语",
+        "clause": ""
+      },
+      {
+        "text": "at home.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "地点状语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "he stayed at home",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "he stayed at home",
+        "note": ""
+      },
+      {
+        "type": "原因状语从句",
+        "text": "Because he was ill",
+        "note": "because 回答 why"
+      }
+    ],
+    "keyPoints": [
+      "because 引导原因状语从句，语气最强。",
+      "英语中 because 和 so 不能同时使用。"
+    ]
+  },
+  {
+    "text": "Both Tom and Jerry are my friends.",
+    "grammarPoint": "介词、连词、感叹词",
+    "translation": "汤姆和杰瑞都是我的朋友。",
+    "basicPattern": "主系表",
+    "basicFormula": "S+V+P",
+    "pattern": "SVP",
+    "patternName": "主系表",
+    "chunks": [
+      {
+        "text": "Both Tom and Jerry",
+        "role": "subject",
+        "label": "主语",
+        "note": "both ... and ... 连接并列主语，谓语用复数",
+        "clause": ""
+      },
+      {
+        "text": "are",
+        "role": "verb",
+        "label": "谓语",
+        "note": "系动词，复数",
+        "clause": ""
+      },
+      {
+        "text": "my friends.",
+        "role": "predicative",
+        "label": "表语",
+        "note": "名词短语作表语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "Both Tom and Jerry are my friends",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "Both Tom and Jerry are my friends.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "both ... and ... 连接两个主语时，谓语用复数。",
+      "并列连词连接的两个成分在句中作用相同。"
+    ]
+  },
+  {
+    "text": "Either you or he is wrong.",
+    "grammarPoint": "介词、连词、感叹词",
+    "translation": "要么你错，要么他错。",
+    "basicPattern": "主系表",
+    "basicFormula": "S+V+P",
+    "pattern": "SVP",
+    "patternName": "主系表",
+    "chunks": [
+      {
+        "text": "Either you or he",
+        "role": "subject",
+        "label": "主语",
+        "note": "either ... or ... 连接并列主语",
+        "clause": ""
+      },
+      {
+        "text": "is",
+        "role": "verb",
+        "label": "谓语",
+        "note": "谓语与最近的主语 he 保持一致",
+        "clause": ""
+      },
+      {
+        "text": "wrong.",
+        "role": "predicative",
+        "label": "表语",
+        "note": "形容词作表语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "Either you or he is wrong",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "Either you or he is wrong.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "either ... or ... 表示“要么……要么……”。",
+      "连接并列主语时，谓语遵循就近原则。"
+    ]
+  },
+  {
+    "text": "Not only did she sing, but she also danced.",
+    "grammarPoint": "介词、连词、感叹词",
+    "translation": "她不仅唱了歌，还跳了舞。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV+并列句",
+    "patternName": "主谓+并列句（倒装）",
+    "chunks": [
+      {
+        "text": "Not only",
+        "role": "conjunction",
+        "label": "连词",
+        "note": "否定词置于句首，引起部分倒装",
+        "clause": ""
+      },
+      {
+        "text": "did",
+        "role": "verb",
+        "label": "谓语",
+        "note": "助动词提前",
+        "clause": ""
+      },
+      {
+        "text": "she",
+        "role": "subject",
+        "label": "主语",
+        "note": "第一分句主语",
+        "clause": ""
+      },
+      {
+        "text": "sing,",
+        "role": "verb",
+        "label": "谓语",
+        "note": "动词原形",
+        "clause": ""
+      },
+      {
+        "text": "but",
+        "role": "conjunction",
+        "label": "连词",
+        "note": "并列连词",
+        "clause": ""
+      },
+      {
+        "text": "she",
+        "role": "subject",
+        "label": "主语",
+        "note": "第二分句主语",
+        "clause": ""
+      },
+      {
+        "text": "also danced.",
+        "role": "verb",
+        "label": "谓语",
+        "note": "第二分句谓语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "she sang and danced",
+    "clauses": [
+      {
+        "type": "并列句",
+        "text": "Not only did she sing, but she also danced",
+        "note": "两个分句由 not only ... but also ... 连接"
+      }
+    ],
+    "keyPoints": [
+      "not only 置于句首时，前一个分句要部分倒装。",
+      "not only ... but also ... 连接两个并列分句。"
+    ]
+  },
+  {
+    "text": "What a beautiful day it is!",
+    "grammarPoint": "介词、连词、感叹词",
+    "translation": "今天天气多好啊！",
+    "basicPattern": "主系表",
+    "basicFormula": "S+V+P",
+    "pattern": "SVP",
+    "patternName": "主系表（感叹句）",
+    "chunks": [
+      {
+        "text": "What",
+        "role": "conjunction",
+        "label": "连词",
+        "note": "感叹句引导词",
+        "clause": ""
+      },
+      {
+        "text": "a beautiful day",
+        "role": "predicative",
+        "label": "表语",
+        "note": "感叹中心，前置到句首",
+        "clause": ""
+      },
+      {
+        "text": "it",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "is!",
+        "role": "verb",
+        "label": "谓语",
+        "note": "系动词",
+        "clause": ""
+      }
+    ],
+    "skeleton": "It is a beautiful day",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "What a beautiful day it is!",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "感叹句结构：What + a/an + 形容词 + 名词 + 主谓！",
+      "感叹句常把被感叹部分提到句首。"
+    ]
+  },
+  {
+    "text": "Oh no, I forgot my keys!",
+    "grammarPoint": "介词、连词、感叹词",
+    "translation": "哦不，我忘带钥匙了！",
+    "basicPattern": "主谓宾",
+    "basicFormula": "S+V+O",
+    "pattern": "SVO",
+    "patternName": "主谓宾",
+    "chunks": [
+      {
+        "text": "Oh no,",
+        "role": "other",
+        "label": "其他",
+        "note": "感叹词，表示惊讶或懊恼",
+        "clause": ""
+      },
+      {
+        "text": "I",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "forgot",
+        "role": "verb",
+        "label": "谓语",
+        "note": "一般过去时",
+        "clause": ""
+      },
+      {
+        "text": "my keys!",
+        "role": "object",
+        "label": "宾语",
+        "note": "物主代词 + 名词复数作宾语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "I forgot my keys",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "Oh no, I forgot my keys!",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "感叹词独立使用，不作句子成分。",
+      "forget 的过去式是 forgot。"
+    ]
+  },
+  {
+    "text": "Birds fly.",
+    "grammarPoint": "句子成分与五种简单句",
+    "translation": "鸟儿会飞。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV",
+    "patternName": "主谓",
+    "chunks": [
+      {
+        "text": "Birds",
+        "role": "subject",
+        "label": "主语",
+        "note": "名词复数作主语",
+        "clause": ""
+      },
+      {
+        "text": "fly.",
+        "role": "verb",
+        "label": "谓语",
+        "note": "不及物动词作谓语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "Birds fly",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "Birds fly.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "主语 + 不及物动词构成主谓结构。",
+      "fly 在这里是不及物动词。"
+    ]
+  },
+  {
+    "text": "The baby smiled happily.",
+    "grammarPoint": "句子成分与五种简单句",
+    "translation": "婴儿开心地笑了。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV",
+    "patternName": "主谓",
+    "chunks": [
+      {
+        "text": "The baby",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "smiled",
+        "role": "verb",
+        "label": "谓语",
+        "note": "不及物动词作谓语",
+        "clause": ""
+      },
+      {
+        "text": "happily.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "副词作方式状语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "The baby smiled",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "The baby smiled happily.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "状语修饰谓语，说明动作方式。",
+      "主谓结构可以带状语，但仍是主谓句。"
+    ]
+  },
+  {
+    "text": "She opened the window.",
+    "grammarPoint": "句子成分与五种简单句",
+    "translation": "她打开了窗户。",
+    "basicPattern": "主谓宾",
+    "basicFormula": "S+V+O",
+    "pattern": "SVO",
+    "patternName": "主谓宾",
+    "chunks": [
+      {
+        "text": "She",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "opened",
+        "role": "verb",
+        "label": "谓语",
+        "note": "及物动词作谓语",
+        "clause": ""
+      },
+      {
+        "text": "the window.",
+        "role": "object",
+        "label": "宾语",
+        "note": "名词短语作宾语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "She opened the window",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "She opened the window.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "主语 + 及物动词 + 宾语构成主谓宾结构。",
+      "open 在这里是及物动词。"
+    ]
+  },
+  {
+    "text": "My father bought me a new bike.",
+    "grammarPoint": "句子成分与五种简单句",
+    "translation": "我爸爸给我买了一辆新自行车。",
+    "basicPattern": "主谓双宾",
+    "basicFormula": "S+V+O+O",
+    "pattern": "SVOO",
+    "patternName": "主谓双宾",
+    "chunks": [
+      {
+        "text": "My father",
+        "role": "subject",
+        "label": "主语",
+        "note": "物主代词 + 名词作主语",
+        "clause": ""
+      },
+      {
+        "text": "bought",
+        "role": "verb",
+        "label": "谓语",
+        "note": "及物动词作谓语",
+        "clause": ""
+      },
+      {
+        "text": "me",
+        "role": "object",
+        "label": "宾语",
+        "note": "间接宾语，指人",
+        "clause": ""
+      },
+      {
+        "text": "a new bike.",
+        "role": "object",
+        "label": "宾语",
+        "note": "直接宾语，指物",
+        "clause": ""
+      }
+    ],
+    "skeleton": "My father bought me a bike",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "My father bought me a new bike.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "双宾语结构中，间接宾语通常指人，直接宾语指物。",
+      "buy sb. sth. 可改为 buy sth. for sb.。"
+    ]
+  },
+  {
+    "text": "The teacher asked us to read the text.",
+    "grammarPoint": "句子成分与五种简单句",
+    "translation": "老师让我们读课文。",
+    "basicPattern": "主谓宾宾补",
+    "basicFormula": "S+V+O+C",
+    "pattern": "SVOC",
+    "patternName": "主谓宾宾补",
+    "chunks": [
+      {
+        "text": "The teacher",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "asked",
+        "role": "verb",
+        "label": "谓语",
+        "note": "及物动词作谓语",
+        "clause": ""
+      },
+      {
+        "text": "us",
+        "role": "object",
+        "label": "宾语",
+        "note": "宾语",
+        "clause": ""
+      },
+      {
+        "text": "to read the text.",
+        "role": "complement",
+        "label": "宾补",
+        "note": "不定式短语作宾语补足语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "The teacher asked us to read the text",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "The teacher asked us to read the text.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "ask sb. to do sth. 是常见的宾补结构。",
+      "宾语 us 是 to read 的逻辑主语。"
+    ]
+  },
+  {
+    "text": "We elected him monitor.",
+    "grammarPoint": "句子成分与五种简单句",
+    "translation": "我们选他当班长。",
+    "basicPattern": "主谓宾宾补",
+    "basicFormula": "S+V+O+C",
+    "pattern": "SVOC",
+    "patternName": "主谓宾宾补",
+    "chunks": [
+      {
+        "text": "We",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "elected",
+        "role": "verb",
+        "label": "谓语",
+        "note": "及物动词作谓语",
+        "clause": ""
+      },
+      {
+        "text": "him",
+        "role": "object",
+        "label": "宾语",
+        "note": "宾语",
+        "clause": ""
+      },
+      {
+        "text": "monitor.",
+        "role": "complement",
+        "label": "宾补",
+        "note": "名词作宾语补足语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "We elected him monitor",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "We elected him monitor.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "elect sb. + 职位名词，职位前通常不加冠词。",
+      "名词作宾补，说明宾语的身份。"
+    ]
+  },
+  {
+    "text": "The cake smells sweet.",
+    "grammarPoint": "句子成分与五种简单句",
+    "translation": "蛋糕闻起来很甜。",
+    "basicPattern": "主系表",
+    "basicFormula": "S+V+P",
+    "pattern": "SVP",
+    "patternName": "主系表",
+    "chunks": [
+      {
+        "text": "The cake",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "smells",
+        "role": "verb",
+        "label": "谓语",
+        "note": "感官系动词",
+        "clause": ""
+      },
+      {
+        "text": "sweet.",
+        "role": "predicative",
+        "label": "表语",
+        "note": "形容词作表语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "The cake smells sweet",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "The cake smells sweet.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "系动词后接形容词作表语，不用副词。",
+      "smell 可作感官系动词。"
+    ]
+  },
+  {
+    "text": "He became a doctor.",
+    "grammarPoint": "句子成分与五种简单句",
+    "translation": "他成了一名医生。",
+    "basicPattern": "主系表",
+    "basicFormula": "S+V+P",
+    "pattern": "SVP",
+    "patternName": "主系表",
+    "chunks": [
+      {
+        "text": "He",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "became",
+        "role": "verb",
+        "label": "谓语",
+        "note": "系动词，表示状态变化",
+        "clause": ""
+      },
+      {
+        "text": "a doctor.",
+        "role": "predicative",
+        "label": "表语",
+        "note": "名词短语作表语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "He became a doctor",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "He became a doctor.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "become 是系动词，后接名词或形容词作表语。",
+      "表语说明主语的身份。"
+    ]
+  },
+  {
+    "text": "They kept the room clean.",
+    "grammarPoint": "句子成分与五种简单句",
+    "translation": "他们让房间保持干净。",
+    "basicPattern": "主谓宾宾补",
+    "basicFormula": "S+V+O+C",
+    "pattern": "SVOC",
+    "patternName": "主谓宾宾补",
+    "chunks": [
+      {
+        "text": "They",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "kept",
+        "role": "verb",
+        "label": "谓语",
+        "note": "及物动词作谓语",
+        "clause": ""
+      },
+      {
+        "text": "the room",
+        "role": "object",
+        "label": "宾语",
+        "note": "宾语",
+        "clause": ""
+      },
+      {
+        "text": "clean.",
+        "role": "complement",
+        "label": "宾补",
+        "note": "形容词作宾语补足语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "They kept the room clean",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "They kept the room clean.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "keep + 宾语 + 形容词，表示“使……保持……”。",
+      "形容词 clean 说明宾语 the room 的状态。"
+    ]
+  },
+  {
+    "text": "I found the book interesting.",
+    "grammarPoint": "句子成分与五种简单句",
+    "translation": "我觉得这本书很有趣。",
+    "basicPattern": "主谓宾宾补",
+    "basicFormula": "S+V+O+C",
+    "pattern": "SVOC",
+    "patternName": "主谓宾宾补",
+    "chunks": [
+      {
+        "text": "I",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "found",
+        "role": "verb",
+        "label": "谓语",
+        "note": "及物动词作谓语",
+        "clause": ""
+      },
+      {
+        "text": "the book",
+        "role": "object",
+        "label": "宾语",
+        "note": "宾语",
+        "clause": ""
+      },
+      {
+        "text": "interesting.",
+        "role": "complement",
+        "label": "宾补",
+        "note": "形容词作宾语补足语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "I found the book interesting",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "I found the book interesting.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "find + 宾语 + 形容词，表示“发现……怎么样”。",
+      "interesting 说明宾语 the book 的性质。"
+    ]
+  },
+  {
+    "text": "She made him angry.",
+    "grammarPoint": "句子成分与五种简单句",
+    "translation": "她让他生气了。",
+    "basicPattern": "主谓宾宾补",
+    "basicFormula": "S+V+O+C",
+    "pattern": "SVOC",
+    "patternName": "主谓宾宾补",
+    "chunks": [
+      {
+        "text": "She",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "made",
+        "role": "verb",
+        "label": "谓语",
+        "note": "及物动词作谓语",
+        "clause": ""
+      },
+      {
+        "text": "him",
+        "role": "object",
+        "label": "宾语",
+        "note": "宾语",
+        "clause": ""
+      },
+      {
+        "text": "angry.",
+        "role": "complement",
+        "label": "宾补",
+        "note": "形容词作宾语补足语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "She made him angry",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "She made him angry.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "make + 宾语 + 形容词，表示“使……变得……”。",
+      "angry 说明宾语 him 的状态。"
+    ]
+  },
+  {
+    "text": "The meeting lasted two hours.",
+    "grammarPoint": "句子成分与五种简单句",
+    "translation": "会议持续了两个小时。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV",
+    "patternName": "主谓",
+    "chunks": [
+      {
+        "text": "The meeting",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "lasted",
+        "role": "verb",
+        "label": "谓语",
+        "note": "不及物动词作谓语",
+        "clause": ""
+      },
+      {
+        "text": "two hours.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "时间状语，表示持续时长",
+        "clause": ""
+      }
+    ],
+    "skeleton": "The meeting lasted two hours",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "The meeting lasted two hours.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "last 是不及物动词，后面不是宾语而是时间状语。",
+      "表示持续多久用 for + 时间段。"
+    ]
+  },
+  {
+    "text": "Do you like classical music?",
+    "grammarPoint": "句子类别",
+    "translation": "你喜欢古典音乐吗？",
+    "basicPattern": "主谓宾",
+    "basicFormula": "S+V+O",
+    "pattern": "SVO",
+    "patternName": "主谓宾（一般疑问句）",
+    "chunks": [
+      {
+        "text": "Do",
+        "role": "verb",
+        "label": "谓语",
+        "note": "助动词提前，构成一般疑问句",
+        "clause": ""
+      },
+      {
+        "text": "you",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "like",
+        "role": "verb",
+        "label": "谓语",
+        "note": "实义动词原形",
+        "clause": ""
+      },
+      {
+        "text": "classical music?",
+        "role": "object",
+        "label": "宾语",
+        "note": "宾语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "you like classical music",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "Do you like classical music?",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "一般疑问句把助动词提到主语前。",
+      "实义动词 like 在疑问句中还原为原形。"
+    ]
+  },
+  {
+    "text": "Where did you buy that coat?",
+    "grammarPoint": "句子类别",
+    "translation": "你在哪里买的那件外套？",
+    "basicPattern": "主谓宾",
+    "basicFormula": "S+V+O",
+    "pattern": "SVO",
+    "patternName": "主谓宾（特殊疑问句）",
+    "chunks": [
+      {
+        "text": "Where",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "疑问副词作地点状语",
+        "clause": ""
+      },
+      {
+        "text": "did",
+        "role": "verb",
+        "label": "谓语",
+        "note": "助动词提前",
+        "clause": ""
+      },
+      {
+        "text": "you",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "buy",
+        "role": "verb",
+        "label": "谓语",
+        "note": "实义动词原形",
+        "clause": ""
+      },
+      {
+        "text": "that coat?",
+        "role": "object",
+        "label": "宾语",
+        "note": "宾语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "you bought that coat",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "Where did you buy that coat?",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "特殊疑问句以疑问词开头，助动词提前。",
+      "did 后面的动词用原形。"
+    ]
+  },
+  {
+    "text": "Who is knocking at the door?",
+    "grammarPoint": "句子类别",
+    "translation": "谁在敲门？",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV",
+    "patternName": "主谓（特殊疑问句）",
+    "chunks": [
+      {
+        "text": "Who",
+        "role": "subject",
+        "label": "主语",
+        "note": "疑问代词作主语",
+        "clause": ""
+      },
+      {
+        "text": "is knocking",
+        "role": "verb",
+        "label": "谓语",
+        "note": "现在进行时",
+        "clause": ""
+      },
+      {
+        "text": "at the door?",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "地点状语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "Who is knocking",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "Who is knocking at the door?",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "疑问词作主语时，语序与陈述句相同。",
+      "knock at the door 是固定搭配。"
+    ]
+  },
+  {
+    "text": "Open the door, please.",
+    "grammarPoint": "句子类别",
+    "translation": "请打开门。",
+    "basicPattern": "主谓宾",
+    "basicFormula": "S+V+O",
+    "pattern": "SVO",
+    "patternName": "主谓宾（祈使句）",
+    "chunks": [
+      {
+        "text": "Open",
+        "role": "verb",
+        "label": "谓语",
+        "note": "祈使句谓语，动词原形",
+        "clause": ""
+      },
+      {
+        "text": "the door,",
+        "role": "object",
+        "label": "宾语",
+        "note": "宾语",
+        "clause": ""
+      },
+      {
+        "text": "please.",
+        "role": "other",
+        "label": "其他",
+        "note": "礼貌用语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "Open the door",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "Open the door, please.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "祈使句以动词原形开头，主语省略。",
+      "please 可放在句首或句末。"
+    ]
+  },
+  {
+    "text": "Don't be late again.",
+    "grammarPoint": "句子类别",
+    "translation": "别再迟到了。",
+    "basicPattern": "主系表",
+    "basicFormula": "S+V+P",
+    "pattern": "SVP",
+    "patternName": "主系表（否定祈使句）",
+    "chunks": [
+      {
+        "text": "Don't",
+        "role": "verb",
+        "label": "谓语",
+        "note": "否定祈使句的助动词",
+        "clause": ""
+      },
+      {
+        "text": "be",
+        "role": "verb",
+        "label": "谓语",
+        "note": "系动词原形",
+        "clause": ""
+      },
+      {
+        "text": "late",
+        "role": "predicative",
+        "label": "表语",
+        "note": "形容词作表语",
+        "clause": ""
+      },
+      {
+        "text": "again.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "频率副词作状语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "Don't be late",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "Don't be late again.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "否定祈使句用 Don't + 动词原形。",
+      "be late 表示“迟到”。"
+    ]
+  },
+  {
+    "text": "How beautiful the flowers are!",
+    "grammarPoint": "句子类别",
+    "translation": "这些花多美啊！",
+    "basicPattern": "主系表",
+    "basicFormula": "S+V+P",
+    "pattern": "SVP",
+    "patternName": "主系表（感叹句）",
+    "chunks": [
+      {
+        "text": "How",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "感叹句引导词，修饰形容词",
+        "clause": ""
+      },
+      {
+        "text": "beautiful",
+        "role": "predicative",
+        "label": "表语",
+        "note": "形容词作表语",
+        "clause": ""
+      },
+      {
+        "text": "the flowers",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "are!",
+        "role": "verb",
+        "label": "谓语",
+        "note": "系动词",
+        "clause": ""
+      }
+    ],
+    "skeleton": "The flowers are beautiful",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "How beautiful the flowers are!",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "感叹句结构：How + 形容词/副词 + 主谓！",
+      "How 修饰形容词或副词。"
+    ]
+  },
+  {
+    "text": "How time flies!",
+    "grammarPoint": "句子类别",
+    "translation": "时间过得真快啊！",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV",
+    "patternName": "主谓（感叹句）",
+    "chunks": [
+      {
+        "text": "How",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "感叹句引导词，修饰副词",
+        "clause": ""
+      },
+      {
+        "text": "time",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "flies!",
+        "role": "verb",
+        "label": "谓语",
+        "note": "不及物动词作谓语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "Time flies",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "How time flies!",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "感叹句 How + 副词 + 主谓！",
+      "fly 在这里表示“（时间）飞逝”。"
+    ]
+  },
+  {
+    "text": "There will be a concert tomorrow.",
+    "grammarPoint": "句子类别",
+    "translation": "明天会有一场音乐会。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV",
+    "patternName": "主谓（There be 倒装）",
+    "chunks": [
+      {
+        "text": "There",
+        "role": "other",
+        "label": "其他",
+        "note": "There be 句型的引导词，无实义",
+        "clause": ""
+      },
+      {
+        "text": "will be",
+        "role": "verb",
+        "label": "谓语",
+        "note": "There be 的将来时",
+        "clause": ""
+      },
+      {
+        "text": "a concert",
+        "role": "subject",
+        "label": "主语",
+        "note": "真正主语",
+        "clause": ""
+      },
+      {
+        "text": "tomorrow.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "时间状语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "There will be a concert",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "There will be a concert tomorrow.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "There be 句型表示“某处/某时存在某物”。",
+      "will be 后接单数主语 a concert。"
+    ]
+  },
+  {
+    "text": "I get up at seven every morning.",
+    "grammarPoint": "英语的基础时态",
+    "translation": "我每天早上七点起床。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV",
+    "patternName": "主谓",
+    "chunks": [
+      {
+        "text": "I",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "get up",
+        "role": "verb",
+        "label": "谓语",
+        "note": "短语动词，一般现在时",
+        "clause": ""
+      },
+      {
+        "text": "at seven",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "时间状语",
+        "clause": ""
+      },
+      {
+        "text": "every morning.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "频率时间状语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "I get up at seven",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "I get up at seven every morning.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "一般现在时表示习惯性动作。",
+      "get up 是“动词 + 副词”的短语动词。"
+    ]
+  },
+  {
+    "text": "She is reading a novel now.",
+    "grammarPoint": "英语的基础时态",
+    "translation": "她现在正在读一本小说。",
+    "basicPattern": "主谓宾",
+    "basicFormula": "S+V+O",
+    "pattern": "SVO",
+    "patternName": "主谓宾",
+    "chunks": [
+      {
+        "text": "She",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "is reading",
+        "role": "verb",
+        "label": "谓语",
+        "note": "现在进行时",
+        "clause": ""
+      },
+      {
+        "text": "a novel",
+        "role": "object",
+        "label": "宾语",
+        "note": "宾语",
+        "clause": ""
+      },
+      {
+        "text": "now.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "时间状语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "She is reading a novel",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "She is reading a novel now.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "现在进行时结构为 be + 动词 -ing。",
+      "now 常与现在进行时连用。"
+    ]
+  },
+  {
+    "text": "They have lived here for ten years.",
+    "grammarPoint": "英语的基础时态",
+    "translation": "他们在这里住了十年了。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV",
+    "patternName": "主谓",
+    "chunks": [
+      {
+        "text": "They",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "have lived",
+        "role": "verb",
+        "label": "谓语",
+        "note": "现在完成时",
+        "clause": ""
+      },
+      {
+        "text": "here",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "地点副词作状语",
+        "clause": ""
+      },
+      {
+        "text": "for ten years.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "时间状语，表示持续时长",
+        "clause": ""
+      }
+    ],
+    "skeleton": "They have lived here",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "They have lived here for ten years.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "现在完成时表示过去开始、持续到现在的动作。",
+      "for + 时间段常与现在完成时连用。"
+    ]
+  },
+  {
+    "text": "He has just finished his homework.",
+    "grammarPoint": "英语的基础时态",
+    "translation": "他刚刚完成作业。",
+    "basicPattern": "主谓宾",
+    "basicFormula": "S+V+O",
+    "pattern": "SVO",
+    "patternName": "主谓宾",
+    "chunks": [
+      {
+        "text": "He",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "has just finished",
+        "role": "verb",
+        "label": "谓语",
+        "note": "现在完成时，just 放在助动词后",
+        "clause": ""
+      },
+      {
+        "text": "his homework.",
+        "role": "object",
+        "label": "宾语",
+        "note": "宾语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "He has just finished his homework",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "He has just finished his homework.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "现在完成时结构为 have/has + 过去分词。",
+      "just 通常放在 have/has 和过去分词之间。"
+    ]
+  },
+  {
+    "text": "We visited the museum last Sunday.",
+    "grammarPoint": "英语的基础时态",
+    "translation": "上周日我们参观了博物馆。",
+    "basicPattern": "主谓宾",
+    "basicFormula": "S+V+O",
+    "pattern": "SVO",
+    "patternName": "主谓宾",
+    "chunks": [
+      {
+        "text": "We",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "visited",
+        "role": "verb",
+        "label": "谓语",
+        "note": "一般过去时",
+        "clause": ""
+      },
+      {
+        "text": "the museum",
+        "role": "object",
+        "label": "宾语",
+        "note": "宾语",
+        "clause": ""
+      },
+      {
+        "text": "last Sunday.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "时间状语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "We visited the museum",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "We visited the museum last Sunday.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "一般过去时表示过去某个时间发生的动作。",
+      "last Sunday 是明确的过去时间。"
+    ]
+  },
+  {
+    "text": "I was watching TV when he called.",
+    "grammarPoint": "英语的基础时态",
+    "translation": "他打电话时我正在看电视。",
+    "basicPattern": "主谓宾",
+    "basicFormula": "S+V+O",
+    "pattern": "SVO+状语从句",
+    "patternName": "主谓宾+时间状语从句",
+    "chunks": [
+      {
+        "text": "I",
+        "role": "subject",
+        "label": "主语",
+        "note": "主句主语",
+        "clause": ""
+      },
+      {
+        "text": "was watching",
+        "role": "verb",
+        "label": "谓语",
+        "note": "过去进行时",
+        "clause": ""
+      },
+      {
+        "text": "TV",
+        "role": "object",
+        "label": "宾语",
+        "note": "宾语",
+        "clause": ""
+      },
+      {
+        "text": "when",
+        "role": "conjunction",
+        "label": "连词",
+        "note": "时间状语从句引导词",
+        "clause": ""
+      },
+      {
+        "text": "he",
+        "role": "subject",
+        "label": "主语",
+        "note": "状语从句主语",
+        "clause": "状语从句"
+      },
+      {
+        "text": "called.",
+        "role": "verb",
+        "label": "谓语",
+        "note": "状语从句谓语，一般过去时",
+        "clause": "状语从句"
+      }
+    ],
+    "skeleton": "I was watching TV",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "I was watching TV",
+        "note": ""
+      },
+      {
+        "type": "时间状语从句",
+        "text": "when he called",
+        "note": "when 表示“当……的时候”"
+      }
+    ],
+    "keyPoints": [
+      "过去进行时表示过去某一时刻正在进行的动作。",
+      "when 引导的从句常用一般过去时，表示突然发生的动作。"
+    ]
+  },
+  {
+    "text": "She will call you tomorrow.",
+    "grammarPoint": "英语的基础时态",
+    "translation": "她明天会给你打电话。",
+    "basicPattern": "主谓宾",
+    "basicFormula": "S+V+O",
+    "pattern": "SVO",
+    "patternName": "主谓宾",
+    "chunks": [
+      {
+        "text": "She",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "will call",
+        "role": "verb",
+        "label": "谓语",
+        "note": "一般将来时",
+        "clause": ""
+      },
+      {
+        "text": "you",
+        "role": "object",
+        "label": "宾语",
+        "note": "宾语",
+        "clause": ""
+      },
+      {
+        "text": "tomorrow.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "时间状语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "She will call you",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "She will call you tomorrow.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "一般将来时用 will + 动词原形。",
+      "tomorrow 表示将来的时间。"
+    ]
+  },
+  {
+    "text": "They are going to build a new bridge.",
+    "grammarPoint": "英语的基础时态",
+    "translation": "他们打算建一座新桥。",
+    "basicPattern": "主谓宾",
+    "basicFormula": "S+V+O",
+    "pattern": "SVO",
+    "patternName": "主谓宾",
+    "chunks": [
+      {
+        "text": "They",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "are going to build",
+        "role": "verb",
+        "label": "谓语",
+        "note": "be going to + 动词原形，表计划",
+        "clause": ""
+      },
+      {
+        "text": "a new bridge.",
+        "role": "object",
+        "label": "宾语",
+        "note": "宾语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "They are going to build a bridge",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "They are going to build a new bridge.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "be going to 表示计划或打算。",
+      "a new bridge 中 new 作前置定语。"
+    ]
+  },
+  {
+    "text": "By the end of last year, he had worked there for five years.",
+    "grammarPoint": "英语的基础时态",
+    "translation": "到去年年底，他已经在那边工作五年了。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV",
+    "patternName": "主谓",
+    "chunks": [
+      {
+        "text": "By the end of last year,",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "时间状语，by the end of + 过去时间",
+        "clause": ""
+      },
+      {
+        "text": "he",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "had worked",
+        "role": "verb",
+        "label": "谓语",
+        "note": "过去完成时",
+        "clause": ""
+      },
+      {
+        "text": "there",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "地点副词作状语",
+        "clause": ""
+      },
+      {
+        "text": "for five years.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "持续时间状语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "He had worked there for five years",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "By the end of last year, he had worked there for five years.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "过去完成时表示“过去的过去”。",
+      "by the end of + 过去时间常与过去完成时连用。"
+    ]
+  },
+  {
+    "text": "The letter was written by Tom.",
+    "grammarPoint": "英语的基础时态",
+    "translation": "这封信是汤姆写的。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV",
+    "patternName": "主谓（被动语态）",
+    "chunks": [
+      {
+        "text": "The letter",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语，动作的承受者",
+        "clause": ""
+      },
+      {
+        "text": "was written",
+        "role": "verb",
+        "label": "谓语",
+        "note": "一般过去时被动语态",
+        "clause": ""
+      },
+      {
+        "text": "by Tom.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "by 短语表示动作执行者",
+        "clause": ""
+      }
+    ],
+    "skeleton": "The letter was written by Tom",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "The letter was written by Tom.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "被动语态结构为 be + 过去分词。",
+      "动作执行者用 by 引导。"
+    ]
+  },
+  {
+    "text": "The bridge is being repaired now.",
+    "grammarPoint": "英语的基础时态",
+    "translation": "这座桥现在正在维修。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV",
+    "patternName": "主谓（被动语态）",
+    "chunks": [
+      {
+        "text": "The bridge",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语，动作的承受者",
+        "clause": ""
+      },
+      {
+        "text": "is being repaired",
+        "role": "verb",
+        "label": "谓语",
+        "note": "现在进行时被动语态",
+        "clause": ""
+      },
+      {
+        "text": "now.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "时间状语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "The bridge is being repaired",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "The bridge is being repaired now.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "现在进行时被动语态结构为 is/are being + 过去分词。",
+      "repair 是及物动词，可用于被动语态。"
+    ]
+  },
+  {
+    "text": "The work will be finished by Friday.",
+    "grammarPoint": "英语的基础时态",
+    "translation": "这项工作将在周五前完成。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV",
+    "patternName": "主谓（被动语态）",
+    "chunks": [
+      {
+        "text": "The work",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语，动作的承受者",
+        "clause": ""
+      },
+      {
+        "text": "will be finished",
+        "role": "verb",
+        "label": "谓语",
+        "note": "一般将来时被动语态",
+        "clause": ""
+      },
+      {
+        "text": "by Friday.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "时间状语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "The work will be finished",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "The work will be finished by Friday.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "一般将来时被动语态结构为 will be + 过去分词。",
+      "by Friday 表示“到周五为止”。"
+    ]
+  },
+  {
+    "text": "I like coffee, but my sister prefers tea.",
+    "grammarPoint": "并列复合句和主从复合句",
+    "translation": "我喜欢咖啡，但我妹妹更喜欢茶。",
+    "basicPattern": "主谓宾",
+    "basicFormula": "S+V+O",
+    "pattern": "SVO+并列句",
+    "patternName": "主谓宾+并列句",
+    "chunks": [
+      {
+        "text": "I",
+        "role": "subject",
+        "label": "主语",
+        "note": "第一分句主语",
+        "clause": ""
+      },
+      {
+        "text": "like",
+        "role": "verb",
+        "label": "谓语",
+        "note": "第一分句谓语",
+        "clause": ""
+      },
+      {
+        "text": "coffee,",
+        "role": "object",
+        "label": "宾语",
+        "note": "第一分句宾语",
+        "clause": ""
+      },
+      {
+        "text": "but",
+        "role": "conjunction",
+        "label": "连词",
+        "note": "并列连词，表转折",
+        "clause": ""
+      },
+      {
+        "text": "my sister",
+        "role": "subject",
+        "label": "主语",
+        "note": "第二分句主语",
+        "clause": ""
+      },
+      {
+        "text": "prefers",
+        "role": "verb",
+        "label": "谓语",
+        "note": "第二分句谓语",
+        "clause": ""
+      },
+      {
+        "text": "tea.",
+        "role": "object",
+        "label": "宾语",
+        "note": "第二分句宾语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "I like coffee, but my sister prefers tea",
+    "clauses": [
+      {
+        "type": "并列句",
+        "text": "I like coffee, but my sister prefers tea",
+        "note": "but 连接两个并列分句"
+      }
+    ],
+    "keyPoints": [
+      "并列句由并列连词连接两个独立分句。",
+      "but 表示转折关系。"
+    ]
+  },
+  {
+    "text": "He is tired, so he went to bed early.",
+    "grammarPoint": "并列复合句和主从复合句",
+    "translation": "他累了，所以早早上床睡觉了。",
+    "basicPattern": "主系表",
+    "basicFormula": "S+V+P",
+    "pattern": "SVP+并列句",
+    "patternName": "主系表+并列句",
+    "chunks": [
+      {
+        "text": "He",
+        "role": "subject",
+        "label": "主语",
+        "note": "第一分句主语",
+        "clause": ""
+      },
+      {
+        "text": "is",
+        "role": "verb",
+        "label": "谓语",
+        "note": "第一分句系动词",
+        "clause": ""
+      },
+      {
+        "text": "tired,",
+        "role": "predicative",
+        "label": "表语",
+        "note": "第一分句表语",
+        "clause": ""
+      },
+      {
+        "text": "so",
+        "role": "conjunction",
+        "label": "连词",
+        "note": "并列连词，表结果",
+        "clause": ""
+      },
+      {
+        "text": "he",
+        "role": "subject",
+        "label": "主语",
+        "note": "第二分句主语",
+        "clause": ""
+      },
+      {
+        "text": "went to bed",
+        "role": "verb",
+        "label": "谓语",
+        "note": "第二分句谓语，短语动词",
+        "clause": ""
+      },
+      {
+        "text": "early.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "第二分句状语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "He is tired, so he went to bed early",
+    "clauses": [
+      {
+        "type": "并列句",
+        "text": "He is tired, so he went to bed early",
+        "note": "so 连接两个并列分句"
+      }
+    ],
+    "keyPoints": [
+      "so 表示结果，连接两个并列分句。",
+      "go to bed 是固定短语，意为“上床睡觉”。"
+    ]
+  },
+  {
+    "text": "Study hard, or you will fail the exam.",
+    "grammarPoint": "并列复合句和主从复合句",
+    "translation": "努力学习，否则你会考试不及格。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV+并列句",
+    "patternName": "主谓+并列句",
+    "chunks": [
+      {
+        "text": "Study",
+        "role": "verb",
+        "label": "谓语",
+        "note": "第一分句祈使句谓语",
+        "clause": ""
+      },
+      {
+        "text": "hard,",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "第一分句状语",
+        "clause": ""
+      },
+      {
+        "text": "or",
+        "role": "conjunction",
+        "label": "连词",
+        "note": "并列连词，表“否则”",
+        "clause": ""
+      },
+      {
+        "text": "you",
+        "role": "subject",
+        "label": "主语",
+        "note": "第二分句主语",
+        "clause": ""
+      },
+      {
+        "text": "will fail",
+        "role": "verb",
+        "label": "谓语",
+        "note": "第二分句谓语",
+        "clause": ""
+      },
+      {
+        "text": "the exam.",
+        "role": "object",
+        "label": "宾语",
+        "note": "第二分句宾语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "Study hard, or you will fail the exam",
+    "clauses": [
+      {
+        "type": "并列句",
+        "text": "Study hard, or you will fail the exam",
+        "note": "or 连接祈使句和结果分句"
+      }
+    ],
+    "keyPoints": [
+      "祈使句 + or + 分句，表示“否则……”。",
+      "or 在这里不是“或者”，而是“否则”。"
+    ]
+  },
+  {
+    "text": "I know that he is honest.",
+    "grammarPoint": "并列复合句和主从复合句",
+    "translation": "我知道他是诚实的。",
+    "basicPattern": "主谓宾",
+    "basicFormula": "S+V+O",
+    "pattern": "SVO+宾语从句",
+    "patternName": "主谓宾+宾语从句",
+    "chunks": [
+      {
+        "text": "I",
+        "role": "subject",
+        "label": "主语",
+        "note": "主句主语",
+        "clause": ""
+      },
+      {
+        "text": "know",
+        "role": "verb",
+        "label": "谓语",
+        "note": "主句谓语",
+        "clause": ""
+      },
+      {
+        "text": "that",
+        "role": "conjunction",
+        "label": "连词",
+        "note": "宾语从句引导词",
+        "clause": ""
+      },
+      {
+        "text": "he",
+        "role": "subject",
+        "label": "主语",
+        "note": "宾语从句主语",
+        "clause": "宾语从句"
+      },
+      {
+        "text": "is",
+        "role": "verb",
+        "label": "谓语",
+        "note": "宾语从句系动词",
+        "clause": "宾语从句"
+      },
+      {
+        "text": "honest.",
+        "role": "predicative",
+        "label": "表语",
+        "note": "宾语从句表语",
+        "clause": "宾语从句"
+      }
+    ],
+    "skeleton": "I know that he is honest",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "I know",
+        "note": "主句谓语 know 后接宾语从句"
+      },
+      {
+        "type": "宾语从句",
+        "text": "that he is honest",
+        "note": "that 在从句中不作成分，只起引导作用"
+      }
+    ],
+    "keyPoints": [
+      "宾语从句用 that 引导时，that 可省略。",
+      "宾语从句要用陈述语序。"
+    ]
+  },
+  {
+    "text": "She asked me whether I could help her.",
+    "grammarPoint": "并列复合句和主从复合句",
+    "translation": "她问我能不能帮她。",
+    "basicPattern": "主谓双宾",
+    "basicFormula": "S+V+O+O",
+    "pattern": "SVOO+宾语从句",
+    "patternName": "主谓双宾+宾语从句",
+    "chunks": [
+      {
+        "text": "She",
+        "role": "subject",
+        "label": "主语",
+        "note": "主句主语",
+        "clause": ""
+      },
+      {
+        "text": "asked",
+        "role": "verb",
+        "label": "谓语",
+        "note": "主句谓语",
+        "clause": ""
+      },
+      {
+        "text": "me",
+        "role": "object",
+        "label": "宾语",
+        "note": "间接宾语",
+        "clause": ""
+      },
+      {
+        "text": "whether",
+        "role": "conjunction",
+        "label": "连词",
+        "note": "宾语从句引导词",
+        "clause": ""
+      },
+      {
+        "text": "I",
+        "role": "subject",
+        "label": "主语",
+        "note": "宾语从句主语",
+        "clause": "宾语从句"
+      },
+      {
+        "text": "could help",
+        "role": "verb",
+        "label": "谓语",
+        "note": "宾语从句谓语",
+        "clause": "宾语从句"
+      },
+      {
+        "text": "her.",
+        "role": "object",
+        "label": "宾语",
+        "note": "宾语从句宾语",
+        "clause": "宾语从句"
+      }
+    ],
+    "skeleton": "She asked me whether I could help her",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "She asked me",
+        "note": "ask sb. + 宾语从句"
+      },
+      {
+        "type": "宾语从句",
+        "text": "whether I could help her",
+        "note": "whether 表示“是否”"
+      }
+    ],
+    "keyPoints": [
+      "whether 引导宾语从句，表示“是否”。",
+      "宾语从句必须用陈述语序。"
+    ]
+  },
+  {
+    "text": "The book that you lent me is very interesting.",
+    "grammarPoint": "并列复合句和主从复合句",
+    "translation": "你借给我的那本书非常有趣。",
+    "basicPattern": "主系表",
+    "basicFormula": "S+V+P",
+    "pattern": "SVP+定语从句",
+    "patternName": "主系表+定语从句",
+    "chunks": [
+      {
+        "text": "The book",
+        "role": "subject",
+        "label": "主语",
+        "note": "主句主语，先行词",
+        "clause": ""
+      },
+      {
+        "text": "that",
+        "role": "conjunction",
+        "label": "连词",
+        "note": "定语从句引导词，在从句中作宾语",
+        "clause": ""
+      },
+      {
+        "text": "you",
+        "role": "subject",
+        "label": "主语",
+        "note": "定语从句主语",
+        "clause": "定语从句"
+      },
+      {
+        "text": "lent",
+        "role": "verb",
+        "label": "谓语",
+        "note": "定语从句谓语",
+        "clause": "定语从句"
+      },
+      {
+        "text": "me",
+        "role": "object",
+        "label": "宾语",
+        "note": "定语从句宾语",
+        "clause": "定语从句"
+      },
+      {
+        "text": "is",
+        "role": "verb",
+        "label": "谓语",
+        "note": "主句系动词",
+        "clause": ""
+      },
+      {
+        "text": "very interesting.",
+        "role": "predicative",
+        "label": "表语",
+        "note": "主句表语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "The book is very interesting",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "The book is very interesting",
+        "note": ""
+      },
+      {
+        "type": "定语从句",
+        "text": "that you lent me",
+        "note": "修饰 the book，that 作 lent 的宾语"
+      }
+    ],
+    "keyPoints": [
+      "定语从句修饰前面的先行词。",
+      "关系代词 that 在从句中作宾语。"
+    ]
+  },
+  {
+    "text": "This is the house where I grew up.",
+    "grammarPoint": "并列复合句和主从复合句",
+    "translation": "这就是我长大的那所房子。",
+    "basicPattern": "主系表",
+    "basicFormula": "S+V+P",
+    "pattern": "SVP+定语从句",
+    "patternName": "主系表+定语从句",
+    "chunks": [
+      {
+        "text": "This",
+        "role": "subject",
+        "label": "主语",
+        "note": "主句主语",
+        "clause": ""
+      },
+      {
+        "text": "is",
+        "role": "verb",
+        "label": "谓语",
+        "note": "主句系动词",
+        "clause": ""
+      },
+      {
+        "text": "the house",
+        "role": "predicative",
+        "label": "表语",
+        "note": "主句表语，先行词",
+        "clause": ""
+      },
+      {
+        "text": "where",
+        "role": "conjunction",
+        "label": "连词",
+        "note": "关系副词，在定语从句中作地点状语",
+        "clause": ""
+      },
+      {
+        "text": "I",
+        "role": "subject",
+        "label": "主语",
+        "note": "定语从句主语",
+        "clause": "定语从句"
+      },
+      {
+        "text": "grew up.",
+        "role": "verb",
+        "label": "谓语",
+        "note": "定语从句谓语，短语动词",
+        "clause": "定语从句"
+      }
+    ],
+    "skeleton": "This is the house",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "This is the house",
+        "note": ""
+      },
+      {
+        "type": "定语从句",
+        "text": "where I grew up",
+        "note": "where 修饰表示地点的先行词"
+      }
+    ],
+    "keyPoints": [
+      "先行词是地点时，定语从句可用关系副词 where。",
+      "where 在从句中作地点状语。"
+    ]
+  },
+  {
+    "text": "The news that he won the prize surprised us.",
+    "grammarPoint": "并列复合句和主从复合句",
+    "translation": "他获奖的消息让我们很吃惊。",
+    "basicPattern": "主谓宾",
+    "basicFormula": "S+V+O",
+    "pattern": "SVO+同位语从句",
+    "patternName": "主谓宾+同位语从句",
+    "chunks": [
+      {
+        "text": "The news",
+        "role": "subject",
+        "label": "主语",
+        "note": "主句主语，同位语从句的先行词",
+        "clause": ""
+      },
+      {
+        "text": "that",
+        "role": "conjunction",
+        "label": "连词",
+        "note": "同位语从句引导词",
+        "clause": ""
+      },
+      {
+        "text": "he",
+        "role": "subject",
+        "label": "主语",
+        "note": "同位语从句主语",
+        "clause": "同位语从句"
+      },
+      {
+        "text": "won",
+        "role": "verb",
+        "label": "谓语",
+        "note": "同位语从句谓语",
+        "clause": "同位语从句"
+      },
+      {
+        "text": "the prize",
+        "role": "object",
+        "label": "宾语",
+        "note": "同位语从句宾语",
+        "clause": "同位语从句"
+      },
+      {
+        "text": "surprised",
+        "role": "verb",
+        "label": "谓语",
+        "note": "主句谓语",
+        "clause": ""
+      },
+      {
+        "text": "us.",
+        "role": "object",
+        "label": "宾语",
+        "note": "主句宾语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "The news surprised us",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "The news surprised us",
+        "note": ""
+      },
+      {
+        "type": "同位语从句",
+        "text": "that he won the prize",
+        "note": "解释 news 的具体内容"
+      }
+    ],
+    "keyPoints": [
+      "同位语从句解释抽象名词的内容，that 不作成分。",
+      "注意区别于定语从句：that 在定语从句中要作成分。"
+    ]
+  },
+  {
+    "text": "What he said made us laugh.",
+    "grammarPoint": "并列复合句和主从复合句",
+    "translation": "他说的话让我们笑了。",
+    "basicPattern": "主谓宾宾补",
+    "basicFormula": "S+V+O+C",
+    "pattern": "SVOC+主语从句",
+    "patternName": "主谓宾宾补+主语从句",
+    "chunks": [
+      {
+        "text": "What he said",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语从句作主语",
+        "clause": "主语从句"
+      },
+      {
+        "text": "made",
+        "role": "verb",
+        "label": "谓语",
+        "note": "主句谓语",
+        "clause": ""
+      },
+      {
+        "text": "us",
+        "role": "object",
+        "label": "宾语",
+        "note": "宾语",
+        "clause": ""
+      },
+      {
+        "text": "laugh.",
+        "role": "complement",
+        "label": "宾补",
+        "note": "不带 to 的不定式作宾语补足语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "What he said made us laugh",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "What he said made us laugh",
+        "note": ""
+      },
+      {
+        "type": "主语从句",
+        "text": "What he said",
+        "note": "整个从句作主语"
+      }
+    ],
+    "keyPoints": [
+      "主语从句可在句中作主语。",
+      "make sb. do sth. 中不定式不带 to。"
+    ]
+  },
+  {
+    "text": "It is important that we protect nature.",
+    "grammarPoint": "并列复合句和主从复合句",
+    "translation": "我们保护大自然是重要的。",
+    "basicPattern": "主系表",
+    "basicFormula": "S+V+P",
+    "pattern": "SVP+主语从句",
+    "patternName": "主系表+主语从句",
+    "chunks": [
+      {
+        "text": "It",
+        "role": "subject",
+        "label": "主语",
+        "note": "形式主语，真正主语是后面的从句",
+        "clause": ""
+      },
+      {
+        "text": "is",
+        "role": "verb",
+        "label": "谓语",
+        "note": "系动词",
+        "clause": ""
+      },
+      {
+        "text": "important",
+        "role": "predicative",
+        "label": "表语",
+        "note": "形容词作表语",
+        "clause": ""
+      },
+      {
+        "text": "that",
+        "role": "conjunction",
+        "label": "连词",
+        "note": "主语从句引导词",
+        "clause": ""
+      },
+      {
+        "text": "we",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语从句主语",
+        "clause": "主语从句"
+      },
+      {
+        "text": "protect",
+        "role": "verb",
+        "label": "谓语",
+        "note": "主语从句谓语",
+        "clause": "主语从句"
+      },
+      {
+        "text": "nature.",
+        "role": "object",
+        "label": "宾语",
+        "note": "主语从句宾语",
+        "clause": "主语从句"
+      }
+    ],
+    "skeleton": "It is important to protect nature",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "It is important",
+        "note": ""
+      },
+      {
+        "type": "主语从句",
+        "text": "that we protect nature",
+        "note": "真正主语，it 为形式主语"
+      }
+    ],
+    "keyPoints": [
+      "it 可作形式主语，真正主语由 that 从句后置。",
+      "从句用陈述语序。"
+    ]
+  },
+  {
+    "text": "The reason why he left is unknown.",
+    "grammarPoint": "并列复合句和主从复合句",
+    "translation": "他离开的原因还不清楚。",
+    "basicPattern": "主系表",
+    "basicFormula": "S+V+P",
+    "pattern": "SVP+定语从句",
+    "patternName": "主系表+定语从句",
+    "chunks": [
+      {
+        "text": "The reason",
+        "role": "subject",
+        "label": "主语",
+        "note": "主句主语，先行词",
+        "clause": ""
+      },
+      {
+        "text": "why",
+        "role": "conjunction",
+        "label": "连词",
+        "note": "关系副词，在定语从句中作原因状语",
+        "clause": ""
+      },
+      {
+        "text": "he",
+        "role": "subject",
+        "label": "主语",
+        "note": "定语从句主语",
+        "clause": "定语从句"
+      },
+      {
+        "text": "left",
+        "role": "verb",
+        "label": "谓语",
+        "note": "定语从句谓语",
+        "clause": "定语从句"
+      },
+      {
+        "text": "is",
+        "role": "verb",
+        "label": "谓语",
+        "note": "主句系动词",
+        "clause": ""
+      },
+      {
+        "text": "unknown.",
+        "role": "predicative",
+        "label": "表语",
+        "note": "主句表语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "The reason is unknown",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "The reason is unknown",
+        "note": ""
+      },
+      {
+        "type": "定语从句",
+        "text": "why he left",
+        "note": "修饰 the reason"
+      }
+    ],
+    "keyPoints": [
+      "why 引导定语从句，修饰表示原因的名词。",
+      "unknown 作表语，表示“未知的”。"
+    ]
+  },
+  {
+    "text": "He ran so fast that nobody could catch him.",
+    "grammarPoint": "并列复合句和主从复合句",
+    "translation": "他跑得那么快，没人能追上他。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV+状语从句",
+    "patternName": "主谓+结果状语从句",
+    "chunks": [
+      {
+        "text": "He",
+        "role": "subject",
+        "label": "主语",
+        "note": "主句主语",
+        "clause": ""
+      },
+      {
+        "text": "ran",
+        "role": "verb",
+        "label": "谓语",
+        "note": "主句谓语",
+        "clause": ""
+      },
+      {
+        "text": "so fast",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "程度状语，so 修饰副词",
+        "clause": ""
+      },
+      {
+        "text": "that",
+        "role": "conjunction",
+        "label": "连词",
+        "note": "结果状语从句引导词",
+        "clause": ""
+      },
+      {
+        "text": "nobody",
+        "role": "subject",
+        "label": "主语",
+        "note": "状语从句主语",
+        "clause": "状语从句"
+      },
+      {
+        "text": "could catch",
+        "role": "verb",
+        "label": "谓语",
+        "note": "状语从句谓语",
+        "clause": "状语从句"
+      },
+      {
+        "text": "him.",
+        "role": "object",
+        "label": "宾语",
+        "note": "状语从句宾语",
+        "clause": "状语从句"
+      }
+    ],
+    "skeleton": "He ran so fast",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "He ran so fast",
+        "note": ""
+      },
+      {
+        "type": "结果状语从句",
+        "text": "that nobody could catch him",
+        "note": "so ... that ... 表示“如此……以至于……”"
+      }
+    ],
+    "keyPoints": [
+      "so + 形容词/副词 + that 引导结果状语从句。",
+      "that 从句中谓语用 could，表示过去的能力。"
+    ]
+  },
+  {
+    "text": "If I were you, I would apologize.",
+    "grammarPoint": "从句进阶、非谓语与特殊结构",
+    "translation": "如果我是你，我会道歉。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV+状语从句",
+    "patternName": "主谓+条件状语从句（虚拟）",
+    "chunks": [
+      {
+        "text": "If",
+        "role": "conjunction",
+        "label": "连词",
+        "note": "条件状语从句引导词，虚拟语气",
+        "clause": ""
+      },
+      {
+        "text": "I",
+        "role": "subject",
+        "label": "主语",
+        "note": "状语从句主语",
+        "clause": "状语从句"
+      },
+      {
+        "text": "were",
+        "role": "verb",
+        "label": "谓语",
+        "note": "虚拟语气，与现在事实相反",
+        "clause": "状语从句"
+      },
+      {
+        "text": "you,",
+        "role": "predicative",
+        "label": "表语",
+        "note": "状语从句表语",
+        "clause": "状语从句"
+      },
+      {
+        "text": "I",
+        "role": "subject",
+        "label": "主语",
+        "note": "主句主语",
+        "clause": ""
+      },
+      {
+        "text": "would apologize.",
+        "role": "verb",
+        "label": "谓语",
+        "note": "主句谓语，would + 动词原形",
+        "clause": ""
+      }
+    ],
+    "skeleton": "I would apologize",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "I would apologize",
+        "note": ""
+      },
+      {
+        "type": "条件状语从句",
+        "text": "If I were you",
+        "note": "与现在事实相反的虚拟条件"
+      }
+    ],
+    "keyPoints": [
+      "与现在事实相反：从句用过去式，be 用 were。",
+      "主句用 would + 动词原形。"
+    ]
+  },
+  {
+    "text": "I wish I had more time.",
+    "grammarPoint": "从句进阶、非谓语与特殊结构",
+    "translation": "我希望我有更多时间。",
+    "basicPattern": "主谓宾",
+    "basicFormula": "S+V+O",
+    "pattern": "SVO+宾语从句",
+    "patternName": "主谓宾+宾语从句（虚拟）",
+    "chunks": [
+      {
+        "text": "I",
+        "role": "subject",
+        "label": "主语",
+        "note": "主句主语",
+        "clause": ""
+      },
+      {
+        "text": "wish",
+        "role": "verb",
+        "label": "谓语",
+        "note": "主句谓语",
+        "clause": ""
+      },
+      {
+        "text": "I",
+        "role": "subject",
+        "label": "主语",
+        "note": "宾语从句主语",
+        "clause": "宾语从句"
+      },
+      {
+        "text": "had",
+        "role": "verb",
+        "label": "谓语",
+        "note": "宾语从句谓语，虚拟语气",
+        "clause": "宾语从句"
+      },
+      {
+        "text": "more time.",
+        "role": "object",
+        "label": "宾语",
+        "note": "宾语从句宾语",
+        "clause": "宾语从句"
+      }
+    ],
+    "skeleton": "I wish I had more time",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "I wish",
+        "note": ""
+      },
+      {
+        "type": "宾语从句",
+        "text": "I had more time",
+        "note": "wish 后的宾语从句用虚拟语气"
+      }
+    ],
+    "keyPoints": [
+      "wish 后接与现在事实相反的愿望，从句用过去式。",
+      "had 在这里不是过去完成时，而是虚拟语气。"
+    ]
+  },
+  {
+    "text": "The man standing under the tree is my uncle.",
+    "grammarPoint": "从句进阶、非谓语与特殊结构",
+    "translation": "站在树下的那个男人是我叔叔。",
+    "basicPattern": "主系表",
+    "basicFormula": "S+V+P",
+    "pattern": "SVP",
+    "patternName": "主系表",
+    "chunks": [
+      {
+        "text": "The man",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "standing under the tree",
+        "role": "attributive",
+        "label": "定语",
+        "note": "现在分词短语作后置定语",
+        "clause": ""
+      },
+      {
+        "text": "is",
+        "role": "verb",
+        "label": "谓语",
+        "note": "系动词",
+        "clause": ""
+      },
+      {
+        "text": "my uncle.",
+        "role": "predicative",
+        "label": "表语",
+        "note": "名词短语作表语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "The man is my uncle",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "The man standing under the tree is my uncle.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "现在分词短语作定语，相当于 who is standing ...。",
+      "分词短语作定语放在名词之后。"
+    ]
+  },
+  {
+    "text": "Having finished the work, she went home.",
+    "grammarPoint": "从句进阶、非谓语与特殊结构",
+    "translation": "完成工作后，她回家了。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV",
+    "patternName": "主谓（含分词状语）",
+    "chunks": [
+      {
+        "text": "Having finished the work,",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "现在分词完成式作时间状语",
+        "clause": ""
+      },
+      {
+        "text": "she",
+        "role": "subject",
+        "label": "主语",
+        "note": "主句主语",
+        "clause": ""
+      },
+      {
+        "text": "went home.",
+        "role": "verb",
+        "label": "谓语",
+        "note": "主句谓语，go home 是固定搭配",
+        "clause": ""
+      }
+    ],
+    "skeleton": "She went home",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "Having finished the work, she went home.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "分词作状语时，其逻辑主语与主句主语一致。",
+      "having finished 表示动作先于主句动作发生。"
+    ]
+  },
+  {
+    "text": "To learn a language well, you need patience.",
+    "grammarPoint": "从句进阶、非谓语与特殊结构",
+    "translation": "要把一门语言学好，你需要耐心。",
+    "basicPattern": "主谓宾",
+    "basicFormula": "S+V+O",
+    "pattern": "SVO",
+    "patternName": "主谓宾",
+    "chunks": [
+      {
+        "text": "To learn a language well,",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "不定式短语作目的状语",
+        "clause": ""
+      },
+      {
+        "text": "you",
+        "role": "subject",
+        "label": "主语",
+        "note": "主句主语",
+        "clause": ""
+      },
+      {
+        "text": "need",
+        "role": "verb",
+        "label": "谓语",
+        "note": "主句谓语",
+        "clause": ""
+      },
+      {
+        "text": "patience.",
+        "role": "object",
+        "label": "宾语",
+        "note": "不可数名词作宾语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "You need patience",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "To learn a language well, you need patience.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "不定式可作目的状语，表示“为了……”。",
+      "不定式的逻辑主语通常是主句主语。"
+    ]
+  },
+  {
+    "text": "I enjoy listening to music.",
+    "grammarPoint": "从句进阶、非谓语与特殊结构",
+    "translation": "我喜欢听音乐。",
+    "basicPattern": "主谓宾",
+    "basicFormula": "S+V+O",
+    "pattern": "SVO",
+    "patternName": "主谓宾",
+    "chunks": [
+      {
+        "text": "I",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "enjoy",
+        "role": "verb",
+        "label": "谓语",
+        "note": "及物动词作谓语",
+        "clause": ""
+      },
+      {
+        "text": "listening to music.",
+        "role": "object",
+        "label": "宾语",
+        "note": "动名词短语作宾语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "I enjoy listening to music",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "I enjoy listening to music.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "enjoy 后接动名词作宾语。",
+      "listen to 是固定搭配。"
+    ]
+  },
+  {
+    "text": "He asked me to close the door.",
+    "grammarPoint": "从句进阶、非谓语与特殊结构",
+    "translation": "他让我把门关上。",
+    "basicPattern": "主谓宾宾补",
+    "basicFormula": "S+V+O+C",
+    "pattern": "SVOC",
+    "patternName": "主谓宾宾补",
+    "chunks": [
+      {
+        "text": "He",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "asked",
+        "role": "verb",
+        "label": "谓语",
+        "note": "及物动词作谓语",
+        "clause": ""
+      },
+      {
+        "text": "me",
+        "role": "object",
+        "label": "宾语",
+        "note": "宾语",
+        "clause": ""
+      },
+      {
+        "text": "to close the door.",
+        "role": "complement",
+        "label": "宾补",
+        "note": "不定式短语作宾语补足语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "He asked me to close the door",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "He asked me to close the door.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "ask sb. to do sth. 是常见的宾补结构。",
+      "不定式的逻辑主语是宾语 me。"
+    ]
+  },
+  {
+    "text": "The homework finished, we went out.",
+    "grammarPoint": "从句进阶、非谓语与特殊结构",
+    "translation": "作业做完后，我们出去了。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV",
+    "patternName": "主谓（含独立主格）",
+    "chunks": [
+      {
+        "text": "The homework",
+        "role": "subject",
+        "label": "主语",
+        "note": "独立主格结构中的名词",
+        "clause": ""
+      },
+      {
+        "text": "finished,",
+        "role": "other",
+        "label": "其他",
+        "note": "过去分词，与 homework 构成独立主格",
+        "clause": ""
+      },
+      {
+        "text": "we",
+        "role": "subject",
+        "label": "主语",
+        "note": "主句主语",
+        "clause": ""
+      },
+      {
+        "text": "went out.",
+        "role": "verb",
+        "label": "谓语",
+        "note": "主句谓语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "We went out",
+    "clauses": [
+      {
+        "type": "独立主格",
+        "text": "The homework finished",
+        "note": "名词 + 过去分词，表示时间或原因"
+      }
+    ],
+    "keyPoints": [
+      "独立主格有自己的逻辑主语，与主句主语不同。",
+      "过去分词表示被动或完成的动作。"
+    ]
+  },
+  {
+    "text": "Never have I seen such a beautiful sunset.",
+    "grammarPoint": "从句进阶、非谓语与特殊结构",
+    "translation": "我从没见过这么美的日落。",
+    "basicPattern": "主谓宾",
+    "basicFormula": "S+V+O",
+    "pattern": "SVO",
+    "patternName": "主谓宾（倒装）",
+    "chunks": [
+      {
+        "text": "Never",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "否定副词置于句首，引起部分倒装",
+        "clause": ""
+      },
+      {
+        "text": "have",
+        "role": "verb",
+        "label": "谓语",
+        "note": "助动词提前",
+        "clause": ""
+      },
+      {
+        "text": "I",
+        "role": "subject",
+        "label": "主语",
+        "note": "主语",
+        "clause": ""
+      },
+      {
+        "text": "seen",
+        "role": "verb",
+        "label": "谓语",
+        "note": "过去分词",
+        "clause": ""
+      },
+      {
+        "text": "such a beautiful sunset.",
+        "role": "object",
+        "label": "宾语",
+        "note": "宾语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "I have never seen such a beautiful sunset",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "Never have I seen such a beautiful sunset.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "否定副词 never 置于句首时，助动词提前构成倒装。",
+      "现在完成时的过去分词 seen 保持不变。"
+    ]
+  },
+  {
+    "text": "It was Tom who broke the window.",
+    "grammarPoint": "从句进阶、非谓语与特殊结构",
+    "translation": "是汤姆打破了窗户。",
+    "basicPattern": "主系表",
+    "basicFormula": "S+V+P",
+    "pattern": "SVP",
+    "patternName": "主系表（强调句）",
+    "chunks": [
+      {
+        "text": "It",
+        "role": "other",
+        "label": "其他",
+        "note": "强调句的形式主语，无实义",
+        "clause": ""
+      },
+      {
+        "text": "was",
+        "role": "verb",
+        "label": "谓语",
+        "note": "强调句结构中的系动词",
+        "clause": ""
+      },
+      {
+        "text": "Tom",
+        "role": "predicative",
+        "label": "表语",
+        "note": "被强调的主语",
+        "clause": ""
+      },
+      {
+        "text": "who",
+        "role": "conjunction",
+        "label": "连词",
+        "note": "强调句连接词",
+        "clause": ""
+      },
+      {
+        "text": "broke",
+        "role": "verb",
+        "label": "谓语",
+        "note": "剩余部分的谓语",
+        "clause": ""
+      },
+      {
+        "text": "the window.",
+        "role": "object",
+        "label": "宾语",
+        "note": "剩余部分的宾语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "It was Tom who broke the window",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "It was Tom who broke the window.",
+        "note": ""
+      }
+    ],
+    "keyPoints": [
+      "强调句结构：It is/was + 被强调部分 + who/that + 其他。",
+      "被强调的是人时，连接词可用 who 或 that。"
+    ]
+  },
+  {
+    "text": "Hardly had he arrived when it began to rain.",
+    "grammarPoint": "从句进阶、非谓语与特殊结构",
+    "translation": "他刚到就开始下雨了。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV+状语从句",
+    "patternName": "主谓+时间状语从句（倒装）",
+    "chunks": [
+      {
+        "text": "Hardly",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "否定副词置于句首，引起部分倒装",
+        "clause": ""
+      },
+      {
+        "text": "had",
+        "role": "verb",
+        "label": "谓语",
+        "note": "助动词提前",
+        "clause": ""
+      },
+      {
+        "text": "he",
+        "role": "subject",
+        "label": "主语",
+        "note": "主句主语",
+        "clause": ""
+      },
+      {
+        "text": "arrived",
+        "role": "verb",
+        "label": "谓语",
+        "note": "过去分词",
+        "clause": ""
+      },
+      {
+        "text": "when",
+        "role": "conjunction",
+        "label": "连词",
+        "note": "时间状语从句引导词",
+        "clause": ""
+      },
+      {
+        "text": "it",
+        "role": "subject",
+        "label": "主语",
+        "note": "状语从句主语",
+        "clause": "状语从句"
+      },
+      {
+        "text": "began",
+        "role": "verb",
+        "label": "谓语",
+        "note": "状语从句谓语",
+        "clause": "状语从句"
+      },
+      {
+        "text": "to rain.",
+        "role": "object",
+        "label": "宾语",
+        "note": "不定式作宾语",
+        "clause": "状语从句"
+      }
+    ],
+    "skeleton": "Hardly had he arrived",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "Hardly had he arrived",
+        "note": ""
+      },
+      {
+        "type": "时间状语从句",
+        "text": "when it began to rain",
+        "note": "hardly ... when ... 表示“一……就……”"
+      }
+    ],
+    "keyPoints": [
+      "hardly 置于句首时，主句部分倒装。",
+      "hardly ... when ... 表示“刚……就……”。"
+    ]
+  },
+  {
+    "text": "The more you read, the more you learn.",
+    "grammarPoint": "从句进阶、非谓语与特殊结构",
+    "translation": "你读得越多，学到的就越多。",
+    "basicPattern": "主谓",
+    "basicFormula": "S+V",
+    "pattern": "SV+状语从句",
+    "patternName": "主谓+比较状语从句",
+    "chunks": [
+      {
+        "text": "The more",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "the more ... the more ... 比较结构，引导状语从句",
+        "clause": ""
+      },
+      {
+        "text": "you",
+        "role": "subject",
+        "label": "主语",
+        "note": "状语从句主语",
+        "clause": "状语从句"
+      },
+      {
+        "text": "read,",
+        "role": "verb",
+        "label": "谓语",
+        "note": "状语从句谓语",
+        "clause": "状语从句"
+      },
+      {
+        "text": "the more",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "主句比较结构",
+        "clause": ""
+      },
+      {
+        "text": "you",
+        "role": "subject",
+        "label": "主语",
+        "note": "主句主语",
+        "clause": ""
+      },
+      {
+        "text": "learn.",
+        "role": "verb",
+        "label": "谓语",
+        "note": "主句谓语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "The more you read, the more you learn",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "the more you learn",
+        "note": ""
+      },
+      {
+        "type": "状语从句",
+        "text": "The more you read",
+        "note": "the + 比较级 ... the + 比较级 ... 结构"
+      }
+    ],
+    "keyPoints": [
+      "the + 比较级，the + 比较级，表示“越……越……”。",
+      "两个分句都用陈述语序。"
+    ]
+  },
+  {
+    "text": "The scientist whose research changed our lives won the prize.",
+    "grammarPoint": "综合长难句",
+    "translation": "那位研究改变了我们生活的科学家获奖了。",
+    "basicPattern": "主谓宾",
+    "basicFormula": "S+V+O",
+    "pattern": "SVO+定语从句",
+    "patternName": "主谓宾+定语从句",
+    "chunks": [
+      {
+        "text": "The scientist",
+        "role": "subject",
+        "label": "主语",
+        "note": "主句主语，先行词",
+        "clause": ""
+      },
+      {
+        "text": "whose",
+        "role": "conjunction",
+        "label": "连词",
+        "note": "关系代词，在定语从句中作定语",
+        "clause": ""
+      },
+      {
+        "text": "research",
+        "role": "subject",
+        "label": "主语",
+        "note": "定语从句主语",
+        "clause": "定语从句"
+      },
+      {
+        "text": "changed",
+        "role": "verb",
+        "label": "谓语",
+        "note": "定语从句谓语",
+        "clause": "定语从句"
+      },
+      {
+        "text": "our lives",
+        "role": "object",
+        "label": "宾语",
+        "note": "定语从句宾语",
+        "clause": "定语从句"
+      },
+      {
+        "text": "won",
+        "role": "verb",
+        "label": "谓语",
+        "note": "主句谓语",
+        "clause": ""
+      },
+      {
+        "text": "the prize.",
+        "role": "object",
+        "label": "宾语",
+        "note": "主句宾语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "The scientist won the prize",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "The scientist won the prize",
+        "note": ""
+      },
+      {
+        "type": "定语从句",
+        "text": "whose research changed our lives",
+        "note": "whose 表示所属关系"
+      }
+    ],
+    "keyPoints": [
+      "whose 引导定语从句，表示“……的”。",
+      "主句的主干是 The scientist won the prize。"
+    ]
+  },
+  {
+    "text": "Although the task was difficult, they managed to finish it on time.",
+    "grammarPoint": "综合长难句",
+    "translation": "尽管任务很难，他们还是设法按时完成了。",
+    "basicPattern": "主谓宾",
+    "basicFormula": "S+V+O",
+    "pattern": "SVO+状语从句",
+    "patternName": "主谓宾+让步状语从句",
+    "chunks": [
+      {
+        "text": "Although",
+        "role": "conjunction",
+        "label": "连词",
+        "note": "让步状语从句引导词",
+        "clause": ""
+      },
+      {
+        "text": "the task",
+        "role": "subject",
+        "label": "主语",
+        "note": "状语从句主语",
+        "clause": "状语从句"
+      },
+      {
+        "text": "was",
+        "role": "verb",
+        "label": "谓语",
+        "note": "状语从句系动词",
+        "clause": "状语从句"
+      },
+      {
+        "text": "difficult,",
+        "role": "predicative",
+        "label": "表语",
+        "note": "状语从句表语",
+        "clause": "状语从句"
+      },
+      {
+        "text": "they",
+        "role": "subject",
+        "label": "主语",
+        "note": "主句主语",
+        "clause": ""
+      },
+      {
+        "text": "managed",
+        "role": "verb",
+        "label": "谓语",
+        "note": "主句谓语",
+        "clause": ""
+      },
+      {
+        "text": "to finish it",
+        "role": "object",
+        "label": "宾语",
+        "note": "不定式短语作宾语",
+        "clause": ""
+      },
+      {
+        "text": "on time.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "时间状语",
+        "clause": ""
+      }
+    ],
+    "skeleton": "they managed to finish it on time",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "they managed to finish it on time",
+        "note": ""
+      },
+      {
+        "type": "让步状语从句",
+        "text": "Although the task was difficult",
+        "note": "although 表示“虽然”"
+      }
+    ],
+    "keyPoints": [
+      "manage to do 表示“设法做成某事”。",
+      "although 引导让步状语从句，不能与 but 连用。"
+    ]
+  },
+  {
+    "text": "I don't know whether the meeting will be held in the hall or in the classroom.",
+    "grammarPoint": "综合长难句",
+    "translation": "我不知道会议是在大厅还是教室举行。",
+    "basicPattern": "主谓宾",
+    "basicFormula": "S+V+O",
+    "pattern": "SVO+宾语从句",
+    "patternName": "主谓宾+宾语从句",
+    "chunks": [
+      {
+        "text": "I",
+        "role": "subject",
+        "label": "主语",
+        "note": "主句主语",
+        "clause": ""
+      },
+      {
+        "text": "don't know",
+        "role": "verb",
+        "label": "谓语",
+        "note": "主句谓语，否定形式",
+        "clause": ""
+      },
+      {
+        "text": "whether",
+        "role": "conjunction",
+        "label": "连词",
+        "note": "宾语从句引导词",
+        "clause": ""
+      },
+      {
+        "text": "the meeting",
+        "role": "subject",
+        "label": "主语",
+        "note": "宾语从句主语",
+        "clause": "宾语从句"
+      },
+      {
+        "text": "will be held",
+        "role": "verb",
+        "label": "谓语",
+        "note": "宾语从句谓语，一般将来时被动语态",
+        "clause": "宾语从句"
+      },
+      {
+        "text": "in the hall or in the classroom.",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "宾语从句中的选择地点状语",
+        "clause": "宾语从句"
+      }
+    ],
+    "skeleton": "I don't know whether the meeting will be held",
+    "clauses": [
+      {
+        "type": "主句",
+        "text": "I don't know",
+        "note": ""
+      },
+      {
+        "type": "宾语从句",
+        "text": "whether the meeting will be held in the hall or in the classroom",
+        "note": "whether ... or ... 表示“是……还是……”"
+      }
+    ],
+    "keyPoints": [
+      "whether ... or ... 表示两种可能的选择。",
+      "宾语从句用陈述语序，被动语态为 will be held。"
+    ]
+  },
+  {
+    "text": "What surprised me most was that he refused to help.",
+    "grammarPoint": "综合长难句",
+    "translation": "最让我吃惊的是他拒绝帮忙。",
+    "basicPattern": "主系表",
+    "basicFormula": "S+V+P",
+    "pattern": "SVP+主语从句+表语从句",
+    "patternName": "主系表+主语从句+表语从句",
+    "chunks": [
+      {
+        "text": "What",
+        "role": "conjunction",
+        "label": "连词",
+        "note": "主语从句引导词",
+        "clause": ""
+      },
+      {
+        "text": "surprised",
+        "role": "verb",
+        "label": "谓语",
+        "note": "主语从句谓语",
+        "clause": "主语从句"
+      },
+      {
+        "text": "me",
+        "role": "object",
+        "label": "宾语",
+        "note": "主语从句宾语",
+        "clause": "主语从句"
+      },
+      {
+        "text": "most",
+        "role": "adverbial",
+        "label": "状语",
+        "note": "主语从句程度状语",
+        "clause": "主语从句"
+      },
+      {
+        "text": "was",
+        "role": "verb",
+        "label": "谓语",
+        "note": "主句系动词",
+        "clause": ""
+      },
+      {
+        "text": "that",
+        "role": "conjunction",
+        "label": "连词",
+        "note": "表语从句引导词",
+        "clause": ""
+      },
+      {
+        "text": "he",
+        "role": "subject",
+        "label": "主语",
+        "note": "表语从句主语",
+        "clause": "表语从句"
+      },
+      {
+        "text": "refused",
+        "role": "verb",
+        "label": "谓语",
+        "note": "表语从句谓语",
+        "clause": "表语从句"
+      },
+      {
+        "text": "to help.",
+        "role": "object",
+        "label": "宾语",
+        "note": "不定式作宾语",
+        "clause": "表语从句"
+      }
+    ],
+    "skeleton": "What surprised me most was that he refused to help",
+    "clauses": [
+      {
+        "type": "主语从句",
+        "text": "What surprised me most",
+        "note": "整个从句作主语"
+      },
+      {
+        "type": "主句",
+        "text": "What surprised me most was that ...",
+        "note": ""
+      },
+      {
+        "type": "表语从句",
+        "text": "that he refused to help",
+        "note": "说明主语的内容"
+      }
+    ],
+    "keyPoints": [
+      "主语从句 + 系动词 + 表语从句是常见长难句结构。",
+      "refuse to do 表示“拒绝做某事”。"
+    ]
+  }
+]

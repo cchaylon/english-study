@@ -184,9 +184,45 @@
 .input-meta { display: flex; justify-content: space-between; gap: 10px; font-size: 11px; color: var(--muted); }
 .input-meta #charCount { font-family: var(--mono); }
 
-.input-actions { display: grid; grid-template-columns: 1fr auto; gap: 10px; }
+.input-actions { display: flex; align-items: center; gap: 10px; }
 .input-actions .btn { height: 46px; padding: 0 18px; font-size: 14.5px; }
+#analyzeBtn { flex: 1; }
 .btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: none; }
+
+.ai-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 46px;
+  padding: 0 11px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  user-select: none;
+  transition: border-color 0.16s, color 0.16s, background 0.16s;
+}
+.ai-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+.ai-toggle-box {
+  display: grid;
+  place-items: center;
+  width: 15px;
+  height: 15px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface);
+  transition: background 0.16s, border-color 0.16s;
+}
+.ai-toggle-box::after { content: "✓"; font-size: 10px; line-height: 1; color: #fff; opacity: 0; }
+.ai-toggle input:checked + .ai-toggle-box { background: var(--primary); border-color: var(--primary); }
+.ai-toggle input:checked + .ai-toggle-box::after { opacity: 1; }
+.ai-toggle input:checked ~ .ai-toggle-text { color: var(--primary-deep); }
+.ai-toggle:hover { border-color: rgba(79, 70, 229, 0.36); }
+.ai-toggle:focus-within { outline: 2px solid var(--primary-soft); outline-offset: 1px; }
 
 .input-samples { display: flex; flex-direction: column; gap: 6px; padding-top: 2px; }
 .samples-label { font-size: 10px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--muted); font-weight: 800; }
@@ -522,6 +558,8 @@
   .result-grid { gap: 12px; }
   .pattern-badge { gap: 8px; padding: 7px 11px; }
   .pb-kind { display: none; }
+  .input-actions { flex-wrap: wrap; }
+  #analyzeBtn { flex: 1 1 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {

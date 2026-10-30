@@ -72,7 +72,7 @@
               <h3>写下要拆解的英文句子</h3>
             </div>
             <textarea id="sentenceInput" class="sentence-input" maxlength="240" rows="5"
-              placeholder="例如：The guy who lives upstairs keeps playing music that drives me crazy."
+              placeholder="例如：The book that you lent me is very interesting."
               aria-label="待分析的英文句子"></textarea>
             <div class="input-meta">
               <span id="charCount">0 / 240</span>
@@ -81,14 +81,19 @@
             <div class="input-actions">
               <button class="btn btn-primary" id="analyzeBtn" type="button">拆解句子</button>
               <button class="btn btn-ghost" id="randomBtn" type="button">随机例句</button>
+              <label class="ai-toggle" title="勾选后调用 DeepSeek 解析任意句子">
+                <input type="checkbox" id="aiToggle">
+                <span class="ai-toggle-box" aria-hidden="true"></span>
+                <span class="ai-toggle-text">AI</span>
+              </label>
             </div>
             <div class="input-samples">
               <span class="samples-label">试一试</span>
-              <button class="sentence-chip" type="button" data-sentence="I'm not going to let you eat my sandwich.">I'm not going to let you eat my sandwich.</button>
-              <button class="sentence-chip" type="button" data-sentence="Could you tell me where the nearest subway station is?">Could you tell me where the nearest subway station is?</button>
-              <button class="sentence-chip" type="button" data-sentence="My boss asked me to finish the report by Friday.">My boss asked me to finish the report by Friday.</button>
+              <button class="sentence-chip" type="button" data-sentence="The book that you lent me is very interesting.">The book that you lent me is very interesting.</button>
+              <button class="sentence-chip" type="button" data-sentence="I don't know whether the meeting will be held in the hall or in the classroom.">I don't know whether the meeting will be held in the hall or in the classroom.</button>
+              <button class="sentence-chip" type="button" data-sentence="What surprised me most was that he refused to help.">What surprised me most was that he refused to help.</button>
             </div>
-            <p class="input-tip">例句优先取自《老友记》等影视短句，难度对标托业 800 分以下。解析结果由 DeepSeek 生成，仅作学习参考。</p>
+            <p class="input-tip">默认从本地 100 句例句库解析，离线可用；勾选「AI」后由 DeepSeek 实时解析任意句子。</p>
           </aside>
 
           <div class="output-card" id="analyzerOutput" aria-live="polite">
