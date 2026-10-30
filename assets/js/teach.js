@@ -148,10 +148,14 @@
   /* ---------------- 状态 ---------------- */
   const CACHE_KEY = "lingua.teach.sentence.cache.v1";
   const CACHE_LIMIT = 30;
+  const LOCAL_DATA_URL = "assets/data/sentences.json";
 
   let busy = false;
   let currentSource = "";
   let lastSentence = "";
+  let localSentences = [];
+  let localLoadPromise = null;
+  let localLoadFailed = false;
 
   const output = $("#analyzerOutput");
 
@@ -159,6 +163,48 @@
   const esc = (value) => String(value == null ? "" : value).replace(/[&<>"']/g, (ch) => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
   }[ch]));
+
+  function normalizeSentence(text) {
+    return String(text || "").replace(/\s+/g, " ").trim().toLowerCase();
+  }
+
+  /* ---------------- 本地例句库 ----------------
+     未勾选 AI 时，直接读取 assets/data/sentences.json 中预置的解析结果。
+  ------------------------------------------------------- */
+  function loadLocalSentences() {
+    if (localLoadPromise) return localLoadPromise;
+    localLoadPromise = fetch(LOCAL_DATA_URL)
+      .then((res) => {
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        return res.json();
+      })
+      .then((list) => {
+        localSentences = (Array.isArray(list) ? list : [])
+          .filter((item) => item && item.text && Array.isArray(item.chunks));
+        return localSentences;
+      })
+      .catch((err) => {
+        localSentences = [];
+        localLoadFailed = true;
+        console.warn("本地例句库加载失败：", err);
+        return [];
+      });
+    return localLoadPromise;
+  }
+
+  function findLocalSentence(sentence) {
+    const key = normalizeSentence(sentence);
+    return localSentences.find((item) => normalizeSentence(item.text) === key) || null;
+  }
+
+  function aiEnabled() {
+    const toggle = $("#aiToggle");
+    return !!(toggle && toggle.checked);
+  }
+
+  function localSource(item) {
+    return item.grammarPoint ? "本地例句库 · " + item.grammarPoint : "本地例句库";
+  }
 
   function normalizeRole(role) {
     const raw = String(role || "").trim();
@@ -336,7 +382,7 @@
       <div class="state-empty">
         <div class="empty-art">Aa</div>
         <h2 class="empty-title">输入一句英文，看看它的骨架</h2>
-        <p>直接粘贴你想拆的长难句，或点左侧「随机例句」。</p>
+        <p>默认从本地 100 句例句库解析；点左侧「随机例句」即可试，勾选「AI」可联网解析任意句子。</p>
         <p class="empty-note">解析完成后，句子会按成分分色高亮，主谓宾骨架单独拎出来。</p>
       </div>`;
   }
@@ -571,10 +617,37 @@
     }
 
     lastSentence = sentence;
-    syncSource(sentence);
     const input = $("#sentenceInput");
     if (input && input.value.trim() !== sentence) input.value = sentence;
 
+    /* 未勾选 AI：只查本地例句库，不发起网络请求 */
+    if (!aiEnabled()) {
+      if (localLoadPromise && !localSentences.length) await localLoadPromise;
+      const hit = findLocalSentence(sentence);
+      if (!hit) {
+        currentSource = "";
+        let message = "本地例句库中没有找到这句。勾选「AI」后可联网解析任意句子。";
+        if (localLoadFailed) {
+          message = location.protocol === "file:"
+            ? "浏览器禁止 file:// 读取本地 JSON，请用本地服务器打开页面（例如 python3 -m http.server）。"
+            : "本地例句库加载失败，请检查 assets/data/sentences.json，或勾选「AI」联网解析。";
+        }
+        renderError(message, { retry: false });
+        return;
+      }
+      currentSource = localSource(hit);
+      try {
+        renderResult(normalizeResult(hit));
+      } catch (e) {
+        renderError("本地例句数据异常，请换一句试试。", { retry: false });
+      }
+      if (window.innerWidth < 980) {
+        $("#analyze").scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      return;
+    }
+
+    syncSource(sentence);
     if (opts.source) currentSource = opts.source;
 
     const cacheKey = sentence.toLowerCase();
@@ -606,8 +679,11 @@
 
   function pickSample() {
     const current = ($("#sentenceInput") ? $("#sentenceInput").value.trim() : "");
-    const pool = SAMPLES.filter((item) => item.text.toLowerCase() !== current.toLowerCase());
-    const list = pool.length ? pool : SAMPLES;
+    const pool = localSentences.length
+      ? localSentences.map((item) => ({ text: item.text, source: localSource(item) }))
+      : SAMPLES;
+    const filtered = pool.filter((item) => item.text.toLowerCase() !== current.toLowerCase());
+    const list = filtered.length ? filtered : pool;
     return list[Math.floor(Math.random() * list.length)];
   }
 
@@ -682,10 +758,14 @@
 
     const params = new URLSearchParams(location.search);
     const preset = params.get("s");
-    if (preset) {
-      const sample = SAMPLES.find((item) => item.text.toLowerCase() === preset.trim().toLowerCase());
-      fillSample(sample || { text: preset, source: "" });
-    }
+
+    loadLocalSentences().then(() => {
+      if (!preset) return;
+      const hit = findLocalSentence(preset);
+      fillSample(hit
+        ? { text: hit.text, source: localSource(hit) }
+        : { text: preset.trim(), source: "" });
+    });
   }
 
   if (document.readyState === "loading") {
@@ -699,6 +779,8 @@
     modules: MODULES,
     samples: SAMPLES,
     analyze: runAnalysis,
+    loadLocal: loadLocalSentences,
+    getLocal: () => localSentences,
     render: (raw) => renderResult(normalizeResult(raw))
   };
 })();
