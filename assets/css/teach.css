@@ -61,6 +61,7 @@
   font-weight: 600;
   line-height: 1;
   white-space: nowrap;
+  text-decoration: none;
 }
 .module-pill svg { width: 14px; height: 14px; opacity: 0.85; }
 
