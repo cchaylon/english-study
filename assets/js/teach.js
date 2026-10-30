@@ -494,6 +494,19 @@
     return html;
   }
 
+  /* 把 why / judge / contrast 三点拼成一段通顺的话 */
+  function mergePatternAnalysis(pa) {
+    const end = (text) => (/[。！？；…]$/.test(text) ? text : `${text}。`);
+    const why = String(pa.why || "").trim();
+    const judge = String(pa.judge || "").trim();
+    const contrast = String(pa.contrast || "").trim();
+    return [
+      why && end(why),
+      judge && end(`判断时，${judge}`),
+      contrast && end(`至于其他句型，${contrast}`)
+    ].filter(Boolean).join("");
+  }
+
   function renderResult(data) {
     const usedRoles = [];
     data.chunks.forEach((chunk) => {
@@ -549,14 +562,11 @@
     const clauseCount = data.clauses.filter((clause) => String(clause.type).trim() !== "主句").length;
 
     const pa = data.patternAnalysis;
-    const patternAnalysisBlock = pa
+    const paText = pa ? mergePatternAnalysis(pa) : "";
+    const patternAnalysisBlock = paText
       ? `<div class="pattern-analysis">
            <h3>句型解析</h3>
-           <div class="pa-grid">
-             ${pa.why ? `<div class="pa-item"><span class="pa-label">为什么是${esc(data.basicPattern || "这个句型")}</span><p>${esc(pa.why)}</p></div>` : ""}
-             ${pa.judge ? `<div class="pa-item"><span class="pa-label">怎么判断出来的</span><p>${esc(pa.judge)}</p></div>` : ""}
-             ${pa.contrast ? `<div class="pa-item"><span class="pa-label">为何不是其他句型</span><p>${esc(pa.contrast)}</p></div>` : ""}
-           </div>
+           <p class="pa-text">${esc(paText)}</p>
          </div>`
       : "";
 
