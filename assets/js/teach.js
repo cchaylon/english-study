@@ -130,12 +130,13 @@
       icon: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="3"/><path d="M7 7h6M7 10h6M7 13h4" stroke-linecap="round"/></svg>'
     },
     {
-      id: "speak",
-      title: "发音跟读",
-      desc: "逐词标注连读、弱读与语调，跟读一句得分一句。",
-      status: "soon",
-      accent: "#f43f5e",
-      icon: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 8v4M8 5v10M12 7v6M16 9v2" stroke-linecap="round"/></svg>'
+      id: "listen",
+      title: "逐句听透",
+      desc: "粘贴一段台词或听力原文，AI 标出生词、固定搭配与连读弱读，逐句精听、跟读、听写并验证理解。",
+      status: "live",
+      href: "teach-listen.html",
+      accent: "#0d9488",
+      icon: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 7.5v5M7 5v10M10 6.5v7M13 4.5v11M16 8v4" stroke-linecap="round"/></svg>'
     },
     {
       id: "writing",
@@ -1733,6 +1734,7 @@
   /* 扩展接口：后续模块可复用解析能力 */
   window.LinguaTeach = {
     modules: MODULES,
+    config: DEEPSEEK,
     samples: SAMPLES,
     analyze: runAnalysis,
     loadLocal: loadLocalSentences,
