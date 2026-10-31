@@ -17,6 +17,7 @@
     timeout: 110000
   };
   const AI = Object.assign({}, FALLBACK_AI, (window.LinguaTeach && window.LinguaTeach.config) || {});
+  const AI_TIMEOUT = 110000;
 
   const PLAN_PROMPT = `你是资深英语听力教学专家，面向中国学习者，生词筛选基准为 3500 个常用词。
 任务：把用户给出的一段英文原文拆成「逐句听透」学习方案，只输出严格 JSON（不要 markdown、不要解释文字）。
@@ -24,8 +25,8 @@
 硬性要求：
 1. 所有字符串内不得出现英文双引号；需要引用时用中文「」。
 2. sentences 按原文顺序逐句拆分，不改写原句；最多 12 句，超过则只取前 12 句并保证 JSON 完整。
-3. 每句对象字段：text(原句，保留原标点)、cn(中文翻译，不超过 40 字)、chunks(意群数组 2-4 个，每项 {text} 是原句连续片段)、contentWords(实词 2-5 个，取原句中的名词/动词/形容词/副词)、speech(语音现象 0-3 个，{type,text,note}，type 只能取 连读/失爆/弱读/同化/浊化/重音/语调/缩略，note 用中文说明怎么读，不超过 24 字)、actual(整句实际发音转写，宽松 IPA 或重拼，不超过 80 字符)、stress(重音与语调提示，中文，不超过 28 字)、note(学习提示，中文，不超过 30 字)、hard(布尔，是否难句)。
-4. vocab：超出 3500 词或值得学习的生词 4-12 个；字段 word(原形小写)、phonetic(带斜杠音标)、pos、cn、ctx(本段语境义，不超过 16 字)、level(核心/超纲)、colloc(一个高频搭配)、example(短例句)、sentence(所在句序号，从 1 开始)。
+3. 每句对象字段：text(原句，保留原标点)、cn(中文翻译，不超过 40 字)、chunks(意群数组 2-4 个，每项 {text} 是原句连续片段)、skeleton(句子主干，用最少的词保留原词形)、contentWords(实词 2-5 个，取原句中的名词/动词/形容词/副词)、speech(语音现象 0-3 个，{type,text,note}，type 只能取 连读/失爆/弱读/同化/浊化/重音/语调/缩略，note 用中文说明怎么读，不超过 24 字)、dictIpa(慢读或词典式音标转写，宽松 IPA，不超过 80 字符)、actual(整句实际口语发音转写，宽松 IPA 或重拼，不超过 80 字符)、stress(重音与语调提示，中文，不超过 28 字)、note(学习提示，中文，不超过 30 字)、hard(布尔，是否难句)。
+4. vocab：超出 3500 词或值得学习的生词 4-12 个，不收录人名、地名等专有名词，也不收录 a/the/of 等虚词；word 只填单个英文单词（不含空格），短语和搭配一律放进 collocations；字段 word(原形小写)、phonetic(带斜杠音标)、pos、cn、ctx(本段语境义，不超过 16 字)、level(核心/超纲)、colloc(一个高频搭配)、example(短例句)、sentence(所在句序号，从 1 开始)。
 5. collocations：固定搭配/短语动词/习语/口语缩略 4-8 个；字段 phrase、type(固定搭配/短语动词/习语/口语缩略)、meaning、restore(还原完整表达，不是缩略就写空字符串)、example(短例句)、sentence(句序号)。
 6. comprehension：3-4 道听力理解题，字段 type(细节/主旨/推理)、q、options(4 项)、answer(正确项下标 0-3)、why(中文解释)。
 7. retell：{keywords:[5-8 个英文关键词], prompt:中文复述提示}。
@@ -368,6 +369,8 @@
         text: txt(feature.text),
         note: txt(feature.note)
       })).filter((feature) => feature.type),
+      skeleton: txt(item.skeleton),
+      dictIpa: txt(item.dictIpa || item.dictIPA || item.dictionaryIpa || item.dict),
       actual: txt(item.actual),
       stress: txt(item.stress),
       note: txt(item.note),
@@ -403,8 +406,13 @@
       sentence: clamp(num(item.sentence, 0), 0, sentenceMax)
     })).filter((item) => item.phrase && item.meaning);
 
+    const optionText = (option) => {
+      if (typeof option === "string") return txt(option);
+      if (option && typeof option === "object") return txt(option.text || option.option || option.label || option.value);
+      return "";
+    };
     const comprehension = listOf(raw.comprehension).map((item) => {
-      const options = listOf(item.options).map(txt).filter(Boolean).slice(0, 4);
+      const options = listOf(item.options).map(optionText).filter(Boolean).slice(0, 4);
       let answer = item.answer;
       if (typeof answer === "string") {
         const letter = answer.trim().toUpperCase();
@@ -452,7 +460,7 @@
   /* ---------------- 请求 AI ---------------- */
   async function callPlan(text) {
     const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
-    const timer = controller ? setTimeout(() => controller.abort(), Number(AI.timeout) || 110000) : null;
+    const timer = controller ? setTimeout(() => controller.abort(), AI_TIMEOUT) : null;
     try {
       const response = await fetch(AI.endpoint, {
         method: "POST",
@@ -528,7 +536,8 @@
           if (guard) clearTimeout(guard);
           resolve();
         };
-        guard = setTimeout(finish, 1800 + content.length * 130);
+        const factor = utter.rate < 1 ? 1.05 / Math.max(0.5, utter.rate) : 1;
+        guard = setTimeout(finish, Math.min(90000, (1800 + content.length * 150) * factor));
         utter.onend = finish;
         utter.onerror = finish;
         window.speechSynthesis.speak(utter);
@@ -678,7 +687,7 @@
     </div>`;
   }
 
-  function tabsHTML() {
+  function tabsInnerHTML() {
     const d = state.data;
     const book = notebookStats();
     const tabs = [
@@ -690,10 +699,19 @@
       { id: "dictation", label: "听写训练" },
       { id: "comprehension", label: "理解验证" }
     ];
-    return `<div class="ln-tabs" role="tablist">${tabs.map((tab) => `
+    return tabs.map((tab) => `
       <button class="ln-tab${state.tab === tab.id ? " is-active" : ""}" type="button" role="tab" data-ln-tab="${tab.id}" aria-selected="${state.tab === tab.id}">
         ${tab.label}${tab.badge ? `<em>${tab.badge}</em>` : ""}
-      </button>`).join("")}</div>`;
+      </button>`).join("");
+  }
+
+  function tabsHTML() {
+    return `<div class="ln-tabs" role="tablist">${tabsInnerHTML()}</div>`;
+  }
+
+  function refreshTabs() {
+    const tabs = document.querySelector(".ln-tabs");
+    if (tabs) tabs.innerHTML = tabsInnerHTML();
   }
 
   /* ---------------- 总览 ---------------- */
@@ -816,16 +834,20 @@
     const speech = sentence.speech.length
       ? `<div class="ln-speech-row">${sentence.speech.map((feature) => `
           <span class="ln-speech-item">
-            <i class="ln-type">${esc(feature.type)}</i>
-            ${feature.text ? `<b>${esc(feature.text)}</b>` : ""}
+            <i class="ln-type" data-type="${esc(feature.type)}">${esc(feature.type)}</i>
+            ${feature.text ? `<button class="ln-feature-say" type="button" data-say="${esc(feature.text)}" title="听这个语音片段">${esc(feature.text)}</button>` : ""}
             ${feature.note ? `<em>${esc(feature.note)}</em>` : ""}
           </span>`).join("")}</div>`
       : `<p class="ln-sent-note">本句语音变化较少，注意自然停顿与重音。</p>`;
-    const pron = (sentence.actual || sentence.stress) ? `
+    const pron = (sentence.dictIpa || sentence.actual || sentence.stress) ? `
       <div class="ln-pron-row">
+        ${sentence.dictIpa ? `<span><b>词典音标</b><em>${esc(sentence.dictIpa)}</em></span>` : ""}
         ${sentence.actual ? `<span><b>实际发音</b><em>${esc(sentence.actual)}</em></span>` : ""}
         ${sentence.stress ? `<span><b>重音语调</b><em>${esc(sentence.stress)}</em></span>` : ""}
       </div>` : "";
+    const skeleton = sentence.skeleton && normalizeText(sentence.skeleton) !== normalizeText(sentence.text)
+      ? `<div class="ln-skeleton-row"><span>主干</span><p>${esc(sentence.skeleton)}</p></div>`
+      : "";
 
     return `<article class="ln-sent${hidden ? " is-blind" : ""}${mastered ? " is-mastered" : ""}" data-sent="${index}">
       <header class="ln-sent-head">
@@ -848,6 +870,7 @@
         <span class="ln-chunk-label">意群</span>
         ${sentence.chunks.map((chunk, chunkIndex) => `<button class="ln-chunk" type="button" data-say="${esc(chunk.text)}"><em>${chunkIndex + 1}</em>${esc(chunk.text)}</button>`).join("")}
       </div>` : ""}
+      ${skeleton}
       ${pron}
       ${speech}
       ${sentence.note ? `<p class="ln-sent-tip">${esc(sentence.note)}</p>` : ""}
@@ -1015,8 +1038,8 @@
           <p class="ln-speech-sent-text">${esc(sentence.text)}</p>
           ${sentence.speech.length ? `<div class="ln-speech-row">${sentence.speech.map((feature) => `
             <span class="ln-speech-item">
-              <i class="ln-type">${esc(feature.type)}</i>
-              ${feature.text ? `<b>${esc(feature.text)}</b>` : ""}
+              <i class="ln-type" data-type="${esc(feature.type)}">${esc(feature.type)}</i>
+              ${feature.text ? `<button class="ln-feature-say" type="button" data-say="${esc(feature.text)}" title="听这个语音片段">${esc(feature.text)}</button>` : ""}
               ${feature.note ? `<em>${esc(feature.note)}</em>` : ""}
             </span>`).join("")}</div>` : '<p class="ln-sent-note">本句按正常节奏朗读即可。</p>'}
           ${sentence.stress ? `<p class="ln-speech-stress">重音语调：${esc(sentence.stress)}</p>` : ""}
@@ -1074,6 +1097,22 @@
       if (blank) { index = blanks; blanks += 1; }
       return { raw, answer, blank, blankIndex: index };
     }).filter(Boolean);
+
+    // 若 AI 给的生词/实词与本句词形都没匹配上，退回按实词随机挖空，避免出现空题
+    if (!blanks && (level === 1 || level === 2)) {
+      const fallback = tokens
+        .filter((token) => token.answer && token.answer.length > 2 && !STOP_WORDS.has(cleanWord(token.answer)))
+        .map((token) => token.answer)
+        .filter((word, index, all) => all.indexOf(word) === index)
+        .slice(0, 4);
+      tokens.forEach((token) => {
+        if (!token.blank && token.answer && fallback.some((target) => wordRelated(token.answer, target))) {
+          token.blank = true;
+          token.blankIndex = blanks;
+          blanks += 1;
+        }
+      });
+    }
     return { tokens, blanks };
   }
 
@@ -1302,6 +1341,7 @@
   function refreshBookViews() {
     renderBookMini();
     if (!state.data) return;
+    refreshTabs();
     refreshVocab();
     refreshOverview();
   }
@@ -1495,7 +1535,10 @@
     if (!clock) return;
     state.retellRemaining = 60;
     clock.classList.add("is-running");
-    if (button) button.disabled = true;
+    if (button) {
+      button.disabled = true;
+      button.textContent = "复述中…";
+    }
     const tick = () => {
       clock.textContent = state.retellRemaining + "s";
       if (state.retellRemaining <= 0) {
@@ -1704,7 +1747,7 @@
         return normalizePlan(await callPlan(text));
       } catch (err) {
         lastError = err;
-        if (/401|402|429|failed to fetch|network/i.test(String(err && err.message))) throw err;
+        if (/401|402|429|abort|timeout|failed to fetch|network/i.test(String(err && err.message))) throw err;
       }
     }
     throw lastError || new Error("AI 返回的结构不符合预期");
